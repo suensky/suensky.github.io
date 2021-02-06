@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://suensky.github.io/post/comment-clubhouse.html</loc>
+    <loc>https://suensky.github.io/post/big-white.html</loc>
     
-    <lastmod>2021-02-06T06:11:21.958Z</lastmod>
+    <lastmod>2021-02-06T06:17:31.492Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://suensky.github.io/post/bye-to-microsoft.html</loc>
+    
+    <lastmod>2021-02-06T06:17:02.065Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://suensky.github.io/post/clubhouse-problem2.html</loc>
     
-    <lastmod>2021-02-06T06:11:06.290Z</lastmod>
+    <lastmod>2021-02-06T06:16:37.648Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://suensky.github.io/post/comment-clubhouse.html</loc>
+    
+    <lastmod>2021-02-06T06:11:21.958Z</lastmod>
     
   </url>
   
@@ -23,14 +37,14 @@
   </url>
   
   <url>
-    <loc>https://suensky.github.io/tags/index.html</loc>
+    <loc>https://suensky.github.io/series/index.html</loc>
     
     <lastmod>2021-02-06T05:14:01.635Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://suensky.github.io/series/index.html</loc>
+    <loc>https://suensky.github.io/tags/index.html</loc>
     
     <lastmod>2021-02-06T05:14:01.635Z</lastmod>
     
@@ -72,23 +86,9 @@
   </url>
   
   <url>
-    <loc>https://suensky.github.io/post/bye-to-microsoft.html</loc>
-    
-    <lastmod>2021-02-06T05:14:01.632Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://suensky.github.io/post/dp-1.html</loc>
     
     <lastmod>2021-02-06T05:14:01.632Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://suensky.github.io/post/about.html</loc>
-    
-    <lastmod>2021-02-06T05:14:01.631Z</lastmod>
     
   </url>
   
@@ -100,7 +100,7 @@
   </url>
   
   <url>
-    <loc>https://suensky.github.io/post/big-white.html</loc>
+    <loc>https://suensky.github.io/post/about.html</loc>
     
     <lastmod>2021-02-06T05:14:01.631Z</lastmod>
     

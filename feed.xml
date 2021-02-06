@@ -15,7 +15,7 @@
     <atom:link href="https://suensky.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 06 Feb 2021 06:11:06 GMT</pubDate>
+    <pubDate>Sat, 06 Feb 2021 06:16:37 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -134,29 +134,6 @@
     </item>
     
     <item>
-      <title>俱乐部会所火了</title>
-      <link>https://suensky.github.io/post/comment-clubhouse.html</link>
-      <guid>https://suensky.github.io/post/comment-clubhouse.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;Clubhouse(ch)几乎是一夜爆火，窃以为多少与Elon Musk推荐有关。社交产品几乎已成定居的今天，ch是切中了什么用户痛点，能病毒式传播开来是个有趣且值得研究的对象。&lt;/p&gt;
-&lt;p&gt;ch目前是邀请注册制，每个人可以邀请两人，那两人又可以分别邀请两人，以此类推。</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
-      
-      
-      <comments>https://suensky.github.io/post/comment-clubhouse.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
       <title>动态规划系列(1)</title>
       <link>https://suensky.github.io/post/dp-1.html</link>
       <guid>https://suensky.github.io/post/dp-1.html</guid>
@@ -183,21 +160,25 @@
     </item>
     
     <item>
-      <title>关于我</title>
-      <link>https://suensky.github.io/post/about.html</link>
-      <guid>https://suensky.github.io/post/about.html</guid>
+      <title>俱乐部会所火了</title>
+      <link>https://suensky.github.io/post/comment-clubhouse.html</link>
+      <guid>https://suensky.github.io/post/comment-clubhouse.html</guid>
       <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
       
-      <description>sky之小站，做做技术探谈人生</description>
+        
+        
+      <description>&lt;p&gt;Clubhouse(ch)几乎是一夜爆火，窃以为多少与Elon Musk推荐有关。社交产品几乎已成定居的今天，ch是切中了什么用户痛点，能病毒式传播开来是个有趣且值得研究的对象。&lt;/p&gt;
+&lt;p&gt;ch目前是邀请注册制，每个人可以邀请两人，那两人又可以分别邀请两人，以此类推。</description>
+        
       
       
       
       
       
-      <category domain="https://suensky.github.io/tags/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</category>
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
       
       
-      <comments>https://suensky.github.io/post/about.html#disqus_thread</comments>
+      <comments>https://suensky.github.io/post/comment-clubhouse.html#disqus_thread</comments>
       
     </item>
     
@@ -224,6 +205,48 @@
     </item>
     
     <item>
+      <title>关于我</title>
+      <link>https://suensky.github.io/post/about.html</link>
+      <guid>https://suensky.github.io/post/about.html</guid>
+      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
+      
+      <description>sky之小站，做做技术探谈人生</description>
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</category>
+      
+      
+      <comments>https://suensky.github.io/post/about.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>别微软</title>
+      <link>https://suensky.github.io/post/bye-to-microsoft.html</link>
+      <guid>https://suensky.github.io/post/bye-to-microsoft.html</guid>
+      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;于2019/8&lt;/p&gt;
+&lt;h3 id=&quot;时维九月-序属三秋。乘高铁自金陵入京，转三万尺鹏鸟，穿万里长云，赴未眠西雅图。及雨拍弦窗，知身已入他乡。&quot;&gt;&lt;a href=&quot;#时维九月-序属三秋。乘高铁自金陵入京，转三万尺鹏鸟，穿万里长云，赴未眠西雅图。及雨拍弦窗，知身已入他乡。&quot;</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://suensky.github.io/post/bye-to-microsoft.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
       <title>大白传</title>
       <link>https://suensky.github.io/post/big-white.html</link>
       <guid>https://suensky.github.io/post/big-white.html</guid>
@@ -237,6 +260,8 @@
       
       
       
+      
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
       
       
       <comments>https://suensky.github.io/post/big-white.html#disqus_thread</comments>
@@ -264,29 +289,6 @@
       
       
       <comments>https://suensky.github.io/post/clubhouse-problem1.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>别微软</title>
-      <link>https://suensky.github.io/post/bye-to-microsoft.html</link>
-      <guid>https://suensky.github.io/post/bye-to-microsoft.html</guid>
-      <pubDate>Tue, 02 Feb 2021 22:13:14 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;于2019/8&lt;/p&gt;
-&lt;h3 id=&quot;时维九月-序属三秋。乘高铁自金陵入京，转三万尺鹏鸟，穿万里长云，赴未眠西雅图。及雨拍弦窗，知身已入他乡。&quot;&gt;&lt;a href=&quot;#时维九月-序属三秋。乘高铁自金陵入京，转三万尺鹏鸟，穿万里长云，赴未眠西雅图。及雨拍弦窗，知身已入他乡。&quot;</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
-      
-      
-      <comments>https://suensky.github.io/post/bye-to-microsoft.html#disqus_thread</comments>
       
     </item>
     
