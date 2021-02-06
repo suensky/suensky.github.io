@@ -15,8 +15,32 @@
     <atom:link href="https://suensky.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 06 Feb 2021 17:43:09 GMT</pubDate>
+    <pubDate>Sat, 06 Feb 2021 18:24:02 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>clubhouse-problem3</title>
+      <link>https://suensky.github.io/post/clubhouse-problem3.html</link>
+      <guid>https://suensky.github.io/post/clubhouse-problem3.html</guid>
+      <pubDate>Sat, 06 Feb 2021 18:04:40 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;书接前文，pm升到partner level后，打算再接再厉，把clubhouse推向全宇宙。&lt;/p&gt;
+&lt;p&gt;之前一个房间参考微信设置只能容纳500人，pm说500人太少了，应该能容纳5亿人。&lt;/p&gt;
+&lt;p&gt;dev一时间不知如何回应，只能拉出了张小龙：做产品不是要节制么。&lt;</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://suensky.github.io/post/clubhouse-problem3.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Clubhouse需要你解决的算法题之二</title>

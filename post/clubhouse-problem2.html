@@ -129,6 +129,8 @@
         <a class="float-left" href="/post/clubhouse-problem1.html"><i class="u-arrow-left"></i></a>
         
         
+        <a class="float-right" href="/post/clubhouse-problem3.html"><i class="u-arrow-right"></i></a>
+        
     </div>
     <article class="col-xs-12">
         <h1> Clubhouse需要你解决的算法题之二 </h1>
@@ -162,8 +164,8 @@
 <p>PM proposed the immediate idea that it would benefit the engagement if we can improve the joining rate of the rooms recommended to users.</p>
 <p>Dev said, I would prefer to join rooms with my closest friends in. That’s said, we can recommend rooms based on the closeness between the room and the user.</p>
 <p>But what’s the closeness, PM asked.</p>
-<p>We can measure a room’s closeness to a user by aggregating the distance of the user’s following friends in the room to this user. Let’s say we have user A, A’s friend B, B’s friend C who’is not a direct friend of A. Then for A, the closeness of user B is 1024, and C 512. If C’s friend D is neither a friend of A nor B, then D’s closeness is 256. The higher the closeness rate, the closer these two users. If B, C and D are all in room #1, then room #1’s closeness rate to A is 1024+512+256.</p>
-<p>PM noded with confusion and prepared a deck in 7 seconds. The presentation was very successful and PM got high appreciation from leads team. At the end of the performance review cycle, PM got promoted to partner level.</p>
+<p>We can measure a room’s closeness to a user by aggregating the distance of the user’s following friends in the room to this user. Let’s say we have user A, A’s friend B, B’s friend C who’s not a direct friend of A. Then for A, the closeness of user B is 1024, and C 512. If C’s friend D is neither a friend of A nor B, then D’s closeness is 256. The higher the closeness rate, the closer these two users. If B, C and D are all in room #1, then room #1’s closeness rate to A is 1024+512+256.</p>
+<p>PM nodded with confusion and prepared a deck in 7 seconds. The presentation was very successful and PM got high appreciation from leads team. At the end of the performance review cycle, PM got promoted to partner level.</p>
 <p>What about Dev? Dev is very satisfied with the algorithm and the beauty of implementation.</p>
 <p>Here you go, Dev!</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Profile &#123;</span><br><span class="line">    &#x2F;&#x2F; Id of this profile.</span><br><span class="line">    public String id;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; All users this user follows</span><br><span class="line">    public List&lt;Profile&gt; following;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Room &#123;</span><br><span class="line">    public String roomId;</span><br><span class="line"></span><br><span class="line">    public List&lt;Profile&gt; usersInRoom;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; ... more to come as long as PM still has the job.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -199,6 +201,8 @@
     <a class="float-left" href="/post/clubhouse-problem1.html">上一篇 « Clubhouse需要你解决的算法题之一</a>
     
     
+    <a class="float-right" href="/post/clubhouse-problem3.html">下一篇 » clubhouse-problem3</a>
+    
 </p>
     </article>
     <!-- 赞赏 -->
@@ -224,14 +228,47 @@
                 
                 
             </div>
-            <a href="/post/clubhouse-problem1.html" class="title">
-                Clubhouse需要你解决的算法题之一
+            <a href="/post/clubhouse-problem2.html" class="title">
+                Clubhouse需要你解决的算法题之二
             </a>
             <p class="text-gray">
                 <small>
                     <span>发表于2021-02-05，</span>
-                    <span class="hidden-xs">全文670字，</span>
-                    <span>阅读约3分钟</span>
+                    <span class="hidden-xs">全文2199字，</span>
+                    <span>阅读约8分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#programming"
+                    title="programming">programming</a>
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#DP"
+                    title="DP">DP</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/dp-1.html" class="title">
+                动态规划系列(1)
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-02-04，</span>
+                    <span class="hidden-xs">全文1891字，</span>
+                    <span>阅读约7分钟</span>
                 </small>
             </p>
         </div>
@@ -253,43 +290,14 @@
                 
                 
             </div>
-            <a href="/post/beautiful-translation.html" class="title">
-                杂记
+            <a href="/post/poems.html" class="title">
+                无聊的词句有人叫诗
             </a>
             <p class="text-gray">
                 <small>
                     <span>发表于2021-02-03，</span>
-                    <span class="hidden-xs">全文684字，</span>
-                    <span>阅读约3分钟</span>
-                </small>
-            </p>
-        </div>
-    </div>
-</div>
-        
-        <div class="post-preview">
-    <div class="post-img" style="background-image: url('/')"></div>
-    <div class="post-info">
-        <div class="post-info-center">
-            <div class="hidden-xs">
-                
-                
-                <span>/</span>
-                
-                <a class="text-gray" href="/tags/#随笔"
-                    title="随笔">随笔</a>
-                <span>/</span>
-                
-                
-            </div>
-            <a href="/post/big-white.html" class="title">
-                大白传
-            </a>
-            <p class="text-gray">
-                <small>
-                    <span>发表于2021-02-03，</span>
-                    <span class="hidden-xs">全文234字，</span>
-                    <span>阅读约1分钟</span>
+                    <span class="hidden-xs">全文554字，</span>
+                    <span>阅读约2分钟</span>
                 </small>
             </p>
         </div>
@@ -323,7 +331,7 @@
         rel="1">#关于我 (1) </a>
     
     <a class="post-tag-item" href="/tags/#随笔" title="随笔"
-        rel="7">#随笔 (7) </a>
+        rel="8">#随笔 (8) </a>
     
     <a class="post-tag-item" href="/tags/#programming" title="programming"
         rel="3">#programming (3) </a>
@@ -477,7 +485,7 @@
 <div class="gkt-summary">
     <nav>
         <a href="/" class="col-xs-4">
-            <span class="number">12</span><span>文章</span>
+            <span class="number">13</span><span>文章</span>
         </a>
         <a href="/series" class="col-xs-4 middle">
             <span class="number">1</span><span>专题</span>
@@ -565,15 +573,15 @@
             <ul>
                 
                 <li>
+                    <a href="/post/clubhouse-problem3.html">clubhouse-problem3</a>
+                </li>
+                
+                <li>
                     <a href="/post/clubhouse-problem2.html">Clubhouse需要你解决的算法题之二</a>
                 </li>
                 
                 <li>
                     <a href="/post/clubhouse-problem1.html">Clubhouse需要你解决的算法题之一</a>
-                </li>
-                
-                <li>
-                    <a href="/post/comment-clubhouse.html">俱乐部会所火了</a>
                 </li>
                 
             </ul>
