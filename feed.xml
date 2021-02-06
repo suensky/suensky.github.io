@@ -15,14 +15,14 @@
     <atom:link href="https://suensky.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 06 Feb 2021 06:16:37 GMT</pubDate>
+    <pubDate>Sat, 06 Feb 2021 16:00:21 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>Clubhouse需要你解决的算法题之二</title>
       <link>https://suensky.github.io/post/clubhouse-problem2.html</link>
       <guid>https://suensky.github.io/post/clubhouse-problem2.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:26:41 GMT</pubDate>
+      <pubDate>Sat, 06 Feb 2021 01:13:57 GMT</pubDate>
       
         
         
@@ -39,232 +39,6 @@
       
       
       <comments>https://suensky.github.io/post/clubhouse-problem2.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>link</title>
-      <link>https://suensky.github.io/post/link.html</link>
-      <guid>https://suensky.github.io/post/link.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;这个人很懒，什么都没写。&lt;/p&gt;
-</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://suensky.github.io/post/link.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>无与伦比的绿</title>
-      <link>https://suensky.github.io/post/poem-so-green.html</link>
-      <guid>https://suensky.github.io/post/poem-so-green.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;无与伦比的绿&quot;&gt;&lt;a href=&quot;#无与伦比的绿&quot; class=&quot;headerlink&quot; title=&quot;无与伦比的绿&quot;&gt;&lt;/a&gt;无与伦比的绿&lt;/h2&gt;&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;于2019/8 微软最后一天，即将奔赴新公司，心情舒畅，原谅一切，发</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
-      
-      
-      <comments>https://suensky.github.io/post/poem-so-green.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>无聊的词句有人叫诗</title>
-      <link>https://suensky.github.io/post/poems.html</link>
-      <guid>https://suensky.github.io/post/poems.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;Bothell静夜思&quot;&gt;&lt;a href=&quot;#Bothell静夜思&quot; class=&quot;headerlink&quot; title=&quot;Bothell静夜思&quot;&gt;&lt;/a&gt;Bothell静夜思&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;序 某晚理发归，于广袤黑夜驾白色宝驹，风冷气清，&lt;</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
-      
-      
-      <comments>https://suensky.github.io/post/poems.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>开始写</title>
-      <link>https://suensky.github.io/post/startwritting.html</link>
-      <guid>https://suensky.github.io/post/startwritting.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;开这个博客是因为沈向洋博士的一篇号召大家通过写作来淬炼思考广度与深度的文章。很多人可能有这样的经历，读了一本深受启发的书，看了一篇引起共鸣的文章，可身边却没有人分享。自己脑海中有很多的想法，很多的见解，却没有合适的场合去展现。在这个自媒体盛行的时代，写作或许就是一个让那些喜</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
-      
-      
-      <comments>https://suensky.github.io/post/startwritting.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>动态规划系列(1)</title>
-      <link>https://suensky.github.io/post/dp-1.html</link>
-      <guid>https://suensky.github.io/post/dp-1.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;01背包问题（01-backpack-problem）&quot;&gt;&lt;a href=&quot;#01背包问题（01-backpack-problem）&quot; class=&quot;headerlink&quot; title=&quot;01背包问题（01 backpack problem）&quot;&gt;&lt;/a&gt;01背包问</description>
-        
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/categories/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/">算法专题</category>
-      
-      
-      <category domain="https://suensky.github.io/tags/programming/">programming</category>
-      
-      <category domain="https://suensky.github.io/tags/DP/">DP</category>
-      
-      
-      <comments>https://suensky.github.io/post/dp-1.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>俱乐部会所火了</title>
-      <link>https://suensky.github.io/post/comment-clubhouse.html</link>
-      <guid>https://suensky.github.io/post/comment-clubhouse.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;Clubhouse(ch)几乎是一夜爆火，窃以为多少与Elon Musk推荐有关。社交产品几乎已成定居的今天，ch是切中了什么用户痛点，能病毒式传播开来是个有趣且值得研究的对象。&lt;/p&gt;
-&lt;p&gt;ch目前是邀请注册制，每个人可以邀请两人，那两人又可以分别邀请两人，以此类推。</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
-      
-      
-      <comments>https://suensky.github.io/post/comment-clubhouse.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>杂记</title>
-      <link>https://suensky.github.io/post/beautiful-translation.html</link>
-      <guid>https://suensky.github.io/post/beautiful-translation.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;信雅达&quot;&gt;&lt;a href=&quot;#信雅达&quot; class=&quot;headerlink&quot; title=&quot;信雅达&quot;&gt;&lt;/a&gt;信雅达&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;不爱红装爱武装”一般翻译成&lt;/strong&gt;：to be battle-dressed and not rosy-g</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
-      
-      
-      <comments>https://suensky.github.io/post/beautiful-translation.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>关于我</title>
-      <link>https://suensky.github.io/post/about.html</link>
-      <guid>https://suensky.github.io/post/about.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-      <description>sky之小站，做做技术探谈人生</description>
-      
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/tags/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</category>
-      
-      
-      <comments>https://suensky.github.io/post/about.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>别微软</title>
-      <link>https://suensky.github.io/post/bye-to-microsoft.html</link>
-      <guid>https://suensky.github.io/post/bye-to-microsoft.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;于2019/8&lt;/p&gt;
-&lt;h3 id=&quot;时维九月-序属三秋。乘高铁自金陵入京，转三万尺鹏鸟，穿万里长云，赴未眠西雅图。及雨拍弦窗，知身已入他乡。&quot;&gt;&lt;a href=&quot;#时维九月-序属三秋。乘高铁自金陵入京，转三万尺鹏鸟，穿万里长云，赴未眠西雅图。及雨拍弦窗，知身已入他乡。&quot;</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
-      
-      
-      <comments>https://suensky.github.io/post/bye-to-microsoft.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>大白传</title>
-      <link>https://suensky.github.io/post/big-white.html</link>
-      <guid>https://suensky.github.io/post/big-white.html</guid>
-      <pubDate>Sat, 06 Feb 2021 05:14:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;有葱省大白者，少聪慧。弱冠及第乡试，旋会试，后求学于美利坚，研习变脸术。经六年乃成，称深假也。时乔氏苹果欲变脸术于手机，大白得势，骄宠一时。然其性猥，喜倚红偎翠，偷香窃玉，终日声色犬马。初喜东京卡哇伊，后慕欧美大胸波，朝秦暮楚，终无所获。几近不惑，恍觉立世不过白云苍狗。遂弃</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
-      
-      
-      <comments>https://suensky.github.io/post/big-white.html#disqus_thread</comments>
       
     </item>
     
@@ -289,6 +63,232 @@
       
       
       <comments>https://suensky.github.io/post/clubhouse-problem1.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>俱乐部会所火了</title>
+      <link>https://suensky.github.io/post/comment-clubhouse.html</link>
+      <guid>https://suensky.github.io/post/comment-clubhouse.html</guid>
+      <pubDate>Fri, 05 Feb 2021 01:13:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;Clubhouse(ch)几乎是一夜爆火，窃以为多少与Elon Musk推荐有关。社交产品几乎已成定居的今天，ch是切中了什么用户痛点，能病毒式传播开来是个有趣且值得研究的对象。&lt;/p&gt;
+&lt;p&gt;ch目前是邀请注册制，每个人可以邀请两人，那两人又可以分别邀请两人，以此类推。</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://suensky.github.io/post/comment-clubhouse.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>动态规划系列(1)</title>
+      <link>https://suensky.github.io/post/dp-1.html</link>
+      <guid>https://suensky.github.io/post/dp-1.html</guid>
+      <pubDate>Thu, 04 Feb 2021 20:13:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;01背包问题（01-backpack-problem）&quot;&gt;&lt;a href=&quot;#01背包问题（01-backpack-problem）&quot; class=&quot;headerlink&quot; title=&quot;01背包问题（01 backpack problem）&quot;&gt;&lt;/a&gt;01背包问</description>
+        
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/categories/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/">算法专题</category>
+      
+      
+      <category domain="https://suensky.github.io/tags/programming/">programming</category>
+      
+      <category domain="https://suensky.github.io/tags/DP/">DP</category>
+      
+      
+      <comments>https://suensky.github.io/post/dp-1.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>无聊的词句有人叫诗</title>
+      <link>https://suensky.github.io/post/poems.html</link>
+      <guid>https://suensky.github.io/post/poems.html</guid>
+      <pubDate>Wed, 03 Feb 2021 23:23:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;Bothell静夜思&quot;&gt;&lt;a href=&quot;#Bothell静夜思&quot; class=&quot;headerlink&quot; title=&quot;Bothell静夜思&quot;&gt;&lt;/a&gt;Bothell静夜思&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;序 某晚理发归，于广袤黑夜驾白色宝驹，风冷气清，&lt;</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://suensky.github.io/post/poems.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>无与伦比的绿</title>
+      <link>https://suensky.github.io/post/poem-so-green.html</link>
+      <guid>https://suensky.github.io/post/poem-so-green.html</guid>
+      <pubDate>Wed, 03 Feb 2021 22:22:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;无与伦比的绿&quot;&gt;&lt;a href=&quot;#无与伦比的绿&quot; class=&quot;headerlink&quot; title=&quot;无与伦比的绿&quot;&gt;&lt;/a&gt;无与伦比的绿&lt;/h2&gt;&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;于2019/8 微软最后一天，即将奔赴新公司，心情舒畅，原谅一切，发</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://suensky.github.io/post/poem-so-green.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>杂记</title>
+      <link>https://suensky.github.io/post/beautiful-translation.html</link>
+      <guid>https://suensky.github.io/post/beautiful-translation.html</guid>
+      <pubDate>Wed, 03 Feb 2021 19:18:07 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;信雅达&quot;&gt;&lt;a href=&quot;#信雅达&quot; class=&quot;headerlink&quot; title=&quot;信雅达&quot;&gt;&lt;/a&gt;信雅达&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;不爱红装爱武装”一般翻译成&lt;/strong&gt;：to be battle-dressed and not rosy-g</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://suensky.github.io/post/beautiful-translation.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>大白传</title>
+      <link>https://suensky.github.io/post/big-white.html</link>
+      <guid>https://suensky.github.io/post/big-white.html</guid>
+      <pubDate>Wed, 03 Feb 2021 18:11:52 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;有葱省大白者，少聪慧。弱冠及第乡试，旋会试，后求学于美利坚，研习变脸术。经六年乃成，称深假也。时乔氏苹果欲变脸术于手机，大白得势，骄宠一时。然其性猥，喜倚红偎翠，偷香窃玉，终日声色犬马。初喜东京卡哇伊，后慕欧美大胸波，朝秦暮楚，终无所获。几近不惑，恍觉立世不过白云苍狗。遂弃</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://suensky.github.io/post/big-white.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>别微软</title>
+      <link>https://suensky.github.io/post/bye-to-microsoft.html</link>
+      <guid>https://suensky.github.io/post/bye-to-microsoft.html</guid>
+      <pubDate>Wed, 03 Feb 2021 17:15:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;于2019/8&lt;/p&gt;
+&lt;h3 id=&quot;时维九月-序属三秋。乘高铁自金陵入京，转三万尺鹏鸟，穿万里长云，赴未眠西雅图。及雨拍弦窗，知身已入他乡。&quot;&gt;&lt;a href=&quot;#时维九月-序属三秋。乘高铁自金陵入京，转三万尺鹏鸟，穿万里长云，赴未眠西雅图。及雨拍弦窗，知身已入他乡。&quot;</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://suensky.github.io/post/bye-to-microsoft.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>关于我</title>
+      <link>https://suensky.github.io/post/about.html</link>
+      <guid>https://suensky.github.io/post/about.html</guid>
+      <pubDate>Tue, 02 Feb 2021 20:13:57 GMT</pubDate>
+      
+      <description>sky之小站，做做技术探谈人生</description>
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</category>
+      
+      
+      <comments>https://suensky.github.io/post/about.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>link</title>
+      <link>https://suensky.github.io/post/link.html</link>
+      <guid>https://suensky.github.io/post/link.html</guid>
+      <pubDate>Tue, 02 Feb 2021 19:13:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;这个人很懒，什么都没写。&lt;/p&gt;
+</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://suensky.github.io/post/link.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>开始写</title>
+      <link>https://suensky.github.io/post/startwritting.html</link>
+      <guid>https://suensky.github.io/post/startwritting.html</guid>
+      <pubDate>Tue, 02 Feb 2021 16:16:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;开这个博客是因为沈向洋博士的一篇号召大家通过写作来淬炼思考广度与深度的文章。很多人可能有这样的经历，读了一本深受启发的书，看了一篇引起共鸣的文章，可身边却没有人分享。自己脑海中有很多的想法，很多的见解，却没有合适的场合去展现。在这个自媒体盛行的时代，写作或许就是一个让那些喜</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://suensky.github.io/post/startwritting.html#disqus_thread</comments>
       
     </item>
     
