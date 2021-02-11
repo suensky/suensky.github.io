@@ -15,7 +15,7 @@
   <!-- if page has tags, then add tags to keyword -->
   
   
-  <meta name="keywords" content=",随笔,">
+  <meta name="keywords" content=",programming,">
   <!-- page.description has higher priority -->
   <meta name="description" content="">
   <link rel="shortcut icon" href="/img/icon.png">
@@ -84,7 +84,7 @@
             <ul>
                 
                 
-                <li class="gkt-cate-name float-left ">
+                <li class="gkt-cate-name float-left active">
                     <a class="float-left" href="/post/dp-1.html">算法专题</a>
                     
                 </li>
@@ -136,6 +136,33 @@
         <h1> Clubhouse需要你解决的问题之三 </h1>
         
         
+        <div class="hidden-lg hidden-md series_links">
+            <p> <strong> 算法专题系列文章链接：</strong></p>
+            <ul>
+                
+                <li>
+                    <a href="/post/dp-1.html">动态规划系列(1)</a>
+                    <span class="post-item-date">(Feb 4, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/clubhouse-problem1.html">Clubhouse需要你解决的算法题之一</a>
+                    <span class="post-item-date">(Feb 5, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/clubhouse-problem2.html">Clubhouse需要你解决的算法题之二</a>
+                    <span class="post-item-date">(Feb 5, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/clubhouse-problem3.html">Clubhouse需要你解决的问题之三</a>
+                    <span class="post-item-date">(Feb 6, 2021)</span>
+                </li>
+                
+            </ul>
+        </div>
+        
         
         <div class="gkt-article-start"></div>
         <p>书接前文，pm升到partner level后，打算再接再厉，把clubhouse推向全宇宙。</p>
@@ -163,7 +190,16 @@
         <div>
             
             <p>
-                <span>本文发表于 2021-02-06，最后修改于 2021-02-06。</span>
+                <span>专题: </span>
+                
+                <a href="/series/#算法专题">
+                    <code key="算法专题" class="post-label">算法专题</code>
+                </a>
+                
+            </p>
+            
+            <p>
+                <span>本文发表于 2021-02-06，最后修改于 2021-02-11。</span>
             </p>
             <!-- 文章末尾的提示 start -->
             
@@ -233,14 +269,14 @@
                 
                 
             </div>
-            <a href="/post/big-white.html" class="title">
-                大白传
+            <a href="/post/poems.html" class="title">
+                无聊的词句有人叫诗
             </a>
             <p class="text-gray">
                 <small>
                     <span>发表于2021-02-03，</span>
-                    <span class="hidden-xs">全文234字，</span>
-                    <span>阅读约1分钟</span>
+                    <span class="hidden-xs">全文554字，</span>
+                    <span>阅读约2分钟</span>
                 </small>
             </p>
         </div>
@@ -262,14 +298,14 @@
                 
                 
             </div>
-            <a href="/post/startwritting.html" class="title">
-                开始写
+            <a href="/post/beautiful-translation.html" class="title">
+                杂记
             </a>
             <p class="text-gray">
                 <small>
-                    <span>发表于2021-02-02，</span>
-                    <span class="hidden-xs">全文944字，</span>
-                    <span>阅读约4分钟</span>
+                    <span>发表于2021-02-03，</span>
+                    <span class="hidden-xs">全文684字，</span>
+                    <span>阅读约3分钟</span>
                 </small>
             </p>
         </div>
@@ -303,10 +339,10 @@
         rel="1">#关于我 (1) </a>
     
     <a class="post-tag-item" href="/tags/#随笔" title="随笔"
-        rel="9">#随笔 (9) </a>
+        rel="8">#随笔 (8) </a>
     
     <a class="post-tag-item" href="/tags/#programming" title="programming"
-        rel="3">#programming (3) </a>
+        rel="4">#programming (4) </a>
     
     <a class="post-tag-item" href="/tags/#DP" title="DP"
         rel="1">#DP (1) </a>
@@ -471,6 +507,80 @@
 </div></section>
         
         
+        <section class="gkt-sidebar-content box-shadow">
+            <strong>算法专题</strong>
+            <ul>
+                
+                <li>
+                    <a href="/post/dp-1.html"
+                        class="">动态规划系列(1)</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/clubhouse-problem1.html"
+                        class="">Clubhouse需要你解决的算法题之一</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/clubhouse-problem2.html"
+                        class="">Clubhouse需要你解决的算法题之二</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/clubhouse-problem3.html"
+                        class="gkt-sidebar-active">Clubhouse需要你解决的问题之三</a>
+                    
+                    <!-- Table of Contents -->
+<div id="sidebar-toc">
+  <!-- TOC  -->
+  
+  
+</div>
+
+<script>
+  (function () {
+    var h2 = document.querySelectorAll('article h2');
+    var h3 = document.querySelectorAll('article h3');
+    var linkList = document.querySelectorAll('#sidebar-toc a');
+
+    function findLinkElement(name) {
+      for (var i = 0; i < linkList.length; i++) {
+        var items = linkList[i].href.split('#');
+        if (items && items[items.length - 1] === encodeURIComponent(name)) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function activeLink(titleList) {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      for (var i = titleList.length - 1; i >= 0; i--) {
+        if (scrollTop - titleList[i].offsetTop > 0) {
+          var index = findLinkElement(titleList[i].id);
+          index != -1 && linkList[index].classList.add('gkt-sidebar-active');
+          break;
+        }
+      }
+    }
+
+    window.addEventListener("scroll", function (e) {
+      [].slice.call(linkList).forEach(function (link) {
+        link.classList.remove('gkt-sidebar-active');
+      })
+      activeLink(h2);
+    })
+  })();
+</script>
+                    
+                </li>
+                
+            </ul>
+        </section>
+        
         
         <section class="gkt-sidebar-content box-shadow">
             <strong>最近的文章</strong>
@@ -486,34 +596,6 @@
                 
                 <li>
                     <a href="/post/clubhouse-problem2.html">Clubhouse需要你解决的算法题之二</a>
-                </li>
-                
-                <li>
-                    <a href="/post/clubhouse-problem1.html">Clubhouse需要你解决的算法题之一</a>
-                </li>
-                
-                <li>
-                    <a href="/post/comment-clubhouse.html">俱乐部会所火了</a>
-                </li>
-                
-                <li>
-                    <a href="/post/dp-1.html">动态规划系列(1)</a>
-                </li>
-                
-                <li>
-                    <a href="/post/poems.html">无聊的词句有人叫诗</a>
-                </li>
-                
-                <li>
-                    <a href="/post/poem-so-green.html">无与伦比的绿</a>
-                </li>
-                
-                <li>
-                    <a href="/post/beautiful-translation.html">杂记</a>
-                </li>
-                
-                <li>
-                    <a href="/post/big-white.html">大白传</a>
                 </li>
                 
             </ul>
