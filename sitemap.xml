@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://suensky.github.io/post/poem-so-green.html</loc>
+    
+    <lastmod>2021-03-03T04:51:05.011Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://suensky.github.io/post/chuxi-to-2021.html</loc>
     
-    <lastmod>2021-02-11T18:07:50.378Z</lastmod>
+    <lastmod>2021-03-03T04:50:53.416Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://suensky.github.io/post/algorithm-merge-sort.html</loc>
+    
+    <lastmod>2021-03-03T04:49:57.292Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://suensky.github.io/post/algorithm_union-find.html</loc>
+    
+    <lastmod>2021-03-03T04:48:26.565Z</lastmod>
     
   </url>
   
@@ -47,13 +68,6 @@
     <loc>https://suensky.github.io/post/poems.html</loc>
     
     <lastmod>2021-02-06T15:59:06.766Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://suensky.github.io/post/poem-so-green.html</loc>
-    
-    <lastmod>2021-02-06T15:58:50.086Z</lastmod>
     
   </url>
   

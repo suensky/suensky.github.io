@@ -15,8 +15,56 @@
     <atom:link href="https://suensky.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 11 Feb 2021 18:07:50 GMT</pubDate>
+    <pubDate>Wed, 03 Mar 2021 04:49:57 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>详解归并排序之应用(Merge sort)</title>
+      <link>https://suensky.github.io/post/algorithm-merge-sort.html</link>
+      <guid>https://suensky.github.io/post/algorithm-merge-sort.html</guid>
+      <pubDate>Wed, 03 Mar 2021 00:17:18 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;归并排序基于分治思想，基本步骤是把数组一分为二，分别排序，然后将两个排序好的数组合并，合并两个排序好的数组可以在&lt;code&gt;O(N)&lt;/code&gt;的复杂度完成。根据&lt;code&gt;T(N) = 2T(2/N) + N&lt;/code&gt;,可以推导出时间复杂度为&lt;code&gt;O(Nlog</description>
+        
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/categories/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/">算法专题</category>
+      
+      
+      <category domain="https://suensky.github.io/tags/programming/">programming</category>
+      
+      
+      <comments>https://suensky.github.io/post/algorithm-merge-sort.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>详解并查集(Union Find)</title>
+      <link>https://suensky.github.io/post/algorithm_union-find.html</link>
+      <guid>https://suensky.github.io/post/algorithm_union-find.html</guid>
+      <pubDate>Mon, 01 Mar 2021 21:12:12 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;What’s-Union-Find&quot;&gt;&lt;a href=&quot;#What’s-Union-Find&quot; class=&quot;headerlink&quot; title=&quot;What’s Union Find?&quot;&gt;&lt;/a&gt;What’s Union Find?&lt;/h1&gt;&lt;p&gt;Union Fi</description>
+        
+      
+      
+      
+      
+      <category domain="https://suensky.github.io/categories/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/">算法专题</category>
+      
+      
+      <category domain="https://suensky.github.io/tags/programming/">programming</category>
+      
+      
+      <comments>https://suensky.github.io/post/algorithm_union-find.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>除夕</title>
@@ -26,9 +74,10 @@
       
         
         
-      <description>&lt;h2 id=&quot;除夕&quot;&gt;&lt;a href=&quot;#除夕&quot; class=&quot;headerlink&quot; title=&quot;除夕&quot;&gt;&lt;/a&gt;除夕&lt;/h2&gt;&lt;blockquote&gt;
+      <description>&lt;blockquote&gt;
 &lt;p&gt;此一年波谲云诡，世事多艰，终于今宵。纵困苦艰难，江河依旧辽阔。新年至，昂首向前，爆竹声中，品人间烟火。&lt;/p&gt;
-&lt;</description>
+&lt;/blockquote&gt;
+&lt;p&gt;庚子弥年多诡谲，今岁今日终今宵。&lt;br&gt;寒随一夜冬雪去，暖入春风催竹梢。&lt;br&gt;稚齿犹恋除夕夜，三更欲</description>
         
       
       
@@ -196,10 +245,10 @@
       
         
         
-      <description>&lt;h2 id=&quot;无与伦比的绿&quot;&gt;&lt;a href=&quot;#无与伦比的绿&quot; class=&quot;headerlink&quot; title=&quot;无与伦比的绿&quot;&gt;&lt;/a&gt;无与伦比的绿&lt;/h2&gt;&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;于2019/8 微软最后一天，即将奔赴新公司，心情舒畅，原谅一切，发</description>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;于2019/8 微软最后一天，即将奔赴新公司，心情舒畅，原谅一切，发现很多美&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;我车出车库&quot;&gt;&lt;a href=&quot;#我车出车库&quot; class=&quot;headerlink&quot; title=&quot;我车出车库&quot;&gt;&lt;/</description>
         
       
       

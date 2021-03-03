@@ -21,11 +21,11 @@
   <link rel="shortcut icon" href="/img/icon.png">
   <title>
     
-    Clubhouse需要你解决的算法题之二 | 多做多说
+    详解并查集(Union Find) | 多做多说
     
   </title>
 
-  <link rel="canonical" href="https://suensky.github.io/post/clubhouse-problem2.html">
+  <link rel="canonical" href="https://suensky.github.io/post/algorithm_union-find.html">
   
 <link rel="stylesheet" href="/css/geektutu.css">
 
@@ -126,14 +126,14 @@
 <div class="float-left post-container box-shadow">
     <div class="u-arrow-wrapper hidden-xs">
         
-        <a class="float-left" href="/post/clubhouse-problem1.html"><i class="u-arrow-left"></i></a>
+        <a class="float-left" href="/post/chuxi-to-2021.html"><i class="u-arrow-left"></i></a>
         
         
-        <a class="float-right" href="/post/clubhouse-problem3.html"><i class="u-arrow-right"></i></a>
+        <a class="float-right" href="/post/algorithm-merge-sort.html"><i class="u-arrow-right"></i></a>
         
     </div>
     <article class="col-xs-12">
-        <h1> Clubhouse需要你解决的算法题之二 </h1>
+        <h1> 详解并查集(Union Find) </h1>
         
         
         <div class="hidden-lg hidden-md series_links">
@@ -175,16 +175,44 @@
         
         
         <div class="gkt-article-start"></div>
-        <p>书接前文，the coding guy delivered the feature of finding the closest friend in a timely manner. PM got new task from the leads team. They want to improve clubhouse users’ engagement.</p>
-<p>PM proposed the immediate idea that it would benefit the engagement if we can improve the joining rate of the rooms recommended to users.</p>
-<p>Dev said, I would prefer to join rooms with my closest friends in. That’s said, we can recommend rooms based on the closeness between the room and the user.</p>
-<p>But what’s the closeness, PM asked.</p>
-<p>We can measure a room’s closeness to a user by aggregating the distance of the user’s following friends in the room to this user. Let’s say we have user A, A’s friend B, B’s friend C who’s not a direct friend of A. Then for A, the closeness of user B is 1024, and C 512. If C’s friend D is neither a friend of A nor B, then D’s closeness is 256. The higher the closeness rate, the closer these two users. If B, C and D are all in room #1, then room #1’s closeness rate to A is 1024+512+256.</p>
-<p>PM nodded with confusion and prepared a deck in 7 seconds. The presentation was very successful and PM got high appreciation from leads team. At the end of the performance review cycle, PM got promoted to partner level.</p>
-<p>What about Dev? Dev is very satisfied with the algorithm and the beauty of implementation.</p>
-<p>Here you go, Dev!</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Profile &#123;</span><br><span class="line">    &#x2F;&#x2F; Id of this profile.</span><br><span class="line">    public String id;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; All users this user follows</span><br><span class="line">    public List&lt;Profile&gt; following;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Room &#123;</span><br><span class="line">    public String roomId;</span><br><span class="line"></span><br><span class="line">    public List&lt;Profile&gt; usersInRoom;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; ... more to come as long as PM still has the job.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Clubhouse &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; limit represents the number of indirection level to</span><br><span class="line">    &#x2F;&#x2F; reach. E.g., limit &#x3D;&#x3D; 1, then we only consider the direct friends.</span><br><span class="line">    &#x2F;&#x2F; limit &#x3D;&#x3D; 2, then only C is considered.</span><br><span class="line">    public Clubhouse(</span><br><span class="line">      List&lt;Profile&gt; clubPool,</span><br><span class="line">      List&lt;Room&gt; currentRooms,</span><br><span class="line">      int limit) &#123;</span><br><span class="line">      &#x2F;&#x2F; TODO ?</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Recommend the topN rooms for the given user.</span><br><span class="line">    public List&lt;Room&gt; recommendRooms(Profile user, int topN) &#123;</span><br><span class="line">      &#x2F;&#x2F; TODO</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="What’s-Union-Find"><a href="#What’s-Union-Find" class="headerlink" title="What’s Union Find?"></a>What’s Union Find?</h1><p>Union Find is useful in finding connected components. The idea behind UF is quite simple.</p>
+<ol>
+<li>You have <strong>N</strong> items initially. Each item forms its own group by setting parent to pointing to itself, i.e., <code>parents[i] = i</code>.</li>
+<li>Then you can union two items if they are connected or share some common properties in your problem definition. E.g., <code>union(1,3)</code> will connect item 1 and 3 and make their parents both pointing to the same item.</li>
+<li>You can continue <code>union(x, y)</code> and put more items into one group.<br><img src="algorithm_union-find/dsu.png" alt="Disjoint Set process"></li>
+</ol>
+<p>A very common implementation of Disjoint Set Union. Here I applied two optimization: path compression and union by rank. The idea is to flatten the tree when <code>find(x)</code> is called so as to reduce the time complexity, which is <code>O(logN)</code> now. In reality, the amortized time complexity is a very small constant. Refer to <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure">wiki</a> for more detailed discussion.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DSU</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] parents;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] rank;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DSU</span><span class="params">(<span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.size = size;</span><br><span class="line">      parents = <span class="keyword">new</span> <span class="keyword">int</span>[size];</span><br><span class="line">      rank = <span class="keyword">new</span> <span class="keyword">int</span>[size];</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">        parents[i] = i;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> parentX = find(x);</span><br><span class="line">      <span class="keyword">int</span> parentY = find(y);</span><br><span class="line">      <span class="keyword">if</span> (parentX == parentY) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (rank[parentX] &lt; rank[parentY]) &#123;</span><br><span class="line">        parents[parentX] = parentY;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        parents[parentY] = parentX;</span><br><span class="line">        <span class="keyword">if</span> (rank[parentX] == rank[parentY]) &#123;</span><br><span class="line">          ++rank[parentX];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      --size;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getGroups</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">while</span> (parents[x] != x) &#123;</span><br><span class="line">        parents[x] = parents[parents[x]];</span><br><span class="line">        x = parents[x];</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> parents[x];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="How-to-user-UF"><a href="#How-to-user-UF" class="headerlink" title="How to user UF?"></a>How to user UF?</h1><p>While it’s easy to get the idea of UF, it’s not straightforward to use it to solve problems sometimes. Especially when the problems are presented in a way distancing itself from UF. I’ll give two examples to illustrate the use of UF.</p>
+<h2 id="Redundant-Connection"><a href="#Redundant-Connection" class="headerlink" title="Redundant Connection"></a><a target="_blank" rel="noopener" href="https://leetcode.com/problems/redundant-connection/">Redundant Connection</a></h2><h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>In this problem, a tree is an undirected graph that is connected and has no cycles.</p>
+<p>The given input is a graph that started as a tree with N nodes (with distinct values 1, 2, …, N), with one additional edge added. The added edge has two different vertices chosen from 1 to N, and was not an edge that already existed.</p>
+<p>The resulting graph is given as a 2D-array of <code>edges</code>. Each element of <code>edges</code> is a pair [<code>u</code>, <code>v</code>] with <code>u</code> &lt; <code>v</code>, that represents an undirected edge connecting nodes <code>u</code> and <code>v</code>.</p>
+<p>Return <strong>an edge</strong> that can be removed so that the resulting graph is a tree of N nodes. If there are multiple answers, return the answer that occurs last in the given 2D-array. The answer edge [<code>u</code>, <code>v</code>] should be in the same format, with <code>u</code> &lt; <code>v</code>.</p>
+<blockquote>
+<p>Example:<br>Input: [[1,2], [1,3], [2,3]]<br>Output: [2,3] <br>Explanation: The given undirected graph will be like this: <br>   &nbsp; 1<br> &nbsp;&nbsp;/  \ <br>2 - 3</p>
+</blockquote>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution:"></a>Solution:</h3><p>The problem only needs to remove one edge that’s redundant and the last one in the case of multiple answers, which significantly simplifies the problem.</p>
+<p>Think with UF in mind, each vertex in the graph is a group at first. With each edge connecting two vertices, they become the same group. If we find two vertices of an edge already in the same group, we find the answer. The reason is an edge between two vertices that are already connected will cause cycle, as illustrated in above example.</p>
+<p>And the code. Here I used a simplified DSU without rank.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] findRedundantConnection(<span class="keyword">int</span>[][] edges) &#123;</span><br><span class="line">        <span class="keyword">int</span> size = edges.length;</span><br><span class="line">        DSU dsu = <span class="keyword">new</span> DSU(size + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] edge : edges) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = dsu.find(edge[<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">int</span> y = dsu.find(edge[<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (x == y) &#123;</span><br><span class="line">                <span class="keyword">return</span> edge;</span><br><span class="line">            &#125;</span><br><span class="line">            dsu.union(x, y);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">DSU</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span>[] parents;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DSU</span><span class="params">(<span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">            parents = <span class="keyword">new</span> <span class="keyword">int</span>[size + <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= size; i++) &#123;</span><br><span class="line">                parents[i] = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (parents[x] != x) &#123;</span><br><span class="line">                parents[x] = find(parents[x]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> parents[x];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">            parents[find(x)] = find(y);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Regions-Cut-by-Slashes"><a href="#Regions-Cut-by-Slashes" class="headerlink" title="Regions Cut by Slashes"></a><a target="_blank" rel="noopener" href="https://leetcode.com/problems/regions-cut-by-slashes/">Regions Cut by Slashes</a></h2><h3 id="Problem-1"><a href="#Problem-1" class="headerlink" title="Problem"></a>Problem</h3><p>In a N x N grid composed of 1 x 1 squares, each 1 x 1 square consists of a /, \, or blank space.  These characters divide the square into contiguous regions.<br>Return the number of regions.</p>
+<blockquote>
+<p>Note that backslash characters are escaped, so a \ is represented as “\\“.</p>
+</blockquote>
+<p><strong>Example 1:</strong> <br>Input:  <br>[    <br>  “.  /“, <br>  “/ .”  <br>]<br>Output: 2 <br>Explanation: The 2x2 grid is as follows: <br><img src="algorithm_union-find/1.png" alt="eg1"></p>
+<p><strong>Example 2:</strong> <br>Input:  <br>[    <br>  “.  /“, <br>  “. .”  <br>]<br>Output: 1 <br>Explanation: The 2x2 grid is as follows: <br><img src="algorithm_union-find/2.png" alt="eg2"></p>
+<p>Example 1:<br>Input:  <br>[    <br>  “\  /“, <br>  “/ \“  <br>]<br>Output: 4 <br>Explanation: The 2x2 grid is as follows: <br><img src="algorithm_union-find/3.png" alt="eg3"></p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><p>It’s not straightforward to link this problem to UF though the regions cut by the slashes may remind of groups then UF. First, if we each grid cell into 4 small cells like below figure, we know that the four small cells are connected to each other without slashes or back slashes. Also, we know that each small cell connects to its neighbor small cell regardless of slashes or back slashes. Let <code>cell(row, col, index)</code> represents the small cell of <code>index</code> at <code>grid[row][col]</code>. Then we get:</p>
+<ol>
+<li><code>cell(1, 0, 1)</code> connects to <code>cell(0, 0, 3)</code></li>
+<li><code>cell(0, 1, 0)</code> connects to <code>cell(0, 0, 2)</code> for sure. And all other neighbor cells to be connected.</li>
+<li>If there is no / in <code>grid[row][col]</code>, then <code>cell(row, col, 0)</code> connects to <code>cell(row, col, 3)</code> and <code>cell(row, col, 1)</code> connects to <code>cell(row, col, 2)</code>.</li>
+<li>If there is no \ in <code>grid[row][col]</code>, then <code>cell(row, col, 0)</code> connects to <code>cell(row, col, 1)</code> and <code>cell(row, col, 2)</code> connects to <code>cell(row, col, 3)</code>.</li>
+</ol>
+<p><img src="algorithm_union-find/dsu_4.png" alt="eg3"></p>
+<p>With above in mind, we can apply UF here by initially setting each small cell to its own group. Iterate all small cells and union connected cells based on the above rules. The resulting groups is the answer to this problem.</p>
+<p>And the code. Here <code>DSU</code> is defined at the beginning.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">regionsBySlashes</span><span class="params">(String[] grid)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> len = grid.length;</span><br><span class="line">  <span class="keyword">int</span> groups = <span class="number">4</span> * len * len;</span><br><span class="line">  DSU dsu = <span class="keyword">new</span> DSU(groups);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; ++j) &#123;</span><br><span class="line">          <span class="keyword">if</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">              dsu.union(index(len, i, j, <span class="number">1</span>), index(len, i - <span class="number">1</span>, j, <span class="number">3</span>));</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">              dsu.union(index(len, i, j, <span class="number">0</span>), index(len, i, j - <span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">char</span> ch = grid[i].charAt(j);</span><br><span class="line">          <span class="keyword">if</span> (ch != <span class="string">&#x27;/&#x27;</span>) &#123;</span><br><span class="line">              dsu.union(index(len, i, j, <span class="number">0</span>), index(len, i, j, <span class="number">3</span>));</span><br><span class="line">              dsu.union(index(len, i, j, <span class="number">1</span>), index(len, i, j, <span class="number">2</span>));</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (ch != <span class="string">&#x27;\\&#x27;</span>) &#123;</span><br><span class="line">              dsu.union(index(len, i, j, <span class="number">0</span>), index(len, i, j, <span class="number">1</span>));</span><br><span class="line">              dsu.union(index(len, i, j, <span class="number">2</span>), index(len, i, j, <span class="number">3</span>));</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> dsu.count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">index</span><span class="params">(<span class="keyword">int</span> len, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">4</span> * (row * len + col) + k;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
 <script src="/js/qrious.min.js"></script>
 
@@ -202,7 +230,7 @@
             </p>
             
             <p>
-                <span>本文发表于 2021-02-05，最后修改于 2021-02-06。</span>
+                <span>本文发表于 2021-03-01，最后修改于 2021-03-02。</span>
             </p>
             <!-- 文章末尾的提示 start -->
             
@@ -213,10 +241,10 @@
         <hr />
         <p name="pagination" style="font-size: 1.2em">
     
-    <a class="float-left" href="/post/clubhouse-problem1.html">上一篇 « Clubhouse需要你解决的算法题之一</a>
+    <a class="float-left" href="/post/chuxi-to-2021.html">上一篇 « 除夕</a>
     
     
-    <a class="float-right" href="/post/clubhouse-problem3.html">下一篇 » Clubhouse需要你解决的问题之三</a>
+    <a class="float-right" href="/post/algorithm-merge-sort.html">下一篇 » 详解归并排序之应用(Merge sort)</a>
     
 </p>
     </article>
@@ -237,20 +265,20 @@
                 
                 <span>/</span>
                 
-                <a class="text-gray" href="/tags/#programming"
-                    title="programming">programming</a>
+                <a class="text-gray" href="/tags/#随笔"
+                    title="随笔">随笔</a>
                 <span>/</span>
                 
                 
             </div>
-            <a href="/post/algorithm-merge-sort.html" class="title">
-                详解归并排序之应用(Merge sort)
+            <a href="/post/chuxi-to-2021.html" class="title">
+                除夕
             </a>
             <p class="text-gray">
                 <small>
-                    <span>发表于2021-03-02，</span>
-                    <span class="hidden-xs">全文8498字，</span>
-                    <span>阅读约29分钟</span>
+                    <span>发表于2021-02-11，</span>
+                    <span class="hidden-xs">全文182字，</span>
+                    <span>阅读约1分钟</span>
                 </small>
             </p>
         </div>
@@ -272,14 +300,14 @@
                 
                 
             </div>
-            <a href="/post/big-white.html" class="title">
-                大白传
+            <a href="/post/comment-clubhouse.html" class="title">
+                俱乐部会所火了
             </a>
             <p class="text-gray">
                 <small>
-                    <span>发表于2021-02-03，</span>
-                    <span class="hidden-xs">全文234字，</span>
-                    <span>阅读约1分钟</span>
+                    <span>发表于2021-02-04，</span>
+                    <span class="hidden-xs">全文1040字，</span>
+                    <span>阅读约4分钟</span>
                 </small>
             </p>
         </div>
@@ -528,12 +556,26 @@
                 
                 <li>
                     <a href="/post/clubhouse-problem2.html"
-                        class="gkt-sidebar-active">Clubhouse需要你解决的算法题之二</a>
+                        class="">Clubhouse需要你解决的算法题之二</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/clubhouse-problem3.html"
+                        class="">Clubhouse需要你解决的问题之三</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm_union-find.html"
+                        class="gkt-sidebar-active">详解并查集(Union Find)</a>
                     
                     <!-- Table of Contents -->
 <div id="sidebar-toc">
   <!-- TOC  -->
   
+  
+  <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#What%E2%80%99s-Union-Find"><span class="toc-nav-text">What’s Union Find?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#How-to-user-UF"><span class="toc-nav-text">How to user UF?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Redundant-Connection"><span class="toc-nav-text">Redundant Connection</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Regions-Cut-by-Slashes"><span class="toc-nav-text">Regions Cut by Slashes</span></a></li></ol></li></ol>
   
 </div>
 
@@ -572,18 +614,6 @@
     })
   })();
 </script>
-                    
-                </li>
-                
-                <li>
-                    <a href="/post/clubhouse-problem3.html"
-                        class="">Clubhouse需要你解决的问题之三</a>
-                    
-                </li>
-                
-                <li>
-                    <a href="/post/algorithm_union-find.html"
-                        class="">详解并查集(Union Find)</a>
                     
                 </li>
                 
