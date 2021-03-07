@@ -15,17 +15,17 @@
   <!-- if page has tags, then add tags to keyword -->
   
   
-  <meta name="keywords" content=",随笔,">
+  <meta name="keywords" content=",programming,">
   <!-- page.description has higher priority -->
   <meta name="description" content="">
   <link rel="shortcut icon" href="/img/icon.png">
   <title>
     
-    无与伦比的绿 | 多做多说
+    Java集合速览 | 多做多说
     
   </title>
 
-  <link rel="canonical" href="https://suensky.github.io/post/poem-so-green.html">
+  <link rel="canonical" href="https://suensky.github.io/post/java-collections.html">
   
 <link rel="stylesheet" href="/css/geektutu.css">
 
@@ -84,7 +84,7 @@
             <ul>
                 
                 
-                <li class="gkt-cate-name float-left active">
+                <li class="gkt-cate-name float-left ">
                     <a class="float-left" href="/post/startwritting.html">诗和远方 ▾</a>
                     
                     <ul class="gkt-sub-cate">
@@ -92,7 +92,7 @@
                         <li class="gkt-sub-cate-name "><a class="float-left"
                                 href="/post/startwritting.html">随笔</a></li>
                         
-                        <li class="gkt-sub-cate-name active"><a class="float-left"
+                        <li class="gkt-sub-cate-name "><a class="float-left"
                                 href="/post/poem-so-green.html">诗</a></li>
                         
                     </ul>
@@ -117,7 +117,7 @@
                     
                 </li>
                 
-                <li class="gkt-cate-name float-left ">
+                <li class="gkt-cate-name float-left active">
                     <a class="float-left" href="/post/java-collections.html">编程语言</a>
                     
                 </li>
@@ -159,33 +159,21 @@
 <div class="float-left post-container box-shadow">
     <div class="u-arrow-wrapper hidden-xs">
         
-        <a class="float-left" href="/post/beautiful-translation.html"><i class="u-arrow-left"></i></a>
+        <a class="float-left" href="/post/algorithm-segment-tree-2.html"><i class="u-arrow-left"></i></a>
         
-        
-        <a class="float-right" href="/post/poems.html"><i class="u-arrow-right"></i></a>
         
     </div>
     <article class="col-xs-12">
-        <h1> 无与伦比的绿 </h1>
+        <h1> Java集合速览 </h1>
         
         
         <div class="hidden-lg hidden-md series_links">
-            <p> <strong> 诗系列文章链接：</strong></p>
+            <p> <strong> Java系列文章链接：</strong></p>
             <ul>
                 
                 <li>
-                    <a href="/post/poem-so-green.html">无与伦比的绿</a>
-                    <span class="post-item-date">(Feb 3, 2021)</span>
-                </li>
-                
-                <li>
-                    <a href="/post/poems.html">无聊的词句有人叫诗</a>
-                    <span class="post-item-date">(Feb 3, 2021)</span>
-                </li>
-                
-                <li>
-                    <a href="/post/chuxi-to-2021.html">除夕</a>
-                    <span class="post-item-date">(Feb 11, 2021)</span>
+                    <a href="/post/java-collections.html">Java集合速览</a>
+                    <span class="post-item-date">(Mar 7, 2021)</span>
                 </li>
                 
             </ul>
@@ -193,14 +181,355 @@
         
         
         <div class="gkt-article-start"></div>
-        <blockquote>
-<p>于2019/8 微软最后一天，即将奔赴新公司，心情舒畅，原谅一切，发现很多美</p>
-</blockquote>
-<h3 id="我车出车库"><a href="#我车出车库" class="headerlink" title="我车出车库"></a>我车出车库</h3><h3 id="速度0迈"><a href="#速度0迈" class="headerlink" title="速度0迈"></a>速度0迈</h3><h3 id="5-9秒"><a href="#5-9秒" class="headerlink" title="5.9秒"></a>5.9秒</h3><h3 id="速度60迈"><a href="#速度60迈" class="headerlink" title="速度60迈"></a>速度60迈</h3><h3 id="天蓝白云飘"><a href="#天蓝白云飘" class="headerlink" title="天蓝白云飘"></a>天蓝白云飘</h3><h3 id="树绿鸟儿叫"><a href="#树绿鸟儿叫" class="headerlink" title="树绿鸟儿叫"></a>树绿鸟儿叫</h3><br/>
+        <p>A quick review of Java Collection and Map key methods. Array based collections usually have:<br>Method | Time complexity<br>— | —<br>add | O(1)<br>insert(int index) | O(N)<br>remove | O(1)<br>remove(int index) | O(N)<br>find(Object value) | O(N)</p>
+<p>PriorityQueue, TreeSet and TreeMap are implemented based on balanced tree, thus:<br>Method | Time complexity<br>— | —<br>offer | O(logN)<br>poll | O(logN)<br>peak | O(1)</p>
+<h1 id="Overview-via-a-diagram"><a href="#Overview-via-a-diagram" class="headerlink" title="Overview via a diagram"></a>Overview via a diagram</h1><p><img src="java-collections/java-collections.png" alt="Overview"></p>
+<p><code>Collections</code> extends <code>Iterable</code> which has below key methods:<br>Method        | Description<br>— | —<br><code>boolean hasNext()</code> | This method returns true if the iterator has more elements.<br><code>object next()</code> |  It returns the element and moves the cursor pointer to the next element.<br><code>void remove()</code> | This method removes the last elements returned by the iterator.</p>
+<h1 id="List-methods"><a href="#List-methods" class="headerlink" title="List methods"></a>List methods</h1><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>void add​(int index, E element)</code></td>
+<td>Inserts the specified element at the specified position in this list (optional operation).</td>
+</tr>
+<tr>
+<td><code>boolean add​(E e)</code></td>
+<td>Appends the specified element to the end of this list (optional operation).</td>
+</tr>
+<tr>
+<td><code>boolean addAll​(Collection&lt;? extends E&gt; c)</code></td>
+<td>Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection’s iterator (optional operation).</td>
+</tr>
+<tr>
+<td><code>Eget​(int index)</code></td>
+<td>Returns the element at the specified position in this list.</td>
+</tr>
+<tr>
+<td><code>E set​(int index, E element)</code></td>
+<td>Replaces the element at the specified position in this list with the specified element (optional operation).</td>
+</tr>
+<tr>
+<td><code>booleanisEmpty()</code></td>
+<td>Returns true if this list contains no elements.</td>
+</tr>
+<tr>
+<td><code>int size()</code></td>
+<td>Returns the number of elements in this list.</td>
+</tr>
+<tr>
+<td><code>&lt;T&gt; T[] toArray​(T[] a)</code></td>
+<td>Returns an array containing all of the elements in this list in proper sequence (from first to last element); the runtime type of the returned array is that of the specified array. E.g., <code>String[] y = x.toArray(new String[0]);</code></td>
+</tr>
+</tbody></table>
+<h1 id="Queue-methods"><a href="#Queue-methods" class="headerlink" title="Queue methods"></a>Queue methods</h1><table>
+<thead>
+<tr>
+<th align="left">Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>void add(E e)</code></td>
+<td>Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions, returning true upon success and throwing an IllegalStateException if no space is currently available.</td>
+</tr>
+<tr>
+<td align="left"><code>E element()</code></td>
+<td>Retrieves, but does not remove, the head of this queue.</td>
+</tr>
+<tr>
+<td align="left"><code>boolean offer​(E e)</code></td>
+<td>Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions.</td>
+</tr>
+<tr>
+<td align="left"><code>E peek()</code></td>
+<td>Retrieves, but does not remove, the head of this queue, or returns null if this queue is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E poll()</code></td>
+<td>Retrieves and removes the head of this queue, or returns null if this queue is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E remove()</code></td>
+<td>Retrieves and removes the head of this queue.</td>
+</tr>
+</tbody></table>
+<h1 id="Dequeue-LinkedList-Methods"><a href="#Dequeue-LinkedList-Methods" class="headerlink" title="Dequeue / LinkedList Methods"></a>Dequeue / LinkedList Methods</h1><table>
+<thead>
+<tr>
+<th align="left">Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>void addFirst​(E e)</code></td>
+<td>Inserts the specified element at the front of this deque if it is possible to do so immediately without violating capacity restrictions, throwing an IllegalStateException if no space is currently available.</td>
+</tr>
+<tr>
+<td align="left"><code>void addLast​(E e)</code></td>
+<td>Inserts the specified element at the end of this deque if it is possible to do so immediately without violating capacity restrictions, throwing an IllegalStateException if no space is currently available.</td>
+</tr>
+<tr>
+<td align="left"><code>boolean offerFirst​(E e)</code></td>
+<td>Inserts the specified element at the front of this deque unless it would violate capacity restrictions.</td>
+</tr>
+<tr>
+<td align="left"><code>boolean offerLast​(E e)</code></td>
+<td>Inserts the specified element at the end of this deque unless it would violate capacity restrictions.</td>
+</tr>
+<tr>
+<td align="left"><code>E peekFirst()</code></td>
+<td>Retrieves, but does not remove, the first element of this deque, or returns null if this deque is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E peekLast()</code></td>
+<td>Retrieves, but does not remove, the last element of this deque, or returns null if this deque is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E pollFirst()</code></td>
+<td>Retrieves and removes the first element of this deque, or returns null if this deque is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E pollLast()</code></td>
+<td>Retrieves and removes the last element of this deque, or returns null if this deque is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E pop()</code></td>
+<td>Pops an element from the stack represented by this deque.</td>
+</tr>
+<tr>
+<td align="left"><code>void push​(E e)</code></td>
+<td>Pushes an element onto the stack represented by this deque (in other words, at the head of this deque) if it is possible to do so immediately without violating capacity restrictions, throwing an IllegalStateException if no space is currently available.</td>
+</tr>
+<tr>
+<td align="left"><code>E removeFirst()</code></td>
+<td>Retrieves and removes the first element of this deque.`</td>
+</tr>
+<tr>
+<td align="left"><code>E removeLast()</code></td>
+<td>Retrieves and removes the last element of this deque.</td>
+</tr>
+</tbody></table>
+<h2 id="Summary-of-Deque-methods"><a href="#Summary-of-Deque-methods" class="headerlink" title="Summary of Deque methods"></a>Summary of Deque methods</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>First Element (Head)</th>
+<th></th>
+<th>Last Element (Tail)</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>Throws exception</td>
+<td>Special value</td>
+<td>Throws exception</td>
+<td>Special value</td>
+</tr>
+<tr>
+<td>Insert</td>
+<td>addFirst(e)</td>
+<td>offerFirst(e)</td>
+<td>addLast(e)</td>
+<td>offerLast(e)</td>
+</tr>
+<tr>
+<td>Remove</td>
+<td>removeFirst()</td>
+<td>pollFirst()</td>
+<td>removeLast()</td>
+<td>pollLast()</td>
+</tr>
+<tr>
+<td>Examine</td>
+<td>getFirst()</td>
+<td>peekFirst()</td>
+<td>getLast()</td>
+<td>peekLast()</td>
+</tr>
+</tbody></table>
+<h2 id="Comparison-of-Queue-and-Deque-methods"><a href="#Comparison-of-Queue-and-Deque-methods" class="headerlink" title="Comparison of Queue and Deque methods"></a>Comparison of Queue and Deque methods</h2><table>
+<thead>
+<tr>
+<th>Queue Method</th>
+<th>Equivalent Deque Method</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add(e)</td>
+<td>addLast(e)</td>
+</tr>
+<tr>
+<td>offer(e)</td>
+<td>offerLast(e)</td>
+</tr>
+<tr>
+<td>remove()</td>
+<td>removeFirst()</td>
+</tr>
+<tr>
+<td>poll()</td>
+<td>pollFirst()</td>
+</tr>
+<tr>
+<td>element()</td>
+<td>getFirst()</td>
+</tr>
+<tr>
+<td>peek()</td>
+<td>peekFirst()</td>
+</tr>
+</tbody></table>
+<h2 id="Comparison-of-Stack-and-Deque-methods"><a href="#Comparison-of-Stack-and-Deque-methods" class="headerlink" title="Comparison of Stack and Deque methods"></a>Comparison of Stack and Deque methods</h2><table>
+<thead>
+<tr>
+<th>Stack Method</th>
+<th>Equivalent Deque Method</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>push(e)</td>
+<td>addFirst(e)</td>
+</tr>
+<tr>
+<td>pop()</td>
+<td>removeFirst()</td>
+</tr>
+<tr>
+<td>peek()</td>
+<td>getFirst()</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean add​(E e)</td>
+<td>Adds the specified element to this set if it is not already present.</td>
+</tr>
+</tbody></table>
+<h1 id="TreeSet-methods"><a href="#TreeSet-methods" class="headerlink" title="TreeSet methods"></a>TreeSet methods</h1><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean</td>
+<td>add​(E e)</td>
+</tr>
+<tr>
+<td>E ceiling​(E e)</td>
+<td>Returns the least element in this set greater than or equal to the given element, or null if there is no such element.</td>
+</tr>
+<tr>
+<td>E first()</td>
+<td>Returns the first (lowest) element currently in this set.</td>
+</tr>
+<tr>
+<td>E floor​(E e)</td>
+<td>Returns the greatest element in this set less than or equal to the given element, or null if there is no such element.</td>
+</tr>
+<tr>
+<td>SortedSet<E> headSet​(E toElement)</td>
+<td>Returns a view of the portion of this set whose elements are strictly less than toElement.</td>
+</tr>
+<tr>
+<td>NavigableSet<E> headSet​(E toElement, boolean inclusive)</td>
+<td>Returns a view of the portion of this set whose elements are less than (or equal to, if inclusive is true) toElement.</td>
+</tr>
+<tr>
+<td>E higher​(E e)</td>
+<td>Returns the least element in this set strictly greater than the given element, or null if there is no such element.</td>
+</tr>
+<tr>
+<td>E last()</td>
+<td>Returns the last (highest) element currently in this set.</td>
+</tr>
+<tr>
+<td>E lower​(E e)</td>
+<td>Returns the greatest element in this set strictly less than the given element, or null if there is no such element.</td>
+</tr>
+<tr>
+<td>E pollFirst()</td>
+<td>Retrieves and removes the first (lowest) element, or returns null if this set is empty.</td>
+</tr>
+<tr>
+<td>E pollLast()</td>
+<td>Retrieves and removes the last (highest) element, or returns null if this set is empty.</td>
+</tr>
+<tr>
+<td>NavigableSet<E>    subSet​(E fromElement, boolean fromInclusive, E toElement, boolean toInclusive)</td>
+<td>Returns a view of the portion of this set whose elements range from fromElement to toElement.</td>
+</tr>
+<tr>
+<td>SortedSet<E>    subSet​(E fromElement, E toElement)</td>
+<td>Returns a view of the portion of this set whose elements range from fromElement, inclusive, to toElement, exclusive.</td>
+</tr>
+<tr>
+<td>SortedSet<E>    tailSet​(E fromElement)</td>
+<td>Returns a view of the portion of this set whose elements are greater than or equal to fromElement.</td>
+</tr>
+<tr>
+<td>NavigableSet<E>    tailSet​(E fromElement, boolean inclusive)</td>
+<td>Returns a view of the portion of this set whose elements are greater than (or equal to, if inclusive is true) fromElement.</td>
+</tr>
+</tbody></table>
+<h1 id="Map-methods"><a href="#Map-methods" class="headerlink" title="Map methods"></a>Map methods</h1><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V    get​(Object key)</td>
+<td>Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.</td>
+</tr>
+<tr>
+<td>V    put​(K key, V value)</td>
+<td>Associates the specified value with the specified key in this map (optional operation).</td>
+</tr>
+<tr>
+<td>boolean    containsKey​(Object key)</td>
+<td>Returns true if this map contains a mapping for the specified key.</td>
+</tr>
+<tr>
+<td>boolean    containsValue​(Object value)</td>
+<td>Returns true if this map maps one or more keys to the specified value.</td>
+</tr>
+<tr>
+<td>Set&lt;Map.Entry&lt;K,​V&gt;&gt; entrySet()</td>
+<td>Returns a Set view of the mappings contained in this map.</td>
+</tr>
+<tr>
+<td>Set<K>    keySet()</td>
+<td>Returns a Set view of the keys contained in this map.</td>
+</tr>
+<tr>
+<td>Collection<V>    values()</td>
+<td>Returns a Collection view of the values contained in this map.</td>
+</tr>
+</tbody></table>
+<p>Default methods:</p>
+<ul>
+<li><code>compute</code>:<br>Attempts to compute a mapping for the specified key and its current mapped value (or null if there is no current mapping).<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V compute​(K key, BiFunction&lt;? <span class="keyword">super</span> K,​? <span class="keyword">super</span> V,​? extends V&gt; remappingFunction);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example:</span></span><br><span class="line">map.compute(key, (k, v) -&gt; (v == <span class="keyword">null</span>) ? msg : v.concat(msg));</span><br></pre></td></tr></table></figure></li>
+<li><code>computeIfAbsent​</code>: If the specified key is not already associated with a value (or is mapped to null), attempts to compute its value using the given mapping function and enters it into this map unless null.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V computeIfAbsent​(K key, Function&lt;? <span class="keyword">super</span> K,​? extends V&gt; mappingFunction) &#123;</span><br><span class="line">  <span class="comment">// Equivalent to:</span></span><br><span class="line">  <span class="keyword">if</span> (map.get(key) == <span class="keyword">null</span>) &#123;</span><br><span class="line">     V newValue = mappingFunction.apply(key);</span><br><span class="line">     <span class="keyword">if</span> (newValue != <span class="keyword">null</span>)</span><br><span class="line">         map.put(key, newValue);</span><br><span class="line">     <span class="keyword">return</span> newValue;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example call:</span></span><br><span class="line">map.computeIfAbsent(key, k -&gt; <span class="keyword">new</span> HashSet&lt;V&gt;()).add(v);</span><br></pre></td></tr></table></figure></li>
+<li><code>computeIfPresent​</code>: If the value for the specified key is present and non-null, attempts to compute a new mapping given the key and its current mapped value. <br>If the remapping function returns null, the mapping is removed. If the remapping function itself throws an (unchecked) exception, the exception is rethrown, and the current mapping is left unchanged.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V computeIfPresent​(K key, BiFunction&lt;? <span class="keyword">super</span> K,​? <span class="keyword">super</span> V,​? extends V&gt; remappingFunction);</span><br></pre></td></tr></table></figure></li>
+<li><code>merge</code>:<br>If the specified key is not already associated with a value or is associated with null, associates it with the given non-null value. Otherwise, replaces the associated value with the results of the given remapping function, or removes if the result is null. This method may be of use when combining multiple mapped values for a key.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V merge​(K key, V value, BiFunction&lt;? <span class="keyword">super</span> V,​? <span class="keyword">super</span> V,​? extends V&gt; remappingFunction);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example: if key is not present, set map[key] = 1; Otherwise, map[key]++.</span></span><br><span class="line">map.merge(key, <span class="number">1</span>, (cur, notUsed) -&gt; cur + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="TreeMap-methods"><a href="#TreeMap-methods" class="headerlink" title="TreeMap methods"></a>TreeMap methods</h2>Method | Description</li>
+<li>—- | ————<br>Map.Entry&lt;K,​V&gt;    firstEntry()|Returns a key-value mapping associated with the least key in this map, or null if the map is empty.<br>K    firstKey()|Returns the first (lowest) key currently in this map.<br>Map.Entry&lt;K,​V&gt;    lastEntry()|Returns a key-value mapping associated with the greatest key in this map, or null if the map is empty.<br>K    lastKey()|Returns the last (highest) key currently in this map.<br>Map.Entry&lt;K,​V&gt;    ceilingEntry​(K key)|Returns a key-value mapping associated with the least key greater than or equal to the given key, or null if there is no such key.<br>K    ceilingKey​(K key)|Returns the least key greater than or equal to the given key, or null if there is no such key.<br>Map.Entry&lt;K,​V&gt;    floorEntry​(K key)|Returns a key-value mapping associated with the greatest key less than or equal to the given key, or null if there is no such key.<br>K    floorKey​(K key)|Returns the greatest key less than or equal to the given key, or null if there is no such key.<br>Map.Entry&lt;K,​V&gt;    lowerEntry​(K key)|Returns a key-value mapping associated with the greatest key strictly less than the given key, or null if there is no such key.<br>K    lowerKey​(K key)|Returns the greatest key strictly less than the given key, or null if there is no such key.<br>Map.Entry&lt;K,​V&gt;    higherEntry​(K key)|Returns a key-value mapping associated with the least key strictly greater than the given key, or null if there is no such key.<br>K    higherKey​(K key)|Returns the least key strictly greater than the given key, or null if there is no such key.<br>SortedMap&lt;K,​V&gt;    headMap​(K toKey)|Returns a view of the portion of this map whose keys are strictly less than toKey.<br>NavigableMap&lt;K,​V&gt;    headMap​(K toKey, boolean inclusive)|Returns a view of the portion of this map whose keys are less than (or equal to, if inclusive is true) toKey.<br>SortedMap&lt;K,​V&gt;    tailMap​(K fromKey)|Returns a view of the portion of this map whose keys are greater than or equal to fromKey.<br>NavigableMap&lt;K,​V&gt;    tailMap​(K fromKey, boolean inclusive)|Returns a view of the portion of this map whose keys are greater than (or equal to, if inclusive is true) fromKey.</li>
+</ul>
 
-<h3 id="拂面微风"><a href="#拂面微风" class="headerlink" title="拂面微风"></a>拂面微风</h3><h3 id="热闹阳光"><a href="#热闹阳光" class="headerlink" title="热闹阳光"></a>热闹阳光</h3><h3 id="路宽两米"><a href="#路宽两米" class="headerlink" title="路宽两米"></a>路宽两米</h3><h3 id="我却似奔驰草原"><a href="#我却似奔驰草原" class="headerlink" title="我却似奔驰草原"></a>我却似奔驰草原</h3><h3 id="柏油水泥"><a href="#柏油水泥" class="headerlink" title="柏油水泥"></a>柏油水泥</h3><h3 id="我却闻到绿草芬芳"><a href="#我却闻到绿草芬芳" class="headerlink" title="我却闻到绿草芬芳"></a>我却闻到绿草芬芳</h3><br/>
-
-<h3 id="每一个人脸上都有笑"><a href="#每一个人脸上都有笑" class="headerlink" title="每一个人脸上都有笑"></a>每一个人脸上都有笑</h3><h3 id="我甚至与一切和解"><a href="#我甚至与一切和解" class="headerlink" title="我甚至与一切和解"></a>我甚至与一切和解</h3><h3 id="给Nikhal一个微笑"><a href="#给Nikhal一个微笑" class="headerlink" title="给Nikhal一个微笑"></a>给Nikhal一个微笑</h3><h3 id="把讨厌的人写进诗"><a href="#把讨厌的人写进诗" class="headerlink" title="把讨厌的人写进诗"></a>把讨厌的人写进诗</h3><h3 id="哪怕其人面目可憎"><a href="#哪怕其人面目可憎" class="headerlink" title="哪怕其人面目可憎"></a>哪怕其人面目可憎</h3><h3 id="原谅他"><a href="#原谅他" class="headerlink" title="原谅他"></a>原谅他</h3><h3 id="原谅啦"><a href="#原谅啦" class="headerlink" title="原谅啦"></a>原谅啦</h3><h3 id="谁叫他有辆绿色的车"><a href="#谁叫他有辆绿色的车" class="headerlink" title="谁叫他有辆绿色的车"></a>谁叫他有辆绿色的车</h3>
         
 <script src="/js/qrious.min.js"></script>
 
@@ -211,14 +540,14 @@
             <p>
                 <span>专题: </span>
                 
-                <a href="/series/#诗">
-                    <code key="诗" class="post-label">诗</code>
+                <a href="/series/#Java">
+                    <code key="Java" class="post-label">Java</code>
                 </a>
                 
             </p>
             
             <p>
-                <span>本文发表于 2021-02-03，最后修改于 2021-03-05。</span>
+                <span>本文发表于 2021-03-07，最后修改于 2021-03-07。</span>
             </p>
             <!-- 文章末尾的提示 start -->
             
@@ -229,10 +558,8 @@
         <hr />
         <p name="pagination" style="font-size: 1.2em">
     
-    <a class="float-left" href="/post/beautiful-translation.html">上一篇 « 杂记</a>
+    <a class="float-left" href="/post/algorithm-segment-tree-2.html">上一篇 « 详解线段树之进阶(Segment Tree)</a>
     
-    
-    <a class="float-right" href="/post/poems.html">下一篇 » 无聊的词句有人叫诗</a>
     
 </p>
     </article>
@@ -259,13 +586,42 @@
                 
                 
             </div>
-            <a href="/post/clubhouse-problem3.html" class="title">
-                Clubhouse需要你解决的问题之三
+            <a href="/post/algorithm-segment-tree-2.html" class="title">
+                详解线段树之进阶(Segment Tree)
             </a>
             <p class="text-gray">
                 <small>
-                    <span>发表于2021-02-06，</span>
-                    <span class="hidden-xs">全文730字，</span>
+                    <span>发表于2021-03-05，</span>
+                    <span class="hidden-xs">全文9672字，</span>
+                    <span>阅读约33分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#programming"
+                    title="programming">programming</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/clubhouse-problem1.html" class="title">
+                Clubhouse需要你解决的算法题之一
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-02-05，</span>
+                    <span class="hidden-xs">全文680字，</span>
                     <span>阅读约3分钟</span>
                 </small>
             </p>
@@ -282,48 +638,19 @@
                 
                 <span>/</span>
                 
-                <a class="text-gray" href="/tags/#随笔"
-                    title="随笔">随笔</a>
+                <a class="text-gray" href="/tags/#关于我"
+                    title="关于我">关于我</a>
                 <span>/</span>
                 
                 
             </div>
-            <a href="/post/poems.html" class="title">
-                无聊的词句有人叫诗
+            <a href="/post/about.html" class="title">
+                关于我
             </a>
             <p class="text-gray">
                 <small>
-                    <span>发表于2021-02-03，</span>
-                    <span class="hidden-xs">全文580字，</span>
-                    <span>阅读约2分钟</span>
-                </small>
-            </p>
-        </div>
-    </div>
-</div>
-        
-        <div class="post-preview">
-    <div class="post-img" style="background-image: url('/')"></div>
-    <div class="post-info">
-        <div class="post-info-center">
-            <div class="hidden-xs">
-                
-                
-                <span>/</span>
-                
-                <a class="text-gray" href="/tags/#随笔"
-                    title="随笔">随笔</a>
-                <span>/</span>
-                
-                
-            </div>
-            <a href="/post/big-white.html" class="title">
-                大白传
-            </a>
-            <p class="text-gray">
-                <small>
-                    <span>发表于2021-02-03，</span>
-                    <span class="hidden-xs">全文261字，</span>
+                    <span>发表于2021-02-02，</span>
+                    <span class="hidden-xs">全文127字，</span>
                     <span>阅读约1分钟</span>
                 </small>
             </p>
@@ -527,19 +854,19 @@
         
         
         <section class="gkt-sidebar-content box-shadow">
-            <strong>诗</strong>
+            <strong>Java</strong>
             <ul>
                 
                 <li>
-                    <a href="/post/poem-so-green.html"
-                        class="gkt-sidebar-active">无与伦比的绿</a>
+                    <a href="/post/java-collections.html"
+                        class="gkt-sidebar-active">Java集合速览</a>
                     
                     <!-- Table of Contents -->
 <div id="sidebar-toc">
   <!-- TOC  -->
   
   
-  
+  <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Overview-via-a-diagram"><span class="toc-nav-text">Overview via a diagram</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#List-methods"><span class="toc-nav-text">List methods</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Queue-methods"><span class="toc-nav-text">Queue methods</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Dequeue-LinkedList-Methods"><span class="toc-nav-text">Dequeue &#x2F; LinkedList Methods</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Summary-of-Deque-methods"><span class="toc-nav-text">Summary of Deque methods</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Comparison-of-Queue-and-Deque-methods"><span class="toc-nav-text">Comparison of Queue and Deque methods</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Comparison-of-Stack-and-Deque-methods"><span class="toc-nav-text">Comparison of Stack and Deque methods</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#TreeSet-methods"><span class="toc-nav-text">TreeSet methods</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Map-methods"><span class="toc-nav-text">Map methods</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#TreeMap-methods"><span class="toc-nav-text">TreeMap methods</span></a></li></ol></li></ol>
   
 </div>
 
@@ -578,18 +905,6 @@
     })
   })();
 </script>
-                    
-                </li>
-                
-                <li>
-                    <a href="/post/poems.html"
-                        class="">无聊的词句有人叫诗</a>
-                    
-                </li>
-                
-                <li>
-                    <a href="/post/chuxi-to-2021.html"
-                        class="">除夕</a>
                     
                 </li>
                 
