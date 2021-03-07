@@ -181,10 +181,78 @@
         
         
         <div class="gkt-article-start"></div>
-        <p>A quick review of Java Collection and Map key methods. Array based collections usually have:<br>Method | Time complexity<br>— | —<br>add | O(1)<br>insert(int index) | O(N)<br>remove | O(1)<br>remove(int index) | O(N)<br>find(Object value) | O(N)</p>
-<p>PriorityQueue, TreeSet and TreeMap are implemented based on balanced tree, thus:<br>Method | Time complexity<br>— | —<br>offer | O(logN)<br>poll | O(logN)<br>peak | O(1)</p>
+        <p>A quick review of Java Collection and Map key methods. Array based collections usually have:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Time complexity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>insert(int index)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>remove(int index)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>find(Object value)</td>
+<td>O(N)</td>
+</tr>
+</tbody></table>
+<p>PriorityQueue, TreeSet and TreeMap are implemented based on balanced tree, thus:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Time complexity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>offer</td>
+<td>O(logN)</td>
+</tr>
+<tr>
+<td>poll</td>
+<td>O(logN)</td>
+</tr>
+<tr>
+<td>peak</td>
+<td>O(1)</td>
+</tr>
+</tbody></table>
 <h1 id="Overview-via-a-diagram"><a href="#Overview-via-a-diagram" class="headerlink" title="Overview via a diagram"></a>Overview via a diagram</h1><p><img src="java-collections/java-collections.png" alt="Overview"></p>
-<p><code>Collections</code> extends <code>Iterable</code> which has below key methods:<br>Method        | Description<br>— | —<br><code>boolean hasNext()</code> | This method returns true if the iterator has more elements.<br><code>object next()</code> |  It returns the element and moves the cursor pointer to the next element.<br><code>void remove()</code> | This method removes the last elements returned by the iterator.</p>
+<p><code>Collections</code> extends <code>Iterable</code> which has below key methods:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>boolean hasNext()</code></td>
+<td>This method returns true if the iterator has more elements.</td>
+</tr>
+<tr>
+<td><code>object next()</code></td>
+<td>It returns the element and moves the cursor pointer to the next element.</td>
+</tr>
+<tr>
+<td><code>void remove()</code></td>
+<td>This method removes the last elements returned by the iterator.</td>
+</tr>
+</tbody></table>
 <h1 id="List-methods"><a href="#List-methods" class="headerlink" title="List methods"></a>List methods</h1><table>
 <thead>
 <tr>
@@ -526,9 +594,80 @@
 <li><code>computeIfAbsent​</code>: If the specified key is not already associated with a value (or is mapped to null), attempts to compute its value using the given mapping function and enters it into this map unless null.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V computeIfAbsent​(K key, Function&lt;? <span class="keyword">super</span> K,​? extends V&gt; mappingFunction) &#123;</span><br><span class="line">  <span class="comment">// Equivalent to:</span></span><br><span class="line">  <span class="keyword">if</span> (map.get(key) == <span class="keyword">null</span>) &#123;</span><br><span class="line">     V newValue = mappingFunction.apply(key);</span><br><span class="line">     <span class="keyword">if</span> (newValue != <span class="keyword">null</span>)</span><br><span class="line">         map.put(key, newValue);</span><br><span class="line">     <span class="keyword">return</span> newValue;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example call:</span></span><br><span class="line">map.computeIfAbsent(key, k -&gt; <span class="keyword">new</span> HashSet&lt;V&gt;()).add(v);</span><br></pre></td></tr></table></figure></li>
 <li><code>computeIfPresent​</code>: If the value for the specified key is present and non-null, attempts to compute a new mapping given the key and its current mapped value. <br>If the remapping function returns null, the mapping is removed. If the remapping function itself throws an (unchecked) exception, the exception is rethrown, and the current mapping is left unchanged.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V computeIfPresent​(K key, BiFunction&lt;? <span class="keyword">super</span> K,​? <span class="keyword">super</span> V,​? extends V&gt; remappingFunction);</span><br></pre></td></tr></table></figure></li>
 <li><code>merge</code>:<br>If the specified key is not already associated with a value or is associated with null, associates it with the given non-null value. Otherwise, replaces the associated value with the results of the given remapping function, or removes if the result is null. This method may be of use when combining multiple mapped values for a key.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V merge​(K key, V value, BiFunction&lt;? <span class="keyword">super</span> V,​? <span class="keyword">super</span> V,​? extends V&gt; remappingFunction);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example: if key is not present, set map[key] = 1; Otherwise, map[key]++.</span></span><br><span class="line">map.merge(key, <span class="number">1</span>, (cur, notUsed) -&gt; cur + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="TreeMap-methods"><a href="#TreeMap-methods" class="headerlink" title="TreeMap methods"></a>TreeMap methods</h2>Method | Description</li>
-<li>—- | ————<br>Map.Entry&lt;K,​V&gt;    firstEntry()|Returns a key-value mapping associated with the least key in this map, or null if the map is empty.<br>K    firstKey()|Returns the first (lowest) key currently in this map.<br>Map.Entry&lt;K,​V&gt;    lastEntry()|Returns a key-value mapping associated with the greatest key in this map, or null if the map is empty.<br>K    lastKey()|Returns the last (highest) key currently in this map.<br>Map.Entry&lt;K,​V&gt;    ceilingEntry​(K key)|Returns a key-value mapping associated with the least key greater than or equal to the given key, or null if there is no such key.<br>K    ceilingKey​(K key)|Returns the least key greater than or equal to the given key, or null if there is no such key.<br>Map.Entry&lt;K,​V&gt;    floorEntry​(K key)|Returns a key-value mapping associated with the greatest key less than or equal to the given key, or null if there is no such key.<br>K    floorKey​(K key)|Returns the greatest key less than or equal to the given key, or null if there is no such key.<br>Map.Entry&lt;K,​V&gt;    lowerEntry​(K key)|Returns a key-value mapping associated with the greatest key strictly less than the given key, or null if there is no such key.<br>K    lowerKey​(K key)|Returns the greatest key strictly less than the given key, or null if there is no such key.<br>Map.Entry&lt;K,​V&gt;    higherEntry​(K key)|Returns a key-value mapping associated with the least key strictly greater than the given key, or null if there is no such key.<br>K    higherKey​(K key)|Returns the least key strictly greater than the given key, or null if there is no such key.<br>SortedMap&lt;K,​V&gt;    headMap​(K toKey)|Returns a view of the portion of this map whose keys are strictly less than toKey.<br>NavigableMap&lt;K,​V&gt;    headMap​(K toKey, boolean inclusive)|Returns a view of the portion of this map whose keys are less than (or equal to, if inclusive is true) toKey.<br>SortedMap&lt;K,​V&gt;    tailMap​(K fromKey)|Returns a view of the portion of this map whose keys are greater than or equal to fromKey.<br>NavigableMap&lt;K,​V&gt;    tailMap​(K fromKey, boolean inclusive)|Returns a view of the portion of this map whose keys are greater than (or equal to, if inclusive is true) fromKey.</li>
+<h2 id="TreeMap-methods"><a href="#TreeMap-methods" class="headerlink" title="TreeMap methods"></a>TreeMap methods</h2></li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Map.Entry&lt;K,​V&gt;    firstEntry()</td>
+<td>Returns a key-value mapping associated with the least key in this map, or null if the map is empty.</td>
+</tr>
+<tr>
+<td>K    firstKey()</td>
+<td>Returns the first (lowest) key currently in this map.</td>
+</tr>
+<tr>
+<td>Map.Entry&lt;K,​V&gt;    lastEntry()</td>
+<td>Returns a key-value mapping associated with the greatest key in this map, or null if the map is empty.</td>
+</tr>
+<tr>
+<td>K    lastKey()</td>
+<td>Returns the last (highest) key currently in this map.</td>
+</tr>
+<tr>
+<td>Map.Entry&lt;K,​V&gt;    ceilingEntry​(K key)</td>
+<td>Returns a key-value mapping associated with the least key greater than or equal to the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>K    ceilingKey​(K key)</td>
+<td>Returns the least key greater than or equal to the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>Map.Entry&lt;K,​V&gt;    floorEntry​(K key)</td>
+<td>Returns a key-value mapping associated with the greatest key less than or equal to the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>K    floorKey​(K key)</td>
+<td>Returns the greatest key less than or equal to the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>Map.Entry&lt;K,​V&gt;    lowerEntry​(K key)</td>
+<td>Returns a key-value mapping associated with the greatest key strictly less than the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>K    lowerKey​(K key)</td>
+<td>Returns the greatest key strictly less than the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>Map.Entry&lt;K,​V&gt;    higherEntry​(K key)</td>
+<td>Returns a key-value mapping associated with the least key strictly greater than the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>K    higherKey​(K key)</td>
+<td>Returns the least key strictly greater than the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>SortedMap&lt;K,​V&gt;    headMap​(K toKey)</td>
+<td>Returns a view of the portion of this map whose keys are strictly less than toKey.</td>
+</tr>
+<tr>
+<td>NavigableMap&lt;K,​V&gt;    headMap​(K toKey, boolean inclusive)</td>
+<td>Returns a view of the portion of this map whose keys are less than (or equal to, if inclusive is true) toKey.</td>
+</tr>
+<tr>
+<td>SortedMap&lt;K,​V&gt;    tailMap​(K fromKey)</td>
+<td>Returns a view of the portion of this map whose keys are greater than or equal to fromKey.</td>
+</tr>
+<tr>
+<td>NavigableMap&lt;K,​V&gt;    tailMap​(K fromKey, boolean inclusive)</td>
+<td>Returns a view of the portion of this map whose keys are greater than (or equal to, if inclusive is true) fromKey.</td>
+</tr>
+</tbody></table>
 
         
 <script src="/js/qrious.min.js"></script>
@@ -580,64 +719,6 @@
                 
                 <span>/</span>
                 
-                <a class="text-gray" href="/tags/#programming"
-                    title="programming">programming</a>
-                <span>/</span>
-                
-                
-            </div>
-            <a href="/post/algorithm-segment-tree-2.html" class="title">
-                详解线段树之进阶(Segment Tree)
-            </a>
-            <p class="text-gray">
-                <small>
-                    <span>发表于2021-03-05，</span>
-                    <span class="hidden-xs">全文9672字，</span>
-                    <span>阅读约33分钟</span>
-                </small>
-            </p>
-        </div>
-    </div>
-</div>
-        
-        <div class="post-preview">
-    <div class="post-img" style="background-image: url('/')"></div>
-    <div class="post-info">
-        <div class="post-info-center">
-            <div class="hidden-xs">
-                
-                
-                <span>/</span>
-                
-                <a class="text-gray" href="/tags/#programming"
-                    title="programming">programming</a>
-                <span>/</span>
-                
-                
-            </div>
-            <a href="/post/clubhouse-problem1.html" class="title">
-                Clubhouse需要你解决的算法题之一
-            </a>
-            <p class="text-gray">
-                <small>
-                    <span>发表于2021-02-05，</span>
-                    <span class="hidden-xs">全文680字，</span>
-                    <span>阅读约3分钟</span>
-                </small>
-            </p>
-        </div>
-    </div>
-</div>
-        
-        <div class="post-preview">
-    <div class="post-img" style="background-image: url('/')"></div>
-    <div class="post-info">
-        <div class="post-info-center">
-            <div class="hidden-xs">
-                
-                
-                <span>/</span>
-                
                 <a class="text-gray" href="/tags/#关于我"
                     title="关于我">关于我</a>
                 <span>/</span>
@@ -652,6 +733,57 @@
                     <span>发表于2021-02-02，</span>
                     <span class="hidden-xs">全文127字，</span>
                     <span>阅读约1分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+            </div>
+            <a href="/post/link.html" class="title">
+                🔗
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-02-02，</span>
+                    <span class="hidden-xs">全文56字，</span>
+                    <span>阅读约1分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#随笔"
+                    title="随笔">随笔</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/startwritting.html" class="title">
+                开始写
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-02-02，</span>
+                    <span class="hidden-xs">全文971字，</span>
+                    <span>阅读约4分钟</span>
                 </small>
             </p>
         </div>

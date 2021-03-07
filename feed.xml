@@ -15,7 +15,7 @@
     <atom:link href="https://suensky.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 07 Mar 2021 20:02:52 GMT</pubDate>
+    <pubDate>Sun, 07 Mar 2021 20:05:57 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -26,7 +26,12 @@
       
         
         
-      <description>&lt;p&gt;A quick review of Java Collection and Map key methods. Array based collections usually have:&lt;br&gt;Method | Time complexity&lt;br&gt;— | —&lt;br&gt;add </description>
+      <description>&lt;p&gt;A quick review of Java Collection and Map key methods. Array based collections usually have:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Method&lt;/th&gt;
+&lt;th</description>
         
       
       
