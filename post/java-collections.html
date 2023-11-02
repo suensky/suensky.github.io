@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <meta name="baidu-site-verification" content="" />
+  <meta name="google-site-verification" content="" />
+  <meta name="msvalidate.01" content="" />
+  <meta name="360-site-verification" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- if page has tags, then add tags to keyword -->
+  
+  
+  <meta name="keywords" content=",programming,">
+  <!-- page.description has higher priority -->
+  <meta name="description" content="">
+  <link rel="shortcut icon" href="/img/icon.png">
+  <title>
+    
+    Java集合速览 | 多做多说
+    
+  </title>
+
+  <link rel="canonical" href="https://suensky.github.io/post/java-collections.html">
+  
+<link rel="stylesheet" href="/css/geektutu.css">
+
+  <!-- global function -->
+  <script>
+    window.globalAddScript = function (url, onload, onerror) {
+      var s = document.createElement('script');
+      s.src = url;
+      onload && (s.onload = onload);
+      onerror && (s.onerror = onerror);
+      document.body.appendChild(s);
+    }
+    window.globalAddCss = function (url) {
+      var s = document.createElement('link');
+      s.rel = 'stylesheet';
+      s.href = url;
+      document.body.appendChild(s);
+    }
+    window.getPosition = function (ele) {
+      var x = 0, y = 0;
+      while (ele) {
+        x += (ele.offsetLeft - ele.scrollLeft + ele.clientLeft);
+        y += (ele.offsetTop - ele.scrollTop + ele.clientTop);
+        ele = ele.offsetParent;
+      }
+      return { x: x, y: y };
+    }
+    window.getDom = function (str) { return document.querySelector(str) }
+  </script>
+  <!-- google ad -->
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/feed.xml" title="多做多说" type="application/rss+xml">
+</head>
+
+<body>
+    
+<header class="gkt-header col-xs-12 padding-0">
+    <div id="gkt-nav" class="gkt-header-container">
+        <a href="/" class="gkt-header-title float-left">
+            <img class="float-left" src="/img/icon.png" alt="">
+            <span>多做多说</span>
+        </a>
+        <nav class="gkt-header-nav text-right">
+            <ul>
+                <li><a class="hidden-xs" href="/feed.xml">订阅</a></li>
+                <li><a href="/series/">专题</a></li>
+                <li><a href="/archives/">归档</a></li>
+                <li><a href="/post/link.html">友链</a></li>
+                <li><a href="/post/about.html">关于</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="gkt-cate-nav" class="gkt-header-container hidden-xs">
+        
+        <nav class="gkt-header-nav float-left">
+            <ul>
+                
+                
+                <li class="gkt-cate-name float-left ">
+                    <a class="float-left" href="/post/startwritting.html">诗和远方 ▾</a>
+                    
+                    <ul class="gkt-sub-cate">
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/startwritting.html">随笔</a></li>
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/poem-so-green.html">诗</a></li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li class="gkt-cate-name float-left ">
+                    <a class="float-left" href="/post/dp-1.html">算法专题 ▾</a>
+                    
+                    <ul class="gkt-sub-cate">
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/dp-1.html">算法题解</a></li>
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/clubhouse-problem1.html">趣谈算法</a></li>
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/algorithm_union-find.html">算法详解</a></li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li class="gkt-cate-name float-left active">
+                    <a class="float-left" href="/post/java-collections.html">编程语言 ▾</a>
+                    
+                    <ul class="gkt-sub-cate">
+                        
+                        <li class="gkt-sub-cate-name active"><a class="float-left"
+                                href="/post/java-collections.html">Java</a></li>
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/scala-intro.html">Scala</a></li>
+                        
+                    </ul>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="gkt-header-placeholder" style="height: 44px"></div>
+<div class="gkt-header-placeholder hidden-xs" style="height: 44px"></div>
+<script>
+    (function () {
+        window.addEventListener('scroll', function () {
+            if (window.innerWidth < 768) {
+                return;
+            }
+            var nav = document.querySelector('#gkt-nav');
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            scrollTop > 50 && (nav.classList.add('hide'));
+            scrollTop <= 50 && (nav.classList.remove('hide'));
+        });
+        var cateNavs = document.querySelectorAll('#gkt-cate-nav>nav>ul>li');
+        [].slice.call(cateNavs).forEach(function (item) {
+            var sub = item.querySelector('.gkt-sub-cate');
+            if (!sub) return;
+            item.addEventListener('mouseenter', function (e) { sub.style.display = 'block'; }, false);
+            item.addEventListener('mouseleave', function (e) { sub.style.display = 'none'; }, false);
+        })
+    })();
+</script>
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Main Content -->
+<main class="col-xs-12 padding-0 markdown-it">
+    <!-- Post Container -->
+    
+    
+    <!-- Post Content -->
+<div class="float-left post-container box-shadow">
+    <div class="u-arrow-wrapper hidden-xs">
+        
+        <a class="float-left" href="/post/algorithm-segment-tree-2.html"><i class="u-arrow-left"></i></a>
+        
+        
+        <a class="float-right" href="/post/algorithm-reservoir-sampling.html"><i class="u-arrow-right"></i></a>
+        
+    </div>
+    <article class="col-xs-12">
+        <h1> Java集合速览 </h1>
+        
+        
+        <div class="hidden-lg hidden-md series_links">
+            <p> <strong> Java系列文章链接：</strong></p>
+            <ul>
+                
+                <li>
+                    <a href="/post/java-collections.html">Java集合速览</a>
+                    <span class="post-item-date">(Mar 7, 2021)</span>
+                </li>
+                
+            </ul>
+        </div>
+        
+        
+        <div class="gkt-article-start"></div>
+        <p>A quick review of Java Collection and Map key methods. Array based collections usually have:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Time complexity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>insert(int index)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>remove(int index)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>find(Object value)</td>
+<td>O(N)</td>
+</tr>
+</tbody></table>
+<p>PriorityQueue, TreeSet and TreeMap are implemented based on balanced tree, thus:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Time complexity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>offer</td>
+<td>O(logN)</td>
+</tr>
+<tr>
+<td>poll</td>
+<td>O(logN)</td>
+</tr>
+<tr>
+<td>peek</td>
+<td>O(1)</td>
+</tr>
+</tbody></table>
+<h1 id="Overview-via-a-diagram"><a href="#Overview-via-a-diagram" class="headerlink" title="Overview via a diagram"></a>Overview via a diagram</h1><p><img src="java-collections/java-collections.png" alt="Overview"></p>
+<p><code>Collections</code> extends <code>Iterable</code> which has below key methods:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>boolean hasNext()</code></td>
+<td>This method returns true if the iterator has more elements.</td>
+</tr>
+<tr>
+<td><code>object next()</code></td>
+<td>It returns the element and moves the cursor pointer to the next element.</td>
+</tr>
+<tr>
+<td><code>void remove()</code></td>
+<td>This method removes the last elements returned by the iterator.</td>
+</tr>
+</tbody></table>
+<h1 id="List-methods"><a href="#List-methods" class="headerlink" title="List methods"></a>List methods</h1><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>void add​(int index, E element)</code></td>
+<td>Inserts the specified element at the specified position in this list (optional operation).</td>
+</tr>
+<tr>
+<td><code>boolean add​(E e)</code></td>
+<td>Appends the specified element to the end of this list (optional operation).</td>
+</tr>
+<tr>
+<td><code>boolean addAll​(Collection&lt;? extends E&gt; c)</code></td>
+<td>Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection’s iterator (optional operation).</td>
+</tr>
+<tr>
+<td><code>Eget​(int index)</code></td>
+<td>Returns the element at the specified position in this list.</td>
+</tr>
+<tr>
+<td><code>E set​(int index, E element)</code></td>
+<td>Replaces the element at the specified position in this list with the specified element (optional operation).</td>
+</tr>
+<tr>
+<td><code>booleanisEmpty()</code></td>
+<td>Returns true if this list contains no elements.</td>
+</tr>
+<tr>
+<td><code>int size()</code></td>
+<td>Returns the number of elements in this list.</td>
+</tr>
+<tr>
+<td><code>&lt;T&gt; T[] toArray​(T[] a)</code></td>
+<td>Returns an array containing all of the elements in this list in proper sequence (from first to last element); the runtime type of the returned array is that of the specified array. E.g., <code>String[] y = x.toArray(new String[0]);</code></td>
+</tr>
+</tbody></table>
+<h1 id="Queue-methods"><a href="#Queue-methods" class="headerlink" title="Queue methods"></a>Queue methods</h1><table>
+<thead>
+<tr>
+<th align="left">Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>void add(E e)</code></td>
+<td>Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions, returning true upon success and throwing an IllegalStateException if no space is currently available.</td>
+</tr>
+<tr>
+<td align="left"><code>E element()</code></td>
+<td>Retrieves, but does not remove, the head of this queue.</td>
+</tr>
+<tr>
+<td align="left"><code>boolean offer​(E e)</code></td>
+<td>Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions.</td>
+</tr>
+<tr>
+<td align="left"><code>E peek()</code></td>
+<td>Retrieves, but does not remove, the head of this queue, or returns null if this queue is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E poll()</code></td>
+<td>Retrieves and removes the head of this queue, or returns null if this queue is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E remove()</code></td>
+<td>Retrieves and removes the head of this queue.</td>
+</tr>
+</tbody></table>
+<h1 id="Dequeue-LinkedList-Methods"><a href="#Dequeue-LinkedList-Methods" class="headerlink" title="Dequeue / LinkedList Methods"></a>Dequeue / LinkedList Methods</h1><table>
+<thead>
+<tr>
+<th align="left">Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>void addFirst​(E e)</code></td>
+<td>Inserts the specified element at the front of this deque if it is possible to do so immediately without violating capacity restrictions, throwing an IllegalStateException if no space is currently available.</td>
+</tr>
+<tr>
+<td align="left"><code>void addLast​(E e)</code></td>
+<td>Inserts the specified element at the end of this deque if it is possible to do so immediately without violating capacity restrictions, throwing an IllegalStateException if no space is currently available.</td>
+</tr>
+<tr>
+<td align="left"><code>boolean offerFirst​(E e)</code></td>
+<td>Inserts the specified element at the front of this deque unless it would violate capacity restrictions.</td>
+</tr>
+<tr>
+<td align="left"><code>boolean offerLast​(E e)</code></td>
+<td>Inserts the specified element at the end of this deque unless it would violate capacity restrictions.</td>
+</tr>
+<tr>
+<td align="left"><code>E peekFirst()</code></td>
+<td>Retrieves, but does not remove, the first element of this deque, or returns null if this deque is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E peekLast()</code></td>
+<td>Retrieves, but does not remove, the last element of this deque, or returns null if this deque is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E pollFirst()</code></td>
+<td>Retrieves and removes the first element of this deque, or returns null if this deque is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E pollLast()</code></td>
+<td>Retrieves and removes the last element of this deque, or returns null if this deque is empty.</td>
+</tr>
+<tr>
+<td align="left"><code>E pop()</code></td>
+<td>Pops an element from the stack represented by this deque.</td>
+</tr>
+<tr>
+<td align="left"><code>void push​(E e)</code></td>
+<td>Pushes an element onto the stack represented by this deque (in other words, at the head of this deque) if it is possible to do so immediately without violating capacity restrictions, throwing an IllegalStateException if no space is currently available.</td>
+</tr>
+<tr>
+<td align="left"><code>E removeFirst()</code></td>
+<td>Retrieves and removes the first element of this deque.`</td>
+</tr>
+<tr>
+<td align="left"><code>E removeLast()</code></td>
+<td>Retrieves and removes the last element of this deque.</td>
+</tr>
+</tbody></table>
+<h2 id="Summary-of-Deque-methods"><a href="#Summary-of-Deque-methods" class="headerlink" title="Summary of Deque methods"></a>Summary of Deque methods</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>First Element (Head)</th>
+<th></th>
+<th>Last Element (Tail)</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>Throws exception</td>
+<td>Special value</td>
+<td>Throws exception</td>
+<td>Special value</td>
+</tr>
+<tr>
+<td>Insert</td>
+<td>addFirst(e)</td>
+<td>offerFirst(e)</td>
+<td>addLast(e)</td>
+<td>offerLast(e)</td>
+</tr>
+<tr>
+<td>Remove</td>
+<td>removeFirst()</td>
+<td>pollFirst()</td>
+<td>removeLast()</td>
+<td>pollLast()</td>
+</tr>
+<tr>
+<td>Examine</td>
+<td>getFirst()</td>
+<td>peekFirst()</td>
+<td>getLast()</td>
+<td>peekLast()</td>
+</tr>
+</tbody></table>
+<h2 id="Comparison-of-Queue-and-Deque-methods"><a href="#Comparison-of-Queue-and-Deque-methods" class="headerlink" title="Comparison of Queue and Deque methods"></a>Comparison of Queue and Deque methods</h2><table>
+<thead>
+<tr>
+<th>Queue Method</th>
+<th>Equivalent Deque Method</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add(e)</td>
+<td>addLast(e)</td>
+</tr>
+<tr>
+<td>offer(e)</td>
+<td>offerLast(e)</td>
+</tr>
+<tr>
+<td>remove()</td>
+<td>removeFirst()</td>
+</tr>
+<tr>
+<td>poll()</td>
+<td>pollFirst()</td>
+</tr>
+<tr>
+<td>element()</td>
+<td>getFirst()</td>
+</tr>
+<tr>
+<td>peek()</td>
+<td>peekFirst()</td>
+</tr>
+</tbody></table>
+<h2 id="Comparison-of-Stack-and-Deque-methods"><a href="#Comparison-of-Stack-and-Deque-methods" class="headerlink" title="Comparison of Stack and Deque methods"></a>Comparison of Stack and Deque methods</h2><table>
+<thead>
+<tr>
+<th>Stack Method</th>
+<th>Equivalent Deque Method</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>push(e)</td>
+<td>addFirst(e)</td>
+</tr>
+<tr>
+<td>pop()</td>
+<td>removeFirst()</td>
+</tr>
+<tr>
+<td>peek()</td>
+<td>getFirst()</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean add​(E e)</td>
+<td>Adds the specified element to this set if it is not already present.</td>
+</tr>
+</tbody></table>
+<h1 id="TreeSet-methods"><a href="#TreeSet-methods" class="headerlink" title="TreeSet methods"></a>TreeSet methods</h1><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean</td>
+<td>add​(E e)</td>
+</tr>
+<tr>
+<td>E ceiling​(E e)</td>
+<td>Returns the least element in this set greater than or equal to the given element, or null if there is no such element.</td>
+</tr>
+<tr>
+<td>E first()</td>
+<td>Returns the first (lowest) element currently in this set.</td>
+</tr>
+<tr>
+<td>E floor​(E e)</td>
+<td>Returns the greatest element in this set less than or equal to the given element, or null if there is no such element.</td>
+</tr>
+<tr>
+<td>SortedSet<E> headSet​(E toElement)</td>
+<td>Returns a view of the portion of this set whose elements are strictly less than toElement.</td>
+</tr>
+<tr>
+<td>NavigableSet<E> headSet​(E toElement, boolean inclusive)</td>
+<td>Returns a view of the portion of this set whose elements are less than (or equal to, if inclusive is true) toElement.</td>
+</tr>
+<tr>
+<td>E higher​(E e)</td>
+<td>Returns the least element in this set strictly greater than the given element, or null if there is no such element.</td>
+</tr>
+<tr>
+<td>E last()</td>
+<td>Returns the last (highest) element currently in this set.</td>
+</tr>
+<tr>
+<td>E lower​(E e)</td>
+<td>Returns the greatest element in this set strictly less than the given element, or null if there is no such element.</td>
+</tr>
+<tr>
+<td>E pollFirst()</td>
+<td>Retrieves and removes the first (lowest) element, or returns null if this set is empty.</td>
+</tr>
+<tr>
+<td>E pollLast()</td>
+<td>Retrieves and removes the last (highest) element, or returns null if this set is empty.</td>
+</tr>
+<tr>
+<td>NavigableSet<E>    subSet​(E fromElement, boolean fromInclusive, E toElement, boolean toInclusive)</td>
+<td>Returns a view of the portion of this set whose elements range from fromElement to toElement.</td>
+</tr>
+<tr>
+<td>SortedSet<E>    subSet​(E fromElement, E toElement)</td>
+<td>Returns a view of the portion of this set whose elements range from fromElement, inclusive, to toElement, exclusive.</td>
+</tr>
+<tr>
+<td>SortedSet<E>    tailSet​(E fromElement)</td>
+<td>Returns a view of the portion of this set whose elements are greater than or equal to fromElement.</td>
+</tr>
+<tr>
+<td>NavigableSet<E>    tailSet​(E fromElement, boolean inclusive)</td>
+<td>Returns a view of the portion of this set whose elements are greater than (or equal to, if inclusive is true) fromElement.</td>
+</tr>
+</tbody></table>
+<h1 id="Map-methods"><a href="#Map-methods" class="headerlink" title="Map methods"></a>Map methods</h1><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V    get​(Object key)</td>
+<td>Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.</td>
+</tr>
+<tr>
+<td>V    put​(K key, V value)</td>
+<td>Associates the specified value with the specified key in this map (optional operation).</td>
+</tr>
+<tr>
+<td>boolean    containsKey​(Object key)</td>
+<td>Returns true if this map contains a mapping for the specified key.</td>
+</tr>
+<tr>
+<td>boolean    containsValue​(Object value)</td>
+<td>Returns true if this map maps one or more keys to the specified value.</td>
+</tr>
+<tr>
+<td>Set&lt;Map.Entry&lt;K,​V&gt;&gt; entrySet()</td>
+<td>Returns a Set view of the mappings contained in this map.</td>
+</tr>
+<tr>
+<td>Set<K>    keySet()</td>
+<td>Returns a Set view of the keys contained in this map.</td>
+</tr>
+<tr>
+<td>Collection<V>    values()</td>
+<td>Returns a Collection view of the values contained in this map.</td>
+</tr>
+</tbody></table>
+<p>Default methods:</p>
+<ul>
+<li><p><code>compute</code>:<br>Attempts to compute a mapping for the specified key and its current mapped value (or null if there is no current mapping).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V compute​(K key, BiFunction&lt;? <span class="keyword">super</span> K,​? <span class="keyword">super</span> V,​? extends V&gt; remappingFunction);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example:</span></span><br><span class="line">map.compute(key, (k, v) -&gt; (v == <span class="keyword">null</span>) ? msg : v.concat(msg));</span><br></pre></td></tr></table></figure></li>
+<li><p><code>computeIfAbsent​</code>: If the specified key is not already associated with a value (or is mapped to null), attempts to compute its value using the given mapping function and enters it into this map unless null.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V computeIfAbsent​(K key, Function&lt;? <span class="keyword">super</span> K,​? extends V&gt; mappingFunction) &#123;</span><br><span class="line">  <span class="comment">// Equivalent to:</span></span><br><span class="line">  <span class="keyword">if</span> (map.get(key) == <span class="keyword">null</span>) &#123;</span><br><span class="line">     V newValue = mappingFunction.apply(key);</span><br><span class="line">     <span class="keyword">if</span> (newValue != <span class="keyword">null</span>)</span><br><span class="line">         map.put(key, newValue);</span><br><span class="line">     <span class="keyword">return</span> newValue;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example call:</span></span><br><span class="line">map.computeIfAbsent(key, k -&gt; <span class="keyword">new</span> HashSet&lt;V&gt;()).add(v);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>computeIfPresent​</code>: If the value for the specified key is present and non-null, attempts to compute a new mapping given the key and its current mapped value. <br>If the remapping function returns null, the mapping is removed. If the remapping function itself throws an (unchecked) exception, the exception is rethrown, and the current mapping is left unchanged.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V computeIfPresent​(K key, BiFunction&lt;? <span class="keyword">super</span> K,​? <span class="keyword">super</span> V,​? extends V&gt; remappingFunction);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>merge</code>:<br>If the specified key is not already associated with a value or is associated with null, associates it with the given non-null value. Otherwise, replaces the associated value with the results of the given remapping function, or removes if the result is null. This method may be of use when combining multiple mapped values for a key.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V merge​(K key, V value, BiFunction&lt;? <span class="keyword">super</span> V,​? <span class="keyword">super</span> V,​? extends V&gt; remappingFunction);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example: if key is not present, set map[key] = 1; Otherwise, map[key]++.</span></span><br><span class="line">map.merge(key, <span class="number">1</span>, (cur, notUsed) -&gt; cur + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="TreeMap-methods"><a href="#TreeMap-methods" class="headerlink" title="TreeMap methods"></a>TreeMap methods</h2><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Map.Entry&lt;K,​V&gt;    firstEntry()</td>
+<td>Returns a key-value mapping associated with the least key in this map, or null if the map is empty.</td>
+</tr>
+<tr>
+<td>K    firstKey()</td>
+<td>Returns the first (lowest) key currently in this map.</td>
+</tr>
+<tr>
+<td>Map.Entry&lt;K,​V&gt;    lastEntry()</td>
+<td>Returns a key-value mapping associated with the greatest key in this map, or null if the map is empty.</td>
+</tr>
+<tr>
+<td>K    lastKey()</td>
+<td>Returns the last (highest) key currently in this map.</td>
+</tr>
+<tr>
+<td>Map.Entry&lt;K,​V&gt;    ceilingEntry​(K key)</td>
+<td>Returns a key-value mapping associated with the least key greater than or equal to the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>K    ceilingKey​(K key)</td>
+<td>Returns the least key greater than or equal to the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>Map.Entry&lt;K,​V&gt;    floorEntry​(K key)</td>
+<td>Returns a key-value mapping associated with the greatest key less than or equal to the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>K    floorKey​(K key)</td>
+<td>Returns the greatest key less than or equal to the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>Map.Entry&lt;K,​V&gt;    lowerEntry​(K key)</td>
+<td>Returns a key-value mapping associated with the greatest key strictly less than the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>K    lowerKey​(K key)</td>
+<td>Returns the greatest key strictly less than the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>Map.Entry&lt;K,​V&gt;    higherEntry​(K key)</td>
+<td>Returns a key-value mapping associated with the least key strictly greater than the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>K    higherKey​(K key)</td>
+<td>Returns the least key strictly greater than the given key, or null if there is no such key.</td>
+</tr>
+<tr>
+<td>SortedMap&lt;K,​V&gt;    headMap​(K toKey)</td>
+<td>Returns a view of the portion of this map whose keys are strictly less than toKey.</td>
+</tr>
+<tr>
+<td>NavigableMap&lt;K,​V&gt;    headMap​(K toKey, boolean inclusive)</td>
+<td>Returns a view of the portion of this map whose keys are less than (or equal to, if inclusive is true) toKey.</td>
+</tr>
+<tr>
+<td>SortedMap&lt;K,​V&gt;    tailMap​(K fromKey)</td>
+<td>Returns a view of the portion of this map whose keys are greater than or equal to fromKey.</td>
+</tr>
+<tr>
+<td>NavigableMap&lt;K,​V&gt;    tailMap​(K fromKey, boolean inclusive)</td>
+<td>Returns a view of the portion of this map whose keys are greater than (or equal to, if inclusive is true) fromKey.</td>
+</tr>
+</tbody></table>
+<p><strong>References:</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/package-summary.html">https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/package-summary.html</a></li>
+</ol>
+
+        
+<script src="/js/qrious.min.js"></script>
+
+
+        <hr style="margin-top: 2rem;">
+        <div>
+            
+            <p>
+                <span>专题: </span>
+                
+                <a href="/series/#Java">
+                    <code key="Java" class="post-label">Java</code>
+                </a>
+                
+            </p>
+            
+            <p>
+                <span>本文发表于 2021-03-07，最后修改于 2023-11-01。</span>
+            </p>
+            <!-- 文章末尾的提示 start -->
+            
+            
+                
+            <!-- 文章末尾的提示 end -->
+        </div>
+        <hr />
+        <p name="pagination" style="font-size: 1.2em">
+    
+    <a class="float-left" href="/post/algorithm-segment-tree-2.html">上一篇 « 详解线段树之进阶(Segment Tree)</a>
+    
+    
+    <a class="float-right" href="/post/algorithm-reservoir-sampling.html">下一篇 » 详解水塘抽样(Reservoir sampling)</a>
+    
+</p>
+    </article>
+    <!-- 赞赏 -->
+    <!--打赏-->
+
+    
+    <!-- 推荐阅读三篇文章 -->
+    <div class="col-xs-12">
+        <h3>推荐阅读</h3>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#programming"
+                    title="programming">programming</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/algorithm-merge-sort.html" class="title">
+                详解归并排序之应用(Merge sort)
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-03-02，</span>
+                    <span class="hidden-xs">全文8508字，</span>
+                    <span>阅读约29分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+            </div>
+            <a href="/post/link.html" class="title">
+                🔗
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-02-02，</span>
+                    <span class="hidden-xs">全文56字，</span>
+                    <span>阅读约1分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#随笔"
+                    title="随笔">随笔</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/startwritting.html" class="title">
+                开始写
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-02-02，</span>
+                    <span class="hidden-xs">全文971字，</span>
+                    <span>阅读约4分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+    </div>
+    <div class="col-xs-12">
+        <!-- 标签列表 -->
+        <!-- Featured Tags -->
+<style>
+    #featured-tag .post-tag-item {
+        font-size: 12px;
+        line-height: 30px;
+        display: inline-block;
+        height: 30px;
+        margin: 5px 0px;
+        padding: 0 7px;
+        color: #333;
+        border-radius: 15px;
+        background: #f6f6f6;
+    }
+
+    #featured-tag .post-tag-item:hover {
+        color: #337ab7;
+    }
+</style>
+<div id="featured-tag">
+    
+    <a class="post-tag-item" href="/tags/#关于我" title="关于我"
+        rel="1">#关于我 (1) </a>
+    
+    <a class="post-tag-item" href="/tags/#programming" title="programming"
+        rel="12">#programming (12) </a>
+    
+    <a class="post-tag-item" href="/tags/#随笔" title="随笔"
+        rel="9">#随笔 (9) </a>
+    
+    <a class="post-tag-item" href="/tags/#DP" title="DP"
+        rel="1">#DP (1) </a>
+    
+</div>
+    </div>
+    <!-- 评论 -->
+    
+    <div class="col-xs-12">
+        
+<div class="col-xs-12 padding-0">
+    <div id="gitalk-container">
+        <div class="gt-container text-center" style="margin-top: 50px;">
+            <button class="gt-btn gt-btn-public"><span class="gt-btn-text">去 Github 评论</span></button>
+        </div>
+    </div>
+    <div id="gitalk-related"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css">
+
+
+<script src="/js/gitalk.min.js"></script>
+
+<script>
+    window.addEventListener('load', function () {
+        function renderCommentUrl(data) {
+            var url = (data[window.location.pathname] || {}).url
+            url && getDom('#gitalk-container button').addEventListener('click', function (e) { window.open(url)})
+            url || (getDom('#gitalk-container').style.display = 'none')
+        }
+        const gitalk = new Gitalk({
+            clientID: '195277d49379cfe2af1e',
+            clientSecret: '45c2721d438a94be2a42a513626f13e50df60cdd',
+            accessToken: '',
+            repo: 'suensky.github.io',
+            owner: 'suensky',
+            admin: ['suensky'],
+            id: window.location.pathname,
+            distractionFreeMode: false
+        });
+        fetch("https://api.github.com/user").then(function(resp){
+            gitalk.render('gitalk-container');
+        }).catch(function(e){
+            fetch('/tool/issues.json').then(function (r) { return r.json() }).then(renderCommentUrl).catch(function (e) { })
+        })
+        getDom('#gitalk-container').addEventListener('click', function (e) {
+            e && e.stopPropagation && e.stopPropagation();
+        });
+    })
+</script>
+<script>
+    window.addEventListener('load', function () {
+        function render(comments) {
+            var template = '<a href="${comment.url}?utm_source=gitalk" class="dis-item-url"><h3 class="dis-item-title">${comment.title}</h3>' +
+                '<p class="dis-item-des">${comment.count} 评论 ● ${comment.date}</p>' +
+                '<div class="dis-item-content"><img class="dis-item-img" src="${comment.icon}" alt="icon"><p><b><span class="dis-item-user">${comment.user}</span></b>&nbsp;——&nbsp;${comment.body}</p></div>' +
+                '</a>'
+
+            var wrapper = getDom('#gitalk-related');
+            comments = shuffle(comments);
+            comments.slice(0, 4).forEach(function (c) {
+                var div = document.createElement('div');
+                div.classList.add('dis-item');
+                div.innerHTML = template.replace("${comment.url}", c.url)
+                    .replace("${comment.title}", c.title)
+                    .replace("${comment.count}", c.count)
+                    .replace("${comment.date}", c.date)
+                    .replace("${comment.icon}", c.icon)
+                    .replace("${comment.user}", c.user)
+                    .replace("${comment.body}", c.body)
+                wrapper.appendChild(div)
+            })
+            var p = document.createElement('p')
+            p.innerHTML = '<a target="_blank" rel="noopener" href="https://geektutu.com/post/blog-experience-7.html">Gitalk Plus</a>';
+            p.classList.add('dis-divide');
+            wrapper.appendChild(p);
+            wrapper.classList.add('dis-wrapper')
+        }
+        function shuffle(a) {
+            for (var i = a.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+        fetch('/tool/comments.json').then(function (r) { return r.json() }).then(render).catch(function (e) { })
+    })
+</script>
+
+    </div>
+    
+</div>
+<aside class="float-left gkt-sidebar hidden-xs hidden-sm">
+    <div style="clear: both"></div>
+    <div class="gkt-sidebar-wrapper">
+        <section class="box-shadow"><style>
+    .gkt-summary {
+        border: 1px solid #DDDDDD;
+        border-radius: 3px;
+        padding: 5px;
+        width: 100%;
+    }
+
+
+    .gkt-summary nav {
+        overflow: hidden;
+    }
+
+    .gkt-summary nav a {
+        display: inline-block;
+        text-align: center;
+        color: #333;
+        font-size: 12px;
+    }
+
+    .gkt-summary nav span {
+        display: block;
+    }
+
+    .gkt-summary nav .middle {
+        border-left: 1px solid #eaecef;
+        border-right: 1px solid #eaecef;
+    }
+
+    .gkt-summary .number {
+        font-weight: bold;
+    }
+
+    .gkt-summary .link-list {
+        margin-top: 5px;
+        margin-bottom: -5px;
+        padding-top: 7px;
+        border-top: 1px dashed #999;
+        display: flex;
+    }
+
+    .gkt-summary .link-list a {
+        flex: 1;
+    }
+
+    .gkt-summary .link-list img {
+        width: 25px;
+        height: 25px;
+    }
+</style>
+
+<div class="gkt-summary">
+    <nav>
+        <a href="/" class="col-xs-4">
+            <span class="number">23</span><span>文章</span>
+        </a>
+        <a href="/series" class="col-xs-4 middle">
+            <span class="number">7</span><span>专题</span>
+        </a>
+        <a href="/tags" class="col-xs-4">
+            <span class="number">4</span><span>标签</span>
+        </a>
+    </nav>
+
+    
+</div></section>
+        
+        
+        <section class="gkt-sidebar-content box-shadow">
+            <strong>Java</strong>
+            <ul>
+                
+                <li>
+                    <a href="/post/java-collections.html"
+                        class="gkt-sidebar-active">Java集合速览</a>
+                    
+                    <!-- Table of Contents -->
+<div id="sidebar-toc">
+  <!-- TOC  -->
+  
+  
+  <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Overview-via-a-diagram"><span class="toc-nav-text">Overview via a diagram</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#List-methods"><span class="toc-nav-text">List methods</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Queue-methods"><span class="toc-nav-text">Queue methods</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Dequeue-LinkedList-Methods"><span class="toc-nav-text">Dequeue &#x2F; LinkedList Methods</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Summary-of-Deque-methods"><span class="toc-nav-text">Summary of Deque methods</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Comparison-of-Queue-and-Deque-methods"><span class="toc-nav-text">Comparison of Queue and Deque methods</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Comparison-of-Stack-and-Deque-methods"><span class="toc-nav-text">Comparison of Stack and Deque methods</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#TreeSet-methods"><span class="toc-nav-text">TreeSet methods</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Map-methods"><span class="toc-nav-text">Map methods</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#TreeMap-methods"><span class="toc-nav-text">TreeMap methods</span></a></li></ol></li></ol>
+  
+</div>
+
+<script>
+  (function () {
+    var h2 = document.querySelectorAll('article h2');
+    var h3 = document.querySelectorAll('article h3');
+    var linkList = document.querySelectorAll('#sidebar-toc a');
+
+    function findLinkElement(name) {
+      for (var i = 0; i < linkList.length; i++) {
+        var items = linkList[i].href.split('#');
+        if (items && items[items.length - 1] === encodeURIComponent(name)) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function activeLink(titleList) {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      for (var i = titleList.length - 1; i >= 0; i--) {
+        if (scrollTop - titleList[i].offsetTop > 0) {
+          var index = findLinkElement(titleList[i].id);
+          index != -1 && linkList[index].classList.add('gkt-sidebar-active');
+          break;
+        }
+      }
+    }
+
+    window.addEventListener("scroll", function (e) {
+      [].slice.call(linkList).forEach(function (link) {
+        link.classList.remove('gkt-sidebar-active');
+      })
+      activeLink(h2);
+    })
+  })();
+</script>
+                    
+                </li>
+                
+            </ul>
+        </section>
+        
+        
+        <section class="gkt-sidebar-content box-shadow">
+            <strong>最近的文章</strong>
+            <ul>
+                
+                <li>
+                    <a href="/post/goodbye-google.html">夏日绝句</a>
+                </li>
+                
+                <li>
+                    <a href="/post/scala-intro.html">Recap of Scala tutorial</a>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-reservoir-sampling.html">详解水塘抽样(Reservoir sampling)</a>
+                </li>
+                
+            </ul>
+        </section>
+        
+    </div>
+</aside>
+
+<script>
+    (function () {
+        function resizeUArrow() {
+            var s = getDom('.u-arrow-wrapper').style
+            var pc = getDom('.post-container')
+            s.left = getPosition(pc).x + 'px';
+            s.width = pc.clientWidth + 'px';
+        }
+        resizeUArrow()
+        window.addEventListener('resize', resizeUArrow);
+    })();
+</script>
+
+    
+
+<script>
+    (function () {
+        var ele = getDom('.gkt-sidebar-content')
+        if(!ele) return;
+        var wrapper = getDom('.gkt-sidebar-wrapper')
+        var last = 0
+        ele.style.maxHeight = ((window.innerHeight || 798) - 200) + 'px'
+        var f = function (e) {
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var isDown = scrollTop > last;
+            var pos = getPosition(ele).y - scrollTop;
+            var downLimit = 50;
+            var upLimit = -100;
+            // uarrow.style.marginTop = scrollTop + 'px';
+            isDown && pos <= downLimit && wrapper.classList.add("gkt-sidebar-fixed");
+            !isDown && pos > upLimit && wrapper.classList.remove("gkt-sidebar-fixed");
+            last = scrollTop
+        }
+        f()
+        window.addEventListener("scroll", f)
+    })();
+</script>
+
+</main>
+    </div>
+    <style>
+    img#go-top {
+        position: fixed;
+        bottom: 100px;
+        width: 50px;
+        cursor: pointer;
+        z-index: 9999;
+    }
+</style>
+<img id="go-top" src="/icon/top.png" class="hidden-xs" style="display: none" />
+<script>
+    (function () {
+        var goTop = document.getElementById('go-top');
+        var mainContainer = document.querySelector('.main-container');
+        
+        goTop.addEventListener('click', function () {
+            window.scroll(0, 0);
+        }, false);
+        window.addEventListener('scroll', function () {
+            var right = document.body.offsetWidth - mainContainer.getBoundingClientRect().right;
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            goTop.style.right = right + 10 + 'px'
+            scrollTop > 700 && (goTop.style.display = "block");
+            scrollTop <= 700 && (goTop.style.display = "none");
+        });
+    })();
+</script>
+    <style>
+    #geektutu-click-img-container {
+        position: fixed;
+        left: 0;
+        top: 0;
+        text-align: center;
+        width: 100%;
+        display: none;
+        z-index: 9999;
+    }
+
+    #geektutu-click-img-container img {
+        object-fit: contain;
+        background: #eaecef;
+        padding: 15px;
+        border-radius: 10px;
+        height: auto;
+        width: auto;
+        vertical-align: middle;
+    }
+</style>
+
+
+<div id="geektutu-click-img-container">
+    <img src="" alt="Big Image">
+</div>
+
+<script>
+    (function () {
+        var container = document.querySelector('#geektutu-click-img-container')
+        var targetImg = container.querySelector('img')
+        var imgs = document.querySelectorAll('article img');
+        targetImg.addEventListener('click', function (e) {
+            container.style.display = 'none';
+            e && e.stopPropagation && e.stopPropagation();
+        }, false);
+
+        for (var i = 0; i < imgs.length; ++i) {
+            var img = imgs[i];
+            img.addEventListener('click', (function (src, rate) {
+                return function (e) {
+                    e && e.stopPropagation && e.stopPropagation();
+                    if (window.innerWidth < 980) {
+                        return
+                    }
+                    targetImg.style.height = targetImg.style.width = 'auto';
+                    if (window.innerWidth / window.innerHeight > rate) {
+                        targetImg.style.height = (window.innerHeight - 20) + 'px';
+                    } else {
+                        targetImg.style.width = (window.innerWidth - 20) + 'px';
+                    }
+                    container.style.height = window.innerHeight + 'px'
+                    container.style.lineHeight = window.innerHeight + 'px'
+                    container.style.display = 'block';
+                    targetImg.src = src;
+                };
+            }(img.src, img.width / img.height)), false)
+        }
+    })();
+</script>
+    <!-- Footer -->
+    <!-- Footer -->
+<style>
+    footer {
+        width: 100%;
+        line-height: 1.5;
+        padding: 20px;
+    }
+
+    footer a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .footer-hexo img {
+        height: 20px;
+        margin-bottom: -5px;
+    }
+
+    .footer-hexo a {
+        color: #337ab7;
+    }
+</style>
+<footer class="text-center col-xs-12">
+    <p>
+        <small>© 2023 - sky - </small>
+        <small>
+            <a target="_blank" rel="nofollow noopener" href="http://beian.miit.gov.cn/"></a>
+        </small>
+    </p>
+    <p class="footer-hexo">
+        <!-- 但若直接使用或修改主题，请务必保留这段声明 -->
+        <small>Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme
+            <a target="_blank" href="https://geektutu.com">Geektutu</a>
+            <a target="_blank" rel="noopener" href="https://github.com/geektutu/hexo-theme-geektutu">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAYGBgYHBgcICAcKCwoLCg8ODAwODxYQERAREBYiFRkVFRkVIh4kHhweJB42KiYmKjY+NDI0PkxERExfWl98fKcBBgYGBgcGBwgIBwoLCgsKDw4MDA4PFhAREBEQFiIVGRUVGRUiHiQeHB4kHjYqJiYqNj40MjQ+TERETF9aX3x8p//CABEIACIAUAMBIgACEQEDEQH/xAAcAAABBAMBAAAAAAAAAAAAAAAAAQQFBwIDBgj/2gAIAQEAAAAA9KrHSgAYL5/z6zZGuJd12uugbhq3uKtmuRtix20IS7lTLAfAAAn/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oACAECEAAAAAAB/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/aAAgBAxAAAAAAAf/EADEQAAICAQIEBQEGBwAAAAAAAAECAwQFAAYREhORBxQhUlQxQVFic5KxJDJCYYGC0f/aAAgBAQABPwCFHnjWUzuvN6hV4cANSRLGjO9yRVUcSzMoA7jVXJYe5N0a2dhmk9kc0bN2GvLN8mbuNeWb5M3ca8s3yZu415Y/Jm7jXlm+TN3H/NeVPyZu40vOk3TZywK8wJ+v3EHVM/wsI/Dq2lrxN3Nnca16eti8chSAIoMbzByhMwP14kHVfwIiSaF5c96J6kwwCOTnHsYk8uvCrdmQy1TI4rJuz3cZLyGR/wCd4+YoOf8AEpUjXitubLYPG4paFsUxcuiGe7yc5gTW3LW44szXmobsi3Dhmic2+Z4+vCVH9CpraPiQ+QvbgTJrPFBWd5YpWrmNIIEXiRO32Pqt4p7cnfHk18lFBdmEVW1LVdIZGOrniTt6plrWKaO69yCykDRxwF+LMAewB0Txtr+Sf31VI8tEPw62fZt7N3Humtbpzz13ucX6CGSWMSuzpLyD1eNgeUka3PuvHbaxq3biTMHfkiSNCS78CwU+3Xg7Vu3MhuTcU6cq3Zemn3Eh2dv8Lzcut+29x1atKbHYqLJUhLwyNMwiZ3j9yDWOxUOV3tgb+3No5LDx1pi9+aeIwRlNY6bc+Jv+IFGrhLxtXJZ7VKcw81diiAAEn0JOrkWZyNfbEr0tz27UGQgkuGzXdIIvyowq99bRxk9ffO/L81SZBPZgEEroQroIxxMZOgeNsfkn99QypHGqO4Vl9CDrN4LDZkwyzyyQ2IgRHZrzGCZVP1XnQglT9oOtw4LC7iqV6uRkZoYpxKFSQpzFRw4EjVRMfSrQ1qqwxQxKFjjTgFUD7BoWYR6iVe+mtxt9Zwf9teaj4AdccPu5tedX5A/VrzUR+sy/q1CwksF19VEfDj/cnQRW+qg66cfsXtrpx+xe2unH7F7a6cfsXtrpx+xe2unH7F7a6cfsXtoxx+xe2gAAOA1//8QAFBEBAAAAAAAAAAAAAAAAAAAAMP/aAAgBAgEBPwB//8QAFBEBAAAAAAAAAAAAAAAAAAAAMP/aAAgBAwEBPwB//9k="
+                    alt="Github Star">
+            </a>
+        </small>
+    </p>
+    
+    <p>
+        <small>
+            <span id="busuanzi_container_site_pv">👁<span id="busuanzi_value_site_pv"></span></span> &nbsp;
+            <span id="busuanzi_container_page_pv">📚<span id="busuanzi_value_page_pv"></span></span>
+        </small>
+    </p>
+    
+    
+
+</footer>
+
+
+<script>
+    window.addEventListener('load', function () {
+        globalAddScript('//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js');
+    })
+</script>
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+    <script>
+        // 非本站网址，新开tab页签
+        (function () {
+            var stopBubble = function (e) {
+                e && e.stopPropagation && e.stopPropagation();
+            }
+            var links = document.querySelectorAll('a');
+            [].slice.call(links).forEach(function (item) {
+                if (item.href && item.href.indexOf(window.location.host) === -1) {
+                    item.target = '_blank'
+                }
+                // 阻止冒泡，不触发彩蛋。
+                item.addEventListener('click', stopBubble, false);
+            });
+            var article = document.querySelector('article');
+            article && article.addEventListener('click', stopBubble, false)
+        })();
+    </script>
+    
+<script>
+    (function (window, document, undefined) {
+        var hearts = [];
+        var keywords = ["点个赞", "留个言", "赞赏一下", "多做多说", "suensky.github.io"];
+        function randomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+        window.addEventListener('click', createWord)
+
+        function createWord(e) {
+            var d = document.createElement("span");
+            d.style.position = 'fixed';
+            d.style.zIndex = 9999;
+            d.style.color = 'rgb(' + [randomInt(255), randomInt(255), randomInt(255)].join(',') + ')';
+            d.innerHTML = keywords[randomInt(keywords.length)];
+            d.onselectstart = function () { return false; }
+
+            hearts.push({ el: d, x: e.clientX - 5, y: e.clientY - 5, alpha: 1, scale: 1 });
+            document.body.appendChild(d);
+        }
+        (function gameloop() {
+            for (var i = 0; i < hearts.length; i++) {
+                heart = hearts[i];
+                if (heart.alpha <= 0) {
+                    document.body.removeChild(heart.el);
+                    hearts.splice(i, 1);
+                    continue;
+                }
+                heart.y -= heart.alpha < 0.5 ? 2 : 1;
+                heart.scale += 0.002;
+                heart.alpha -= 0.013;
+                heart.el.style.transform = 'scale(' + heart.scale + ')';
+                heart.el.style.left = heart.x + 'px';
+                heart.el.style.top = heart.y + 'px';
+            }
+            setTimeout(gameloop, 10)
+        })();
+    })(window, document);
+</script>
+
+</body>
+
+</html>

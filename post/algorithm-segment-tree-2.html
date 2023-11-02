@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <meta name="baidu-site-verification" content="" />
+  <meta name="google-site-verification" content="" />
+  <meta name="msvalidate.01" content="" />
+  <meta name="360-site-verification" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- if page has tags, then add tags to keyword -->
+  
+  
+  <meta name="keywords" content=",programming,">
+  <!-- page.description has higher priority -->
+  <meta name="description" content="">
+  <link rel="shortcut icon" href="/img/icon.png">
+  <title>
+    
+    详解线段树之进阶(Segment Tree) | 多做多说
+    
+  </title>
+
+  <link rel="canonical" href="https://suensky.github.io/post/algorithm-segment-tree-2.html">
+  
+<link rel="stylesheet" href="/css/geektutu.css">
+
+  <!-- global function -->
+  <script>
+    window.globalAddScript = function (url, onload, onerror) {
+      var s = document.createElement('script');
+      s.src = url;
+      onload && (s.onload = onload);
+      onerror && (s.onerror = onerror);
+      document.body.appendChild(s);
+    }
+    window.globalAddCss = function (url) {
+      var s = document.createElement('link');
+      s.rel = 'stylesheet';
+      s.href = url;
+      document.body.appendChild(s);
+    }
+    window.getPosition = function (ele) {
+      var x = 0, y = 0;
+      while (ele) {
+        x += (ele.offsetLeft - ele.scrollLeft + ele.clientLeft);
+        y += (ele.offsetTop - ele.scrollTop + ele.clientTop);
+        ele = ele.offsetParent;
+      }
+      return { x: x, y: y };
+    }
+    window.getDom = function (str) { return document.querySelector(str) }
+  </script>
+  <!-- google ad -->
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/feed.xml" title="多做多说" type="application/rss+xml">
+</head>
+
+<body>
+    
+<header class="gkt-header col-xs-12 padding-0">
+    <div id="gkt-nav" class="gkt-header-container">
+        <a href="/" class="gkt-header-title float-left">
+            <img class="float-left" src="/img/icon.png" alt="">
+            <span>多做多说</span>
+        </a>
+        <nav class="gkt-header-nav text-right">
+            <ul>
+                <li><a class="hidden-xs" href="/feed.xml">订阅</a></li>
+                <li><a href="/series/">专题</a></li>
+                <li><a href="/archives/">归档</a></li>
+                <li><a href="/post/link.html">友链</a></li>
+                <li><a href="/post/about.html">关于</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="gkt-cate-nav" class="gkt-header-container hidden-xs">
+        
+        <nav class="gkt-header-nav float-left">
+            <ul>
+                
+                
+                <li class="gkt-cate-name float-left ">
+                    <a class="float-left" href="/post/startwritting.html">诗和远方 ▾</a>
+                    
+                    <ul class="gkt-sub-cate">
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/startwritting.html">随笔</a></li>
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/poem-so-green.html">诗</a></li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li class="gkt-cate-name float-left active">
+                    <a class="float-left" href="/post/dp-1.html">算法专题 ▾</a>
+                    
+                    <ul class="gkt-sub-cate">
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/dp-1.html">算法题解</a></li>
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/clubhouse-problem1.html">趣谈算法</a></li>
+                        
+                        <li class="gkt-sub-cate-name active"><a class="float-left"
+                                href="/post/algorithm_union-find.html">算法详解</a></li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li class="gkt-cate-name float-left ">
+                    <a class="float-left" href="/post/java-collections.html">编程语言 ▾</a>
+                    
+                    <ul class="gkt-sub-cate">
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/java-collections.html">Java</a></li>
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/scala-intro.html">Scala</a></li>
+                        
+                    </ul>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="gkt-header-placeholder" style="height: 44px"></div>
+<div class="gkt-header-placeholder hidden-xs" style="height: 44px"></div>
+<script>
+    (function () {
+        window.addEventListener('scroll', function () {
+            if (window.innerWidth < 768) {
+                return;
+            }
+            var nav = document.querySelector('#gkt-nav');
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            scrollTop > 50 && (nav.classList.add('hide'));
+            scrollTop <= 50 && (nav.classList.remove('hide'));
+        });
+        var cateNavs = document.querySelectorAll('#gkt-cate-nav>nav>ul>li');
+        [].slice.call(cateNavs).forEach(function (item) {
+            var sub = item.querySelector('.gkt-sub-cate');
+            if (!sub) return;
+            item.addEventListener('mouseenter', function (e) { sub.style.display = 'block'; }, false);
+            item.addEventListener('mouseleave', function (e) { sub.style.display = 'none'; }, false);
+        })
+    })();
+</script>
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Main Content -->
+<main class="col-xs-12 padding-0 markdown-it">
+    <!-- Post Container -->
+    
+    
+    <!-- Post Content -->
+<div class="float-left post-container box-shadow">
+    <div class="u-arrow-wrapper hidden-xs">
+        
+        <a class="float-left" href="/post/algorithm-segment-tree.html"><i class="u-arrow-left"></i></a>
+        
+        
+        <a class="float-right" href="/post/java-collections.html"><i class="u-arrow-right"></i></a>
+        
+    </div>
+    <article class="col-xs-12">
+        <h1> 详解线段树之进阶(Segment Tree) </h1>
+        
+        
+        <div class="hidden-lg hidden-md series_links">
+            <p> <strong> 算法详解系列文章链接：</strong></p>
+            <ul>
+                
+                <li>
+                    <a href="/post/algorithm_union-find.html">详解并查集(Union Find)</a>
+                    <span class="post-item-date">(Mar 1, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-merge-sort.html">详解归并排序之应用(Merge sort)</a>
+                    <span class="post-item-date">(Mar 2, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-fenwick-tree.html">详解二叉索引树(Binary Index Tree又名Fenwick Tree)</a>
+                    <span class="post-item-date">(Mar 3, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-segment-tree.html">详解线段树之入门(Segment Tree)</a>
+                    <span class="post-item-date">(Mar 4, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-segment-tree-2.html">详解线段树之进阶(Segment Tree)</a>
+                    <span class="post-item-date">(Mar 5, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-reservoir-sampling.html">详解水塘抽样(Reservoir sampling)</a>
+                    <span class="post-item-date">(Mar 24, 2021)</span>
+                </li>
+                
+            </ul>
+        </div>
+        
+        
+        <div class="gkt-article-start"></div>
+        <h1 id="懒更新-lazy-update"><a href="#懒更新-lazy-update" class="headerlink" title="懒更新(lazy update)"></a>懒更新(lazy update)</h1><p><a href="https://suensky.github.io/post/algorithm-segment-tree.html">上文</a>留下一个问题没有解决，就是对一个区间更新。对一个元素的更新复杂度为<code>O(N),N为数组长度</code>,按上文方法对区间更新，则复杂度为<code>L*O(N), L为区间长度</code>。</p>
+<p>另外，更新原数组元素，是从线段树中对应的叶子节点，一路向上更新到根节点。如果所要更新的区间有很多公共祖先节点，那么这些节点每次都需要被更新一次。如图中如果我们要更新数组中的<code>2, 8, 6</code>分别<code>+5, +1, +9</code>，可以看到图中公共节点如<code>19</code>会更新<code>2</code>次，<code>37</code>则有<code>3</code>次。</p>
+<p><img src="algorithm-segment-tree-2/segtree.png" alt="algorithm-segment-tree-2"></p>
+<p>另外，在实际应用中，可能只是某些热点数据会频繁被读取，而大部分数据是在冷宫常年不见天日。有些更新没有必要立即落实到每一个节点，而可以在其被读取时再落实更新。</p>
+<p>这就是懒更新的登场时刻。</p>
+<h1 id="基于数组的实现"><a href="#基于数组的实现" class="headerlink" title="基于数组的实现"></a>基于数组的实现</h1><p>既然需要将更新延后落实，那么就需要保存这些更新，所以需要一个与<code>tree</code>长度一致的<code>lazy</code>数组来保存对应节点没有落实的更新。代码如下。几个注意点：</p>
+<ul>
+<li>进入<code>queryCore</code>时，首先需要检查有无当前节点<code>index</code>的更新，如果有，先执行更新，清空该更新，然后继续，其余与正常线段树<code>query</code>区别。</li>
+<li>进入<code>updateCore</code>时，也是首先要检查有无当前节点<code>index</code>的更新，如果有，重复上面。</li>
+<li>另外，当更新范围<code>[left, right]</code>完全覆盖当前节点代表区间<code>[segLeft, segRight]</code>时，要再次执行更新，但这次<code>update</code>参数是<code>newVal</code>。这是关键点所在，执行完更新，就不用继续递归调用了，因为孩子节点的更新被保存在了<code>lazy[leftChild]</code>和<code>lazy[rightChild]</code>。下次再调用<code>query</code>或者<code>update</code>时，如果执行到节点<code>leftChild</code>或<code>rightChild</code>，则会执行之前保存的更新。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SegmentTree</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] tree;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] lazy;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SegmentTree</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">        <span class="keyword">int</span> len = (<span class="number">1</span> &lt;&lt; (<span class="number">1</span> + (<span class="keyword">int</span>)(Math.ceil(Math.log(n) / Math.log(<span class="number">2</span>))))) - <span class="number">1</span>;</span><br><span class="line">        tree = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        lazy = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> queryCore(left, right, <span class="number">0</span>, n - <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> newVal)</span> </span>&#123;</span><br><span class="line">        updateCore(left, right, <span class="number">0</span>, n - <span class="number">1</span>, <span class="number">0</span>, newVal);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">queryCore</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> segLeft, <span class="keyword">int</span> segRight, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (lazy[index] != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// Execute un-merged update.</span></span><br><span class="line">            execute(index, lazy[index], segLeft, segRight);</span><br><span class="line">            <span class="comment">// Clear merged update.</span></span><br><span class="line">            lazy[index] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &gt; segRight || right &lt; segLeft) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &lt;= segLeft &amp;&amp; segRight &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">return</span> tree[index];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid = getMid(segLeft, segRight);</span><br><span class="line">        <span class="keyword">return</span> merge(queryCore(left, right, segLeft, mid, index * <span class="number">2</span> + <span class="number">1</span>),</span><br><span class="line">            queryCore(left, right, mid + <span class="number">1</span>, segRight, index * <span class="number">2</span> + <span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateCore</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right,</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="keyword">int</span> segLeft, <span class="keyword">int</span> segRight, <span class="keyword">int</span> index, <span class="keyword">int</span> newVal)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (lazy[index] != <span class="number">0</span>) &#123;</span><br><span class="line">            execute(index, lazy[index], segLeft, segRight);</span><br><span class="line">            lazy[index] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &gt; segRight || right &lt; segLeft) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &lt;= segLeft &amp;&amp; segRight &lt;= right) &#123;</span><br><span class="line">            <span class="comment">// Execute update for newVal.</span></span><br><span class="line">            execute(index, newVal, segLeft, segRight);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid = getMid(segLeft, segRight);</span><br><span class="line">        updateCore(left, right, segLeft, mid, index * <span class="number">2</span> + <span class="number">1</span>, newVal);</span><br><span class="line">        updateCore(left, right, mid + <span class="number">1</span>, segRight, index * <span class="number">2</span> + <span class="number">2</span>, newVal);</span><br><span class="line"></span><br><span class="line">        tree[index] = merge(tree[index * <span class="number">2</span> + <span class="number">1</span>], tree[index * <span class="number">2</span> + <span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Execute an update against tree[index] with interval [segLeft, segRight].</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(<span class="keyword">int</span> index, <span class="keyword">int</span> update, <span class="keyword">int</span> segLeft, <span class="keyword">int</span> segRight)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Apply the udpate.</span></span><br><span class="line">        tree[index] = merge(tree[index], update);</span><br><span class="line">        <span class="keyword">if</span> (segLeft != segRight) &#123;</span><br><span class="line">            <span class="comment">// Propagate the update to children.</span></span><br><span class="line">            lazy[<span class="number">2</span> * index + <span class="number">1</span>] = merge(lazy[<span class="number">2</span> * index + <span class="number">1</span>], update);</span><br><span class="line">            lazy[<span class="number">2</span> * index + <span class="number">2</span>] = merge(lazy[<span class="number">2</span> * index + <span class="number">2</span>], update);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Math.max(x, y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getMid</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="基于树的实现"><a href="#基于树的实现" class="headerlink" title="基于树的实现"></a>基于树的实现</h1><p>其实就是把上面的代码做一次翻译，不多赘述。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SegmentTree</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Node root;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SegmentTree</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.root = <span class="keyword">new</span> Node(<span class="number">0</span>, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> queryCore(left, right, root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> newVal)</span> </span>&#123;</span><br><span class="line">        updateCore(left, right, root, newVal);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">queryCore</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, Node cur)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cur.lazyVal != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// Execute un-merged update.</span></span><br><span class="line">            execute(cur, cur.lazyVal);</span><br><span class="line">            <span class="comment">// Clear merged update.</span></span><br><span class="line">            cur.lazyVal = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &gt; cur.high || right &lt; cur.low) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &lt;= cur.low &amp;&amp; cur.high &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">return</span> cur.val;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> merge(queryCore(left, right, cur.left),</span><br><span class="line">            queryCore(left, right, cur.right));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateCore</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, Node cur, <span class="keyword">int</span> newVal)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur.lazyVal != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// Execute un-merged update.</span></span><br><span class="line">            execute(cur, cur.lazyVal);</span><br><span class="line">            <span class="comment">// Clear merged update.</span></span><br><span class="line">            cur.lazyVal = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &gt; cur.high || right &lt; cur.low) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &lt;= cur.low &amp;&amp; cur.high &lt;= right) &#123;</span><br><span class="line">            <span class="comment">// Execute update for newVal.</span></span><br><span class="line">            execute(cur, newVal);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid = getMid(cur.low, cur.high);</span><br><span class="line">        <span class="keyword">if</span> (cur.left == <span class="keyword">null</span>) &#123;</span><br><span class="line">            cur.left = <span class="keyword">new</span> Node(<span class="number">0</span>, cur.low, mid);</span><br><span class="line">            cur.right = <span class="keyword">new</span> Node(<span class="number">0</span>, mid + <span class="number">1</span>, cur.high);</span><br><span class="line">        &#125;</span><br><span class="line">        updateCore(left, right, cur.left, newVal);</span><br><span class="line">        updateCore(left, right, cur.right, newVal);</span><br><span class="line"></span><br><span class="line">        cur.val = merge(cur.left.val, cur.right.val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Node cur, <span class="keyword">int</span> update)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Apply the udpate.</span></span><br><span class="line">        cur.val = merge(cur.val, update);</span><br><span class="line">        <span class="keyword">if</span> (cur.low != cur.high) &#123;</span><br><span class="line">            <span class="comment">// Propagate the updates to children.</span></span><br><span class="line">            <span class="keyword">if</span> (cur.left == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">int</span> mid = getMid(cur.low, cur.high);</span><br><span class="line">                cur.left = <span class="keyword">new</span> Node(<span class="number">0</span>, cur.low, mid);</span><br><span class="line">                cur.right = <span class="keyword">new</span> Node(<span class="number">0</span>, mid + <span class="number">1</span>, cur.high);</span><br><span class="line">            &#125;</span><br><span class="line">            cur.left.lazyVal = merge(cur.left.lazyVal, update);</span><br><span class="line">            cur.right.lazyVal = merge(cur.right.lazyVal, update);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Math.max(x, y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getMid</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">        <span class="comment">// The value for range [low ... high].</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> val;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> low;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> high;</span><br><span class="line">        <span class="comment">// The lazy update yet to apply.</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> lazyVal;</span><br><span class="line">        <span class="keyword">public</span> Node left = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">public</span> Node right = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> val, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.val = val;</span><br><span class="line">            <span class="keyword">this</span>.low = low;</span><br><span class="line">            <span class="keyword">this</span>.high = high;</span><br><span class="line">            <span class="keyword">this</span>.lazyVal = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>上述线段树都基于一个假设，即数组元素允许最小值为<code>0</code>，所以我们把入门篇里所说的<code>null</code>节点的值默认为<code>0</code>。再次重申，对于不同的区间性质(和，最大，最小等)，<code>null</code>节点的默认值需要作相应调整。</p>
+<p>基于上面的线段树可以轻松的解决<a target="_blank" rel="noopener" href="https://leetcode.com/problems/falling-squares/">Leetcode 699 Falling Squares</a>,以更低的复杂度！</p>
+<p>原题表述较为啰嗦，总结如下。给定一组方块以<code>positions[][]</code>表示，<code>position[i]</code>表示方块<code>i</code>,<code>position[i][0]</code>表示方块在<code>x</code>轴上坐标，<code>position[i][1]</code>表示方块边长。依次把方块从很高处沿<code>y轴</code>扔下，后面的方块有可能掉在前面方块上。</p>
+<p>比如：<br><code>positions = [[1, 2], [2, 3], [6, 1]]</code>则扔完后会像下图所示。<br><img src="algorithm-segment-tree-2/falling_squares.png" alt="algorithm-segment-tree-2"></p>
+<p>现在要求<code>heights[]</code>，<code>heights[i]</code>表示在扔到方块<code>i</code>时，所有已扔方块形成的形状的最高高度。比如上述输入，则结果是<code>[2, 5, 5]</code>。</p>
+<p>此题完全可以暴力解决，维持一个<code>heights[]</code>数组来维持到方块<code>i</code>掉下时的高度。</p>
+<ol>
+<li><code>heights[]</code>长度与方块数相同，初始化为0.</li>
+<li>当方块<code>i</code>掉下时，<code>heights[i] += positions[i][1]</code>。</li>
+<li>同时需要更新方块<code>i</code>覆盖范围内的<code>heights[]</code>。</li>
+<li>取当前最大值作为方块<code>i</code>掉落时的最高高度。</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">fallingSquares</span><span class="params">(<span class="keyword">int</span>[][] positions)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span>[] heights = <span class="keyword">new</span> <span class="keyword">int</span>[positions.length];</span><br><span class="line"></span><br><span class="line">      List&lt;Integer&gt; ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; heights.length; ++i) &#123;</span><br><span class="line">          <span class="keyword">int</span> left = positions[i][<span class="number">0</span>];</span><br><span class="line">          <span class="keyword">int</span> size = positions[i][<span class="number">1</span>];</span><br><span class="line">          <span class="keyword">int</span> right = left + size - <span class="number">1</span>;</span><br><span class="line">          heights[i] += size;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; heights.length; ++j) &#123;</span><br><span class="line">              <span class="keyword">int</span> left2 = positions[j][<span class="number">0</span>];</span><br><span class="line">              <span class="keyword">int</span> size2 = positions[j][<span class="number">1</span>];</span><br><span class="line">              <span class="keyword">int</span> right2 = left2 + size2 - <span class="number">1</span>;</span><br><span class="line">              <span class="keyword">if</span> (left2 &lt;= right &amp;&amp; right2 &gt;= left) &#123;</span><br><span class="line">                  heights[j] = Math.max(heights[i], heights[j]);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          cur = Math.max(cur, heights[i]);</span><br><span class="line">          ans.add(cur);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> ans;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，上述<code>O(n^2)</code>的算法中，内循环部分是为了找到方块<code>i</code>掉落所覆盖的区域<code>[left ... right]</code>的最大值，线性扫描更新为<code>O(n)</code>。而线段树则能以<code>O(logN)</code>的复杂度<code>query</code>区域<code>[left ... right]</code>的最大值。</p>
+<p>在这里，还需要对已有数据进行个小处理，名为坐标压缩，以便于后续线段树构造。所谓坐标压缩，方块的横坐标较为分散，上面的例子里有<code>1, 2, 6</code>三个离散值，可以一一映射到从<code>0</code>开始，间隔<code>1</code>的坐标中，如下图所示。<br><img src="algorithm-segment-tree-2/coordinates_compression.png" alt="algorithm-segment-tree-2"></p>
+<p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Map&lt;Integer, Integer&gt; <span class="title">compressCoord</span><span class="params">(<span class="keyword">int</span>[][] positions)</span> </span>&#123;</span><br><span class="line">    Set&lt;Integer&gt; points = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>[] pos : positions) &#123;</span><br><span class="line">        points.add(pos[<span class="number">0</span>]);</span><br><span class="line">        points.add(pos[<span class="number">0</span>] + pos[<span class="number">1</span>] - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; pointList = <span class="keyword">new</span> ArrayList&lt;&gt;(points);</span><br><span class="line">    Collections.sort(pointList);</span><br><span class="line"></span><br><span class="line">    Map&lt;Integer, Integer&gt; coords = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = pointList.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        coords.put(pointList.get(i), i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> coords;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有了以上铺垫，基于线段树的解法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">fallingSquares</span><span class="params">(<span class="keyword">int</span>[][] positions)</span> </span>&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; coords = compressCoord(positions);</span><br><span class="line"></span><br><span class="line">    SegmentTree st = <span class="keyword">new</span> SegmentTree(coords.size());</span><br><span class="line">    List&lt;Integer&gt; ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>[] pos : positions) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = coords.get(pos[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">int</span> right = coords.get(pos[<span class="number">0</span>] + pos[<span class="number">1</span>] - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> height = st.query(left, right) + pos[<span class="number">1</span>];</span><br><span class="line">        st.update(left, right, height);</span><br><span class="line"></span><br><span class="line">        max = Math.max(max, height);</span><br><span class="line">        ans.add(max);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+<script src="/js/qrious.min.js"></script>
+
+
+        <hr style="margin-top: 2rem;">
+        <div>
+            
+            <p>
+                <span>专题: </span>
+                
+                <a href="/series/#算法详解">
+                    <code key="算法详解" class="post-label">算法详解</code>
+                </a>
+                
+            </p>
+            
+            <p>
+                <span>本文发表于 2021-03-05，最后修改于 2023-11-01。</span>
+            </p>
+            <!-- 文章末尾的提示 start -->
+            
+            
+                
+            <!-- 文章末尾的提示 end -->
+        </div>
+        <hr />
+        <p name="pagination" style="font-size: 1.2em">
+    
+    <a class="float-left" href="/post/algorithm-segment-tree.html">上一篇 « 详解线段树之入门(Segment Tree)</a>
+    
+    
+    <a class="float-right" href="/post/java-collections.html">下一篇 » Java集合速览</a>
+    
+</p>
+    </article>
+    <!-- 赞赏 -->
+    <!--打赏-->
+
+    
+    <!-- 推荐阅读三篇文章 -->
+    <div class="col-xs-12">
+        <h3>推荐阅读</h3>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#随笔"
+                    title="随笔">随笔</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/comment-clubhouse.html" class="title">
+                俱乐部会所火了
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-02-04，</span>
+                    <span class="hidden-xs">全文1040字，</span>
+                    <span>阅读约4分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#programming"
+                    title="programming">programming</a>
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#DP"
+                    title="DP">DP</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/dp-1.html" class="title">
+                动态规划系列(1)
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-02-04，</span>
+                    <span class="hidden-xs">全文1901字，</span>
+                    <span>阅读约7分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#随笔"
+                    title="随笔">随笔</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/beautiful-translation.html" class="title">
+                杂记
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-02-03，</span>
+                    <span class="hidden-xs">全文711字，</span>
+                    <span>阅读约3分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+    </div>
+    <div class="col-xs-12">
+        <!-- 标签列表 -->
+        <!-- Featured Tags -->
+<style>
+    #featured-tag .post-tag-item {
+        font-size: 12px;
+        line-height: 30px;
+        display: inline-block;
+        height: 30px;
+        margin: 5px 0px;
+        padding: 0 7px;
+        color: #333;
+        border-radius: 15px;
+        background: #f6f6f6;
+    }
+
+    #featured-tag .post-tag-item:hover {
+        color: #337ab7;
+    }
+</style>
+<div id="featured-tag">
+    
+    <a class="post-tag-item" href="/tags/#关于我" title="关于我"
+        rel="1">#关于我 (1) </a>
+    
+    <a class="post-tag-item" href="/tags/#programming" title="programming"
+        rel="12">#programming (12) </a>
+    
+    <a class="post-tag-item" href="/tags/#随笔" title="随笔"
+        rel="9">#随笔 (9) </a>
+    
+    <a class="post-tag-item" href="/tags/#DP" title="DP"
+        rel="1">#DP (1) </a>
+    
+</div>
+    </div>
+    <!-- 评论 -->
+    
+    <div class="col-xs-12">
+        
+<div class="col-xs-12 padding-0">
+    <div id="gitalk-container">
+        <div class="gt-container text-center" style="margin-top: 50px;">
+            <button class="gt-btn gt-btn-public"><span class="gt-btn-text">去 Github 评论</span></button>
+        </div>
+    </div>
+    <div id="gitalk-related"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css">
+
+
+<script src="/js/gitalk.min.js"></script>
+
+<script>
+    window.addEventListener('load', function () {
+        function renderCommentUrl(data) {
+            var url = (data[window.location.pathname] || {}).url
+            url && getDom('#gitalk-container button').addEventListener('click', function (e) { window.open(url)})
+            url || (getDom('#gitalk-container').style.display = 'none')
+        }
+        const gitalk = new Gitalk({
+            clientID: '195277d49379cfe2af1e',
+            clientSecret: '45c2721d438a94be2a42a513626f13e50df60cdd',
+            accessToken: '',
+            repo: 'suensky.github.io',
+            owner: 'suensky',
+            admin: ['suensky'],
+            id: window.location.pathname,
+            distractionFreeMode: false
+        });
+        fetch("https://api.github.com/user").then(function(resp){
+            gitalk.render('gitalk-container');
+        }).catch(function(e){
+            fetch('/tool/issues.json').then(function (r) { return r.json() }).then(renderCommentUrl).catch(function (e) { })
+        })
+        getDom('#gitalk-container').addEventListener('click', function (e) {
+            e && e.stopPropagation && e.stopPropagation();
+        });
+    })
+</script>
+<script>
+    window.addEventListener('load', function () {
+        function render(comments) {
+            var template = '<a href="${comment.url}?utm_source=gitalk" class="dis-item-url"><h3 class="dis-item-title">${comment.title}</h3>' +
+                '<p class="dis-item-des">${comment.count} 评论 ● ${comment.date}</p>' +
+                '<div class="dis-item-content"><img class="dis-item-img" src="${comment.icon}" alt="icon"><p><b><span class="dis-item-user">${comment.user}</span></b>&nbsp;——&nbsp;${comment.body}</p></div>' +
+                '</a>'
+
+            var wrapper = getDom('#gitalk-related');
+            comments = shuffle(comments);
+            comments.slice(0, 4).forEach(function (c) {
+                var div = document.createElement('div');
+                div.classList.add('dis-item');
+                div.innerHTML = template.replace("${comment.url}", c.url)
+                    .replace("${comment.title}", c.title)
+                    .replace("${comment.count}", c.count)
+                    .replace("${comment.date}", c.date)
+                    .replace("${comment.icon}", c.icon)
+                    .replace("${comment.user}", c.user)
+                    .replace("${comment.body}", c.body)
+                wrapper.appendChild(div)
+            })
+            var p = document.createElement('p')
+            p.innerHTML = '<a target="_blank" rel="noopener" href="https://geektutu.com/post/blog-experience-7.html">Gitalk Plus</a>';
+            p.classList.add('dis-divide');
+            wrapper.appendChild(p);
+            wrapper.classList.add('dis-wrapper')
+        }
+        function shuffle(a) {
+            for (var i = a.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+        fetch('/tool/comments.json').then(function (r) { return r.json() }).then(render).catch(function (e) { })
+    })
+</script>
+
+    </div>
+    
+</div>
+<aside class="float-left gkt-sidebar hidden-xs hidden-sm">
+    <div style="clear: both"></div>
+    <div class="gkt-sidebar-wrapper">
+        <section class="box-shadow"><style>
+    .gkt-summary {
+        border: 1px solid #DDDDDD;
+        border-radius: 3px;
+        padding: 5px;
+        width: 100%;
+    }
+
+
+    .gkt-summary nav {
+        overflow: hidden;
+    }
+
+    .gkt-summary nav a {
+        display: inline-block;
+        text-align: center;
+        color: #333;
+        font-size: 12px;
+    }
+
+    .gkt-summary nav span {
+        display: block;
+    }
+
+    .gkt-summary nav .middle {
+        border-left: 1px solid #eaecef;
+        border-right: 1px solid #eaecef;
+    }
+
+    .gkt-summary .number {
+        font-weight: bold;
+    }
+
+    .gkt-summary .link-list {
+        margin-top: 5px;
+        margin-bottom: -5px;
+        padding-top: 7px;
+        border-top: 1px dashed #999;
+        display: flex;
+    }
+
+    .gkt-summary .link-list a {
+        flex: 1;
+    }
+
+    .gkt-summary .link-list img {
+        width: 25px;
+        height: 25px;
+    }
+</style>
+
+<div class="gkt-summary">
+    <nav>
+        <a href="/" class="col-xs-4">
+            <span class="number">23</span><span>文章</span>
+        </a>
+        <a href="/series" class="col-xs-4 middle">
+            <span class="number">7</span><span>专题</span>
+        </a>
+        <a href="/tags" class="col-xs-4">
+            <span class="number">4</span><span>标签</span>
+        </a>
+    </nav>
+
+    
+</div></section>
+        
+        
+        <section class="gkt-sidebar-content box-shadow">
+            <strong>算法详解</strong>
+            <ul>
+                
+                <li>
+                    <a href="/post/algorithm_union-find.html"
+                        class="">详解并查集(Union Find)</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-merge-sort.html"
+                        class="">详解归并排序之应用(Merge sort)</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-fenwick-tree.html"
+                        class="">详解二叉索引树(Binary Index Tree又名Fenwick Tree)</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-segment-tree.html"
+                        class="">详解线段树之入门(Segment Tree)</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-segment-tree-2.html"
+                        class="gkt-sidebar-active">详解线段树之进阶(Segment Tree)</a>
+                    
+                    <!-- Table of Contents -->
+<div id="sidebar-toc">
+  <!-- TOC  -->
+  
+  
+  <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E6%87%92%E6%9B%B4%E6%96%B0-lazy-update"><span class="toc-nav-text">懒更新(lazy update)</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-nav-text">基于数组的实现</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-nav-text">基于树的实现</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-nav-text">应用</span></a></li></ol>
+  
+</div>
+
+<script>
+  (function () {
+    var h2 = document.querySelectorAll('article h2');
+    var h3 = document.querySelectorAll('article h3');
+    var linkList = document.querySelectorAll('#sidebar-toc a');
+
+    function findLinkElement(name) {
+      for (var i = 0; i < linkList.length; i++) {
+        var items = linkList[i].href.split('#');
+        if (items && items[items.length - 1] === encodeURIComponent(name)) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function activeLink(titleList) {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      for (var i = titleList.length - 1; i >= 0; i--) {
+        if (scrollTop - titleList[i].offsetTop > 0) {
+          var index = findLinkElement(titleList[i].id);
+          index != -1 && linkList[index].classList.add('gkt-sidebar-active');
+          break;
+        }
+      }
+    }
+
+    window.addEventListener("scroll", function (e) {
+      [].slice.call(linkList).forEach(function (link) {
+        link.classList.remove('gkt-sidebar-active');
+      })
+      activeLink(h2);
+    })
+  })();
+</script>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-reservoir-sampling.html"
+                        class="">详解水塘抽样(Reservoir sampling)</a>
+                    
+                </li>
+                
+            </ul>
+        </section>
+        
+        
+        <section class="gkt-sidebar-content box-shadow">
+            <strong>最近的文章</strong>
+            <ul>
+                
+                <li>
+                    <a href="/post/goodbye-google.html">夏日绝句</a>
+                </li>
+                
+                <li>
+                    <a href="/post/scala-intro.html">Recap of Scala tutorial</a>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-reservoir-sampling.html">详解水塘抽样(Reservoir sampling)</a>
+                </li>
+                
+            </ul>
+        </section>
+        
+    </div>
+</aside>
+
+<script>
+    (function () {
+        function resizeUArrow() {
+            var s = getDom('.u-arrow-wrapper').style
+            var pc = getDom('.post-container')
+            s.left = getPosition(pc).x + 'px';
+            s.width = pc.clientWidth + 'px';
+        }
+        resizeUArrow()
+        window.addEventListener('resize', resizeUArrow);
+    })();
+</script>
+
+    
+
+<script>
+    (function () {
+        var ele = getDom('.gkt-sidebar-content')
+        if(!ele) return;
+        var wrapper = getDom('.gkt-sidebar-wrapper')
+        var last = 0
+        ele.style.maxHeight = ((window.innerHeight || 798) - 200) + 'px'
+        var f = function (e) {
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var isDown = scrollTop > last;
+            var pos = getPosition(ele).y - scrollTop;
+            var downLimit = 50;
+            var upLimit = -100;
+            // uarrow.style.marginTop = scrollTop + 'px';
+            isDown && pos <= downLimit && wrapper.classList.add("gkt-sidebar-fixed");
+            !isDown && pos > upLimit && wrapper.classList.remove("gkt-sidebar-fixed");
+            last = scrollTop
+        }
+        f()
+        window.addEventListener("scroll", f)
+    })();
+</script>
+
+</main>
+    </div>
+    <style>
+    img#go-top {
+        position: fixed;
+        bottom: 100px;
+        width: 50px;
+        cursor: pointer;
+        z-index: 9999;
+    }
+</style>
+<img id="go-top" src="/icon/top.png" class="hidden-xs" style="display: none" />
+<script>
+    (function () {
+        var goTop = document.getElementById('go-top');
+        var mainContainer = document.querySelector('.main-container');
+        
+        goTop.addEventListener('click', function () {
+            window.scroll(0, 0);
+        }, false);
+        window.addEventListener('scroll', function () {
+            var right = document.body.offsetWidth - mainContainer.getBoundingClientRect().right;
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            goTop.style.right = right + 10 + 'px'
+            scrollTop > 700 && (goTop.style.display = "block");
+            scrollTop <= 700 && (goTop.style.display = "none");
+        });
+    })();
+</script>
+    <style>
+    #geektutu-click-img-container {
+        position: fixed;
+        left: 0;
+        top: 0;
+        text-align: center;
+        width: 100%;
+        display: none;
+        z-index: 9999;
+    }
+
+    #geektutu-click-img-container img {
+        object-fit: contain;
+        background: #eaecef;
+        padding: 15px;
+        border-radius: 10px;
+        height: auto;
+        width: auto;
+        vertical-align: middle;
+    }
+</style>
+
+
+<div id="geektutu-click-img-container">
+    <img src="" alt="Big Image">
+</div>
+
+<script>
+    (function () {
+        var container = document.querySelector('#geektutu-click-img-container')
+        var targetImg = container.querySelector('img')
+        var imgs = document.querySelectorAll('article img');
+        targetImg.addEventListener('click', function (e) {
+            container.style.display = 'none';
+            e && e.stopPropagation && e.stopPropagation();
+        }, false);
+
+        for (var i = 0; i < imgs.length; ++i) {
+            var img = imgs[i];
+            img.addEventListener('click', (function (src, rate) {
+                return function (e) {
+                    e && e.stopPropagation && e.stopPropagation();
+                    if (window.innerWidth < 980) {
+                        return
+                    }
+                    targetImg.style.height = targetImg.style.width = 'auto';
+                    if (window.innerWidth / window.innerHeight > rate) {
+                        targetImg.style.height = (window.innerHeight - 20) + 'px';
+                    } else {
+                        targetImg.style.width = (window.innerWidth - 20) + 'px';
+                    }
+                    container.style.height = window.innerHeight + 'px'
+                    container.style.lineHeight = window.innerHeight + 'px'
+                    container.style.display = 'block';
+                    targetImg.src = src;
+                };
+            }(img.src, img.width / img.height)), false)
+        }
+    })();
+</script>
+    <!-- Footer -->
+    <!-- Footer -->
+<style>
+    footer {
+        width: 100%;
+        line-height: 1.5;
+        padding: 20px;
+    }
+
+    footer a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .footer-hexo img {
+        height: 20px;
+        margin-bottom: -5px;
+    }
+
+    .footer-hexo a {
+        color: #337ab7;
+    }
+</style>
+<footer class="text-center col-xs-12">
+    <p>
+        <small>© 2023 - sky - </small>
+        <small>
+            <a target="_blank" rel="nofollow noopener" href="http://beian.miit.gov.cn/"></a>
+        </small>
+    </p>
+    <p class="footer-hexo">
+        <!-- 但若直接使用或修改主题，请务必保留这段声明 -->
+        <small>Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme
+            <a target="_blank" href="https://geektutu.com">Geektutu</a>
+            <a target="_blank" rel="noopener" href="https://github.com/geektutu/hexo-theme-geektutu">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAYGBgYHBgcICAcKCwoLCg8ODAwODxYQERAREBYiFRkVFRkVIh4kHhweJB42KiYmKjY+NDI0PkxERExfWl98fKcBBgYGBgcGBwgIBwoLCgsKDw4MDA4PFhAREBEQFiIVGRUVGRUiHiQeHB4kHjYqJiYqNj40MjQ+TERETF9aX3x8p//CABEIACIAUAMBIgACEQEDEQH/xAAcAAABBAMBAAAAAAAAAAAAAAAAAQQFBwIDBgj/2gAIAQEAAAAA9KrHSgAYL5/z6zZGuJd12uugbhq3uKtmuRtix20IS7lTLAfAAAn/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oACAECEAAAAAAB/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/aAAgBAxAAAAAAAf/EADEQAAICAQIEBQEGBwAAAAAAAAECAwQFAAYREhORBxQhUlQxQVFic5KxJDJCYYGC0f/aAAgBAQABPwCFHnjWUzuvN6hV4cANSRLGjO9yRVUcSzMoA7jVXJYe5N0a2dhmk9kc0bN2GvLN8mbuNeWb5M3ca8s3yZu415Y/Jm7jXlm+TN3H/NeVPyZu40vOk3TZywK8wJ+v3EHVM/wsI/Dq2lrxN3Nnca16eti8chSAIoMbzByhMwP14kHVfwIiSaF5c96J6kwwCOTnHsYk8uvCrdmQy1TI4rJuz3cZLyGR/wCd4+YoOf8AEpUjXitubLYPG4paFsUxcuiGe7yc5gTW3LW44szXmobsi3Dhmic2+Z4+vCVH9CpraPiQ+QvbgTJrPFBWd5YpWrmNIIEXiRO32Pqt4p7cnfHk18lFBdmEVW1LVdIZGOrniTt6plrWKaO69yCykDRxwF+LMAewB0Txtr+Sf31VI8tEPw62fZt7N3Humtbpzz13ucX6CGSWMSuzpLyD1eNgeUka3PuvHbaxq3biTMHfkiSNCS78CwU+3Xg7Vu3MhuTcU6cq3Zemn3Eh2dv8Lzcut+29x1atKbHYqLJUhLwyNMwiZ3j9yDWOxUOV3tgb+3No5LDx1pi9+aeIwRlNY6bc+Jv+IFGrhLxtXJZ7VKcw81diiAAEn0JOrkWZyNfbEr0tz27UGQgkuGzXdIIvyowq99bRxk9ffO/L81SZBPZgEEroQroIxxMZOgeNsfkn99QypHGqO4Vl9CDrN4LDZkwyzyyQ2IgRHZrzGCZVP1XnQglT9oOtw4LC7iqV6uRkZoYpxKFSQpzFRw4EjVRMfSrQ1qqwxQxKFjjTgFUD7BoWYR6iVe+mtxt9Zwf9teaj4AdccPu5tedX5A/VrzUR+sy/q1CwksF19VEfDj/cnQRW+qg66cfsXtrpx+xe2unH7F7a6cfsXtrpx+xe2unH7F7a6cfsXtoxx+xe2gAAOA1//8QAFBEBAAAAAAAAAAAAAAAAAAAAMP/aAAgBAgEBPwB//8QAFBEBAAAAAAAAAAAAAAAAAAAAMP/aAAgBAwEBPwB//9k="
+                    alt="Github Star">
+            </a>
+        </small>
+    </p>
+    
+    <p>
+        <small>
+            <span id="busuanzi_container_site_pv">👁<span id="busuanzi_value_site_pv"></span></span> &nbsp;
+            <span id="busuanzi_container_page_pv">📚<span id="busuanzi_value_page_pv"></span></span>
+        </small>
+    </p>
+    
+    
+
+</footer>
+
+
+<script>
+    window.addEventListener('load', function () {
+        globalAddScript('//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js');
+    })
+</script>
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+    <script>
+        // 非本站网址，新开tab页签
+        (function () {
+            var stopBubble = function (e) {
+                e && e.stopPropagation && e.stopPropagation();
+            }
+            var links = document.querySelectorAll('a');
+            [].slice.call(links).forEach(function (item) {
+                if (item.href && item.href.indexOf(window.location.host) === -1) {
+                    item.target = '_blank'
+                }
+                // 阻止冒泡，不触发彩蛋。
+                item.addEventListener('click', stopBubble, false);
+            });
+            var article = document.querySelector('article');
+            article && article.addEventListener('click', stopBubble, false)
+        })();
+    </script>
+    
+<script>
+    (function (window, document, undefined) {
+        var hearts = [];
+        var keywords = ["点个赞", "留个言", "赞赏一下", "多做多说", "suensky.github.io"];
+        function randomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+        window.addEventListener('click', createWord)
+
+        function createWord(e) {
+            var d = document.createElement("span");
+            d.style.position = 'fixed';
+            d.style.zIndex = 9999;
+            d.style.color = 'rgb(' + [randomInt(255), randomInt(255), randomInt(255)].join(',') + ')';
+            d.innerHTML = keywords[randomInt(keywords.length)];
+            d.onselectstart = function () { return false; }
+
+            hearts.push({ el: d, x: e.clientX - 5, y: e.clientY - 5, alpha: 1, scale: 1 });
+            document.body.appendChild(d);
+        }
+        (function gameloop() {
+            for (var i = 0; i < hearts.length; i++) {
+                heart = hearts[i];
+                if (heart.alpha <= 0) {
+                    document.body.removeChild(heart.el);
+                    hearts.splice(i, 1);
+                    continue;
+                }
+                heart.y -= heart.alpha < 0.5 ? 2 : 1;
+                heart.scale += 0.002;
+                heart.alpha -= 0.013;
+                heart.el.style.transform = 'scale(' + heart.scale + ')';
+                heart.el.style.left = heart.x + 'px';
+                heart.el.style.top = heart.y + 'px';
+            }
+            setTimeout(gameloop, 10)
+        })();
+    })(window, document);
+</script>
+
+</body>
+
+</html>

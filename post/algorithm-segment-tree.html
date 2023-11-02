@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <meta name="baidu-site-verification" content="" />
+  <meta name="google-site-verification" content="" />
+  <meta name="msvalidate.01" content="" />
+  <meta name="360-site-verification" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- if page has tags, then add tags to keyword -->
+  
+  
+  <meta name="keywords" content=",programming,">
+  <!-- page.description has higher priority -->
+  <meta name="description" content="">
+  <link rel="shortcut icon" href="/img/icon.png">
+  <title>
+    
+    详解线段树之入门(Segment Tree) | 多做多说
+    
+  </title>
+
+  <link rel="canonical" href="https://suensky.github.io/post/algorithm-segment-tree.html">
+  
+<link rel="stylesheet" href="/css/geektutu.css">
+
+  <!-- global function -->
+  <script>
+    window.globalAddScript = function (url, onload, onerror) {
+      var s = document.createElement('script');
+      s.src = url;
+      onload && (s.onload = onload);
+      onerror && (s.onerror = onerror);
+      document.body.appendChild(s);
+    }
+    window.globalAddCss = function (url) {
+      var s = document.createElement('link');
+      s.rel = 'stylesheet';
+      s.href = url;
+      document.body.appendChild(s);
+    }
+    window.getPosition = function (ele) {
+      var x = 0, y = 0;
+      while (ele) {
+        x += (ele.offsetLeft - ele.scrollLeft + ele.clientLeft);
+        y += (ele.offsetTop - ele.scrollTop + ele.clientTop);
+        ele = ele.offsetParent;
+      }
+      return { x: x, y: y };
+    }
+    window.getDom = function (str) { return document.querySelector(str) }
+  </script>
+  <!-- google ad -->
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/feed.xml" title="多做多说" type="application/rss+xml">
+</head>
+
+<body>
+    
+<header class="gkt-header col-xs-12 padding-0">
+    <div id="gkt-nav" class="gkt-header-container">
+        <a href="/" class="gkt-header-title float-left">
+            <img class="float-left" src="/img/icon.png" alt="">
+            <span>多做多说</span>
+        </a>
+        <nav class="gkt-header-nav text-right">
+            <ul>
+                <li><a class="hidden-xs" href="/feed.xml">订阅</a></li>
+                <li><a href="/series/">专题</a></li>
+                <li><a href="/archives/">归档</a></li>
+                <li><a href="/post/link.html">友链</a></li>
+                <li><a href="/post/about.html">关于</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="gkt-cate-nav" class="gkt-header-container hidden-xs">
+        
+        <nav class="gkt-header-nav float-left">
+            <ul>
+                
+                
+                <li class="gkt-cate-name float-left ">
+                    <a class="float-left" href="/post/startwritting.html">诗和远方 ▾</a>
+                    
+                    <ul class="gkt-sub-cate">
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/startwritting.html">随笔</a></li>
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/poem-so-green.html">诗</a></li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li class="gkt-cate-name float-left active">
+                    <a class="float-left" href="/post/dp-1.html">算法专题 ▾</a>
+                    
+                    <ul class="gkt-sub-cate">
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/dp-1.html">算法题解</a></li>
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/clubhouse-problem1.html">趣谈算法</a></li>
+                        
+                        <li class="gkt-sub-cate-name active"><a class="float-left"
+                                href="/post/algorithm_union-find.html">算法详解</a></li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li class="gkt-cate-name float-left ">
+                    <a class="float-left" href="/post/java-collections.html">编程语言 ▾</a>
+                    
+                    <ul class="gkt-sub-cate">
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/java-collections.html">Java</a></li>
+                        
+                        <li class="gkt-sub-cate-name "><a class="float-left"
+                                href="/post/scala-intro.html">Scala</a></li>
+                        
+                    </ul>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="gkt-header-placeholder" style="height: 44px"></div>
+<div class="gkt-header-placeholder hidden-xs" style="height: 44px"></div>
+<script>
+    (function () {
+        window.addEventListener('scroll', function () {
+            if (window.innerWidth < 768) {
+                return;
+            }
+            var nav = document.querySelector('#gkt-nav');
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            scrollTop > 50 && (nav.classList.add('hide'));
+            scrollTop <= 50 && (nav.classList.remove('hide'));
+        });
+        var cateNavs = document.querySelectorAll('#gkt-cate-nav>nav>ul>li');
+        [].slice.call(cateNavs).forEach(function (item) {
+            var sub = item.querySelector('.gkt-sub-cate');
+            if (!sub) return;
+            item.addEventListener('mouseenter', function (e) { sub.style.display = 'block'; }, false);
+            item.addEventListener('mouseleave', function (e) { sub.style.display = 'none'; }, false);
+        })
+    })();
+</script>
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Main Content -->
+<main class="col-xs-12 padding-0 markdown-it">
+    <!-- Post Container -->
+    
+    
+    <!-- Post Content -->
+<div class="float-left post-container box-shadow">
+    <div class="u-arrow-wrapper hidden-xs">
+        
+        <a class="float-left" href="/post/algorithm-fenwick-tree.html"><i class="u-arrow-left"></i></a>
+        
+        
+        <a class="float-right" href="/post/algorithm-segment-tree-2.html"><i class="u-arrow-right"></i></a>
+        
+    </div>
+    <article class="col-xs-12">
+        <h1> 详解线段树之入门(Segment Tree) </h1>
+        
+        
+        <div class="hidden-lg hidden-md series_links">
+            <p> <strong> 算法详解系列文章链接：</strong></p>
+            <ul>
+                
+                <li>
+                    <a href="/post/algorithm_union-find.html">详解并查集(Union Find)</a>
+                    <span class="post-item-date">(Mar 1, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-merge-sort.html">详解归并排序之应用(Merge sort)</a>
+                    <span class="post-item-date">(Mar 2, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-fenwick-tree.html">详解二叉索引树(Binary Index Tree又名Fenwick Tree)</a>
+                    <span class="post-item-date">(Mar 3, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-segment-tree.html">详解线段树之入门(Segment Tree)</a>
+                    <span class="post-item-date">(Mar 4, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-segment-tree-2.html">详解线段树之进阶(Segment Tree)</a>
+                    <span class="post-item-date">(Mar 5, 2021)</span>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-reservoir-sampling.html">详解水塘抽样(Reservoir sampling)</a>
+                    <span class="post-item-date">(Mar 24, 2021)</span>
+                </li>
+                
+            </ul>
+        </div>
+        
+        
+        <div class="gkt-article-start"></div>
+        <h1 id="何为线段树"><a href="#何为线段树" class="headerlink" title="何为线段树"></a>何为线段树</h1><p>线段树是基于要研究的数组而构建的数据结构，呈二叉树状。线段树的叶子结点就是所要研究的数组，非叶子节点表示数组的一段区间的某个性质的值。比如此区间的和，或者最大值最小值等等。</p>
+<p>为什么需要线段树呢？试想你需要设计一个功能，给定一个数组，需要你提供两个操作，一是更改某个元素，而是索引某个区间的和，或者最大值，或者最小值，这里以和举例。最直接也是最简单做法当然是直接在数组上操作，<code>O(1)</code>更新，<code>O(N)</code>索引和，<code>N为区间长度</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumArray</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">NumArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123; <span class="comment">//TODO &#125;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Updates nums[index] = val.</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> index, <span class="keyword">int</span> val)</span> </span>&#123; <span class="comment">//TODO&#125;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Gets sum of nums[left ... right].</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123; <span class="comment">//TODO &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再进一步，如果需要更新一个区间的元素呢，比如，<code>nums[i] += val, for left &lt;= i &lt;= right</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumArray</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Add val, for nums[i] with left &lt;= i &lt;= right</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> val)</span> </span>&#123; <span class="comment">//TODO &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>继续以上方法，就是遍历区间，一一更新，与索引相同复杂度:<code>O(N)</code>。</p>
+<p>有没有能索引复杂度的方法？有，线段树就是其中一种，通过构造线段树，可以将索引复杂度降低到<code>O(logN), N为区间长度</code>，但会增加<code>update</code>复杂度到<code>O(logN),N为原数组长度</code>。而一般的应用场景，读远大于写，所以这个改进非常有益于整体性能提升。</p>
+<p>那如何构造线段树呢?可以通过数组表示，也可以通过一棵树来表示。先说数组表示法。</p>
+<h1 id="基于数组的线段树"><a href="#基于数组的线段树" class="headerlink" title="基于数组的线段树"></a>基于数组的线段树</h1><p>给定的研究数组<code>a[]</code>，长度为<code>N</code>，线段树用数组<code>tree[]</code>表示，则有：</p>
+<ul>
+<li>根节点为<code>tree[0]</code>，覆盖数组范围<code>a[0 ... N-1]</code>。</li>
+<li>根的左孩子<code>tree[1]</code>,覆盖范围是父节点前一半，即<code>a[0 ... N/2]</code>。有孩子<code>tree[2]</code>,覆盖范围父节点后一半，即<code>a[N/2 + 1 ... N-1]</code>。</li>
+<li>上面两步不断重复，即对于节点<code>tree[i], range[l ... r]</code>，令<code>mid=(l+r)/2</code>则有左孩子<code>tree[2*i+1], range[l ... mid]</code>,右孩子<code>tree[2*i+2], range[mid+1, r]</code>。</li>
+<li>如此递归构造知道叶子节点<code>tree[i], range[l ... r]</code>,此时<code>l == r</code>,则令<code>tree[i]=the desired value</code>。</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SegmentTree</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] tree;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SegmentTree</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">        <span class="keyword">int</span> len = (<span class="number">1</span> &lt;&lt; (<span class="number">1</span> + (<span class="keyword">int</span>)(Math.ceil(Math.log(n) / Math.log(<span class="number">2</span>))))) - <span class="number">1</span>;</span><br><span class="line">        tree = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> queryCore(left, right, <span class="number">0</span>, n - <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> newVal)</span> </span>&#123;</span><br><span class="line">        updateCore(left, right, <span class="number">0</span>, n - <span class="number">1</span>, <span class="number">0</span>, newVal);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">queryCore</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> segLeft, <span class="keyword">int</span> segRight, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; segRight || right &lt; segLeft) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &lt;= segLeft &amp;&amp; segRight &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">return</span> tree[index];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid = getMid(segLeft, segRight);</span><br><span class="line">        <span class="keyword">return</span> merge(queryCore(left, right, segLeft, mid, index * <span class="number">2</span> + <span class="number">1</span>),</span><br><span class="line">            queryCore(left, right, mid + <span class="number">1</span>, segRight, index * <span class="number">2</span> + <span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateCore</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right,</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="keyword">int</span> segLeft, <span class="keyword">int</span> segRight, <span class="keyword">int</span> index, <span class="keyword">int</span> newVal)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; segRight || right &lt; segLeft) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (segLeft == segRight) &#123;</span><br><span class="line">            tree[index] = newVal;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid = getMid(segLeft, segRight);</span><br><span class="line">        updateCore(left, right, segLeft, mid, index * <span class="number">2</span> + <span class="number">1</span>, newVal);</span><br><span class="line">        updateCore(left, right, mid + <span class="number">1</span>, segRight, index * <span class="number">2</span> + <span class="number">2</span>, newVal);</span><br><span class="line"></span><br><span class="line">        tree[index] = merge(tree[<span class="number">2</span> * index + <span class="number">1</span>], tree[<span class="number">2</span> * index + <span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Depending on the query, it can be sum, max, min, etc of an interval.</span></span><br><span class="line">    <span class="comment">// Here is sum of interval.</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> leftVal, <span class="keyword">int</span> rightVal)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> leftVal + rightVal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getMid</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果给定了一个数组<code>a[]</code>，则基于构造此数组的线段树调用方式为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SegmentTree tree = <span class="keyword">new</span> SegmentTree(a.length);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.lenght; ++i) &#123;</span><br><span class="line">  tree.update(i, i, a[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结合以上代码与下图可以走一遍构造过程。<br><img src="algorithm-segment-tree/tree.png" alt="segment tree"></p>
+<p>大家可能疑问了，这个<code>tree[]</code>长度为什么这么计算？很简单，可以看到所构造的线段树是一棵完全二叉树，注意不一定满。其叶子节点共有<code>N</code>个，假设最终的深度为<code>h</code>,则有<code>2^h = N</code>,所以<code>h = logN</code>。接下来就是等比求和<code>1+2+4+...+2^h = 2^(1+h) - 1</code>。因为不一定是满二叉树，所以要<code>logN</code>往上取整。这也说明，会有一些节点永远不会被用到而浪费空间。</p>
+<p>回顾下用<code>BIT</code>解决的<a target="_blank" rel="noopener" href="https://leetcode.com/problems/range-sum-query-mutable/">Leetcode 307. Range Sum Query</a>，也可以用线段树来解。代码如下，时间复杂度一致，但空间复杂度线段树更大，不多赘述。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumArray</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> SegmentTree tree;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">NumArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    tree = <span class="keyword">new</span> SegmentTree(nums.length);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; ++i) &#123;</span><br><span class="line">      tree.update(i, i, nums[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> index, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    tree.update(index, index, val);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> tree.query(left, right);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="基于二叉树的线段树"><a href="#基于二叉树的线段树" class="headerlink" title="基于二叉树的线段树"></a>基于二叉树的线段树</h1><p>前面介绍了基于数组的线段树，灵活但不直观。其实看上图就可以推测，完全可以用二叉树来构造线段树。直接上代码，可以看到，基于二叉树后，初始化线段树只需要初始化一个空节点作为根，甚至可以只记录下<code>N</code>，然后用到时再初始化<code>root</code>也行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SegmentTree</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Node root;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SegmentTree</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.root = <span class="keyword">new</span> Node(<span class="number">0</span>, <span class="number">0</span>, N - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> queryCore(left, right, root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> newVal)</span> </span>&#123;</span><br><span class="line">        updateCore(left, right, root, newVal);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">queryCore</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, Node cur)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; cur.high || right &lt; cur.low) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &lt;= cur.low &amp;&amp; cur.high &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">return</span> cur.val;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> merge(queryCore(left, right, cur.left),</span><br><span class="line">            queryCore(left, right, cur.right));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateCore</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, Node cur, <span class="keyword">int</span> newVal)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; cur.high || right &lt; cur.low) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cur.low == cur.high) &#123;</span><br><span class="line">            cur.val = newVal;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid = getMid(cur.low, cur.high);</span><br><span class="line">        <span class="keyword">if</span> (cur.left == <span class="keyword">null</span>) &#123;</span><br><span class="line">            cur.left = <span class="keyword">new</span> Node(<span class="number">0</span>, cur.low, mid);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (cur.right == <span class="keyword">null</span>) &#123;</span><br><span class="line">            cur.right = <span class="keyword">new</span> Node(<span class="number">0</span>, mid + <span class="number">1</span>, cur.high);</span><br><span class="line">        &#125;</span><br><span class="line">        updateCore(left, right, cur.left, newVal);</span><br><span class="line">        updateCore(left, right, cur.right, newVal);</span><br><span class="line"></span><br><span class="line">        cur.val = merge(cur.left.val, cur.right.val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Depending on the query, it can be sum, max, min, etc of an interval.</span></span><br><span class="line">    <span class="comment">// Here is sum of interval.</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> leftVal, <span class="keyword">int</span> rightVal)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> leftVal + rightVal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getMid</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">        <span class="comment">// The value for range [low ... high].</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> val;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> low;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> high;</span><br><span class="line">        <span class="keyword">public</span> Node left = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">public</span> Node right = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> val, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.val = val;</span><br><span class="line">            <span class="keyword">this</span>.low = low;</span><br><span class="line">            <span class="keyword">this</span>.high = high;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="线段树的应用"><a href="#线段树的应用" class="headerlink" title="线段树的应用"></a>线段树的应用</h1><p>上面举例，线段树都是用于求和，也可用于其他，比如数组区间的最大值，最小值，等等。所需要的修改非常简单，只需要更改<code>merge</code>方法。比如改为针对最大值的线段树，则只需作如下修改：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> leftVal, <span class="keyword">int</span> rightVal)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Math.max(leftVal, rightVal);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其他一概不动，当然是有前提的，基于索引数组区间的性质，可能需要改动线段树初始化值。比如在求和时，我们把未初始化的节点(或者叫<code>null</code>节点)值默认为<code>0</code>，这是合理的，因为加<code>merge</code>的参数中如果有<code>null</code>节点，则加<code>0</code>对结果没有影响。</p>
+<p>如果是求最大值，则初始化时，为了让<code>merge null</code>节点对最终结果没影响，应该很容易想到，<code>null</code>节点默认值应该为<code>MIN</code>,如此<code>max(val, MIN)</code>肯定返回<code>val</code>。</p>
+<p>线段树虽然比BIT费空间，但比BIT灵活。记住，多做的功不会白费，总会在某个地方回馈。一碗线段树鸡汤送给你。</p>
+
+        
+<script src="/js/qrious.min.js"></script>
+
+
+        <hr style="margin-top: 2rem;">
+        <div>
+            
+            <p>
+                <span>专题: </span>
+                
+                <a href="/series/#算法详解">
+                    <code key="算法详解" class="post-label">算法详解</code>
+                </a>
+                
+            </p>
+            
+            <p>
+                <span>本文发表于 2021-03-04，最后修改于 2023-11-01。</span>
+            </p>
+            <!-- 文章末尾的提示 start -->
+            
+            
+                
+            <!-- 文章末尾的提示 end -->
+        </div>
+        <hr />
+        <p name="pagination" style="font-size: 1.2em">
+    
+    <a class="float-left" href="/post/algorithm-fenwick-tree.html">上一篇 « 详解二叉索引树(Binary Index Tree又名Fenwick Tree)</a>
+    
+    
+    <a class="float-right" href="/post/algorithm-segment-tree-2.html">下一篇 » 详解线段树之进阶(Segment Tree)</a>
+    
+</p>
+    </article>
+    <!-- 赞赏 -->
+    <!--打赏-->
+
+    
+    <!-- 推荐阅读三篇文章 -->
+    <div class="col-xs-12">
+        <h3>推荐阅读</h3>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#programming"
+                    title="programming">programming</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/algorithm-merge-sort.html" class="title">
+                详解归并排序之应用(Merge sort)
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-03-02，</span>
+                    <span class="hidden-xs">全文8508字，</span>
+                    <span>阅读约29分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#programming"
+                    title="programming">programming</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/algorithm_union-find.html" class="title">
+                详解并查集(Union Find)
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-03-01，</span>
+                    <span class="hidden-xs">全文7803字，</span>
+                    <span>阅读约27分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+        <div class="post-preview">
+    <div class="post-img" style="background-image: url('/')"></div>
+    <div class="post-info">
+        <div class="post-info-center">
+            <div class="hidden-xs">
+                
+                
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#随笔"
+                    title="随笔">随笔</a>
+                <span>/</span>
+                
+                
+            </div>
+            <a href="/post/startwritting.html" class="title">
+                开始写
+            </a>
+            <p class="text-gray">
+                <small>
+                    <span>发表于2021-02-02，</span>
+                    <span class="hidden-xs">全文971字，</span>
+                    <span>阅读约4分钟</span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+        
+    </div>
+    <div class="col-xs-12">
+        <!-- 标签列表 -->
+        <!-- Featured Tags -->
+<style>
+    #featured-tag .post-tag-item {
+        font-size: 12px;
+        line-height: 30px;
+        display: inline-block;
+        height: 30px;
+        margin: 5px 0px;
+        padding: 0 7px;
+        color: #333;
+        border-radius: 15px;
+        background: #f6f6f6;
+    }
+
+    #featured-tag .post-tag-item:hover {
+        color: #337ab7;
+    }
+</style>
+<div id="featured-tag">
+    
+    <a class="post-tag-item" href="/tags/#关于我" title="关于我"
+        rel="1">#关于我 (1) </a>
+    
+    <a class="post-tag-item" href="/tags/#programming" title="programming"
+        rel="12">#programming (12) </a>
+    
+    <a class="post-tag-item" href="/tags/#随笔" title="随笔"
+        rel="9">#随笔 (9) </a>
+    
+    <a class="post-tag-item" href="/tags/#DP" title="DP"
+        rel="1">#DP (1) </a>
+    
+</div>
+    </div>
+    <!-- 评论 -->
+    
+    <div class="col-xs-12">
+        
+<div class="col-xs-12 padding-0">
+    <div id="gitalk-container">
+        <div class="gt-container text-center" style="margin-top: 50px;">
+            <button class="gt-btn gt-btn-public"><span class="gt-btn-text">去 Github 评论</span></button>
+        </div>
+    </div>
+    <div id="gitalk-related"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css">
+
+
+<script src="/js/gitalk.min.js"></script>
+
+<script>
+    window.addEventListener('load', function () {
+        function renderCommentUrl(data) {
+            var url = (data[window.location.pathname] || {}).url
+            url && getDom('#gitalk-container button').addEventListener('click', function (e) { window.open(url)})
+            url || (getDom('#gitalk-container').style.display = 'none')
+        }
+        const gitalk = new Gitalk({
+            clientID: '195277d49379cfe2af1e',
+            clientSecret: '45c2721d438a94be2a42a513626f13e50df60cdd',
+            accessToken: '',
+            repo: 'suensky.github.io',
+            owner: 'suensky',
+            admin: ['suensky'],
+            id: window.location.pathname,
+            distractionFreeMode: false
+        });
+        fetch("https://api.github.com/user").then(function(resp){
+            gitalk.render('gitalk-container');
+        }).catch(function(e){
+            fetch('/tool/issues.json').then(function (r) { return r.json() }).then(renderCommentUrl).catch(function (e) { })
+        })
+        getDom('#gitalk-container').addEventListener('click', function (e) {
+            e && e.stopPropagation && e.stopPropagation();
+        });
+    })
+</script>
+<script>
+    window.addEventListener('load', function () {
+        function render(comments) {
+            var template = '<a href="${comment.url}?utm_source=gitalk" class="dis-item-url"><h3 class="dis-item-title">${comment.title}</h3>' +
+                '<p class="dis-item-des">${comment.count} 评论 ● ${comment.date}</p>' +
+                '<div class="dis-item-content"><img class="dis-item-img" src="${comment.icon}" alt="icon"><p><b><span class="dis-item-user">${comment.user}</span></b>&nbsp;——&nbsp;${comment.body}</p></div>' +
+                '</a>'
+
+            var wrapper = getDom('#gitalk-related');
+            comments = shuffle(comments);
+            comments.slice(0, 4).forEach(function (c) {
+                var div = document.createElement('div');
+                div.classList.add('dis-item');
+                div.innerHTML = template.replace("${comment.url}", c.url)
+                    .replace("${comment.title}", c.title)
+                    .replace("${comment.count}", c.count)
+                    .replace("${comment.date}", c.date)
+                    .replace("${comment.icon}", c.icon)
+                    .replace("${comment.user}", c.user)
+                    .replace("${comment.body}", c.body)
+                wrapper.appendChild(div)
+            })
+            var p = document.createElement('p')
+            p.innerHTML = '<a target="_blank" rel="noopener" href="https://geektutu.com/post/blog-experience-7.html">Gitalk Plus</a>';
+            p.classList.add('dis-divide');
+            wrapper.appendChild(p);
+            wrapper.classList.add('dis-wrapper')
+        }
+        function shuffle(a) {
+            for (var i = a.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+        fetch('/tool/comments.json').then(function (r) { return r.json() }).then(render).catch(function (e) { })
+    })
+</script>
+
+    </div>
+    
+</div>
+<aside class="float-left gkt-sidebar hidden-xs hidden-sm">
+    <div style="clear: both"></div>
+    <div class="gkt-sidebar-wrapper">
+        <section class="box-shadow"><style>
+    .gkt-summary {
+        border: 1px solid #DDDDDD;
+        border-radius: 3px;
+        padding: 5px;
+        width: 100%;
+    }
+
+
+    .gkt-summary nav {
+        overflow: hidden;
+    }
+
+    .gkt-summary nav a {
+        display: inline-block;
+        text-align: center;
+        color: #333;
+        font-size: 12px;
+    }
+
+    .gkt-summary nav span {
+        display: block;
+    }
+
+    .gkt-summary nav .middle {
+        border-left: 1px solid #eaecef;
+        border-right: 1px solid #eaecef;
+    }
+
+    .gkt-summary .number {
+        font-weight: bold;
+    }
+
+    .gkt-summary .link-list {
+        margin-top: 5px;
+        margin-bottom: -5px;
+        padding-top: 7px;
+        border-top: 1px dashed #999;
+        display: flex;
+    }
+
+    .gkt-summary .link-list a {
+        flex: 1;
+    }
+
+    .gkt-summary .link-list img {
+        width: 25px;
+        height: 25px;
+    }
+</style>
+
+<div class="gkt-summary">
+    <nav>
+        <a href="/" class="col-xs-4">
+            <span class="number">23</span><span>文章</span>
+        </a>
+        <a href="/series" class="col-xs-4 middle">
+            <span class="number">7</span><span>专题</span>
+        </a>
+        <a href="/tags" class="col-xs-4">
+            <span class="number">4</span><span>标签</span>
+        </a>
+    </nav>
+
+    
+</div></section>
+        
+        
+        <section class="gkt-sidebar-content box-shadow">
+            <strong>算法详解</strong>
+            <ul>
+                
+                <li>
+                    <a href="/post/algorithm_union-find.html"
+                        class="">详解并查集(Union Find)</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-merge-sort.html"
+                        class="">详解归并排序之应用(Merge sort)</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-fenwick-tree.html"
+                        class="">详解二叉索引树(Binary Index Tree又名Fenwick Tree)</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-segment-tree.html"
+                        class="gkt-sidebar-active">详解线段树之入门(Segment Tree)</a>
+                    
+                    <!-- Table of Contents -->
+<div id="sidebar-toc">
+  <!-- TOC  -->
+  
+  
+  <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%BD%95%E4%B8%BA%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="toc-nav-text">何为线段树</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%95%B0%E7%BB%84%E7%9A%84%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="toc-nav-text">基于数组的线段树</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E5%9F%BA%E4%BA%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="toc-nav-text">基于二叉树的线段树</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-nav-text">线段树的应用</span></a></li></ol>
+  
+</div>
+
+<script>
+  (function () {
+    var h2 = document.querySelectorAll('article h2');
+    var h3 = document.querySelectorAll('article h3');
+    var linkList = document.querySelectorAll('#sidebar-toc a');
+
+    function findLinkElement(name) {
+      for (var i = 0; i < linkList.length; i++) {
+        var items = linkList[i].href.split('#');
+        if (items && items[items.length - 1] === encodeURIComponent(name)) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function activeLink(titleList) {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      for (var i = titleList.length - 1; i >= 0; i--) {
+        if (scrollTop - titleList[i].offsetTop > 0) {
+          var index = findLinkElement(titleList[i].id);
+          index != -1 && linkList[index].classList.add('gkt-sidebar-active');
+          break;
+        }
+      }
+    }
+
+    window.addEventListener("scroll", function (e) {
+      [].slice.call(linkList).forEach(function (link) {
+        link.classList.remove('gkt-sidebar-active');
+      })
+      activeLink(h2);
+    })
+  })();
+</script>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-segment-tree-2.html"
+                        class="">详解线段树之进阶(Segment Tree)</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-reservoir-sampling.html"
+                        class="">详解水塘抽样(Reservoir sampling)</a>
+                    
+                </li>
+                
+            </ul>
+        </section>
+        
+        
+        <section class="gkt-sidebar-content box-shadow">
+            <strong>最近的文章</strong>
+            <ul>
+                
+                <li>
+                    <a href="/post/goodbye-google.html">夏日绝句</a>
+                </li>
+                
+                <li>
+                    <a href="/post/scala-intro.html">Recap of Scala tutorial</a>
+                </li>
+                
+                <li>
+                    <a href="/post/algorithm-reservoir-sampling.html">详解水塘抽样(Reservoir sampling)</a>
+                </li>
+                
+            </ul>
+        </section>
+        
+    </div>
+</aside>
+
+<script>
+    (function () {
+        function resizeUArrow() {
+            var s = getDom('.u-arrow-wrapper').style
+            var pc = getDom('.post-container')
+            s.left = getPosition(pc).x + 'px';
+            s.width = pc.clientWidth + 'px';
+        }
+        resizeUArrow()
+        window.addEventListener('resize', resizeUArrow);
+    })();
+</script>
+
+    
+
+<script>
+    (function () {
+        var ele = getDom('.gkt-sidebar-content')
+        if(!ele) return;
+        var wrapper = getDom('.gkt-sidebar-wrapper')
+        var last = 0
+        ele.style.maxHeight = ((window.innerHeight || 798) - 200) + 'px'
+        var f = function (e) {
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var isDown = scrollTop > last;
+            var pos = getPosition(ele).y - scrollTop;
+            var downLimit = 50;
+            var upLimit = -100;
+            // uarrow.style.marginTop = scrollTop + 'px';
+            isDown && pos <= downLimit && wrapper.classList.add("gkt-sidebar-fixed");
+            !isDown && pos > upLimit && wrapper.classList.remove("gkt-sidebar-fixed");
+            last = scrollTop
+        }
+        f()
+        window.addEventListener("scroll", f)
+    })();
+</script>
+
+</main>
+    </div>
+    <style>
+    img#go-top {
+        position: fixed;
+        bottom: 100px;
+        width: 50px;
+        cursor: pointer;
+        z-index: 9999;
+    }
+</style>
+<img id="go-top" src="/icon/top.png" class="hidden-xs" style="display: none" />
+<script>
+    (function () {
+        var goTop = document.getElementById('go-top');
+        var mainContainer = document.querySelector('.main-container');
+        
+        goTop.addEventListener('click', function () {
+            window.scroll(0, 0);
+        }, false);
+        window.addEventListener('scroll', function () {
+            var right = document.body.offsetWidth - mainContainer.getBoundingClientRect().right;
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            goTop.style.right = right + 10 + 'px'
+            scrollTop > 700 && (goTop.style.display = "block");
+            scrollTop <= 700 && (goTop.style.display = "none");
+        });
+    })();
+</script>
+    <style>
+    #geektutu-click-img-container {
+        position: fixed;
+        left: 0;
+        top: 0;
+        text-align: center;
+        width: 100%;
+        display: none;
+        z-index: 9999;
+    }
+
+    #geektutu-click-img-container img {
+        object-fit: contain;
+        background: #eaecef;
+        padding: 15px;
+        border-radius: 10px;
+        height: auto;
+        width: auto;
+        vertical-align: middle;
+    }
+</style>
+
+
+<div id="geektutu-click-img-container">
+    <img src="" alt="Big Image">
+</div>
+
+<script>
+    (function () {
+        var container = document.querySelector('#geektutu-click-img-container')
+        var targetImg = container.querySelector('img')
+        var imgs = document.querySelectorAll('article img');
+        targetImg.addEventListener('click', function (e) {
+            container.style.display = 'none';
+            e && e.stopPropagation && e.stopPropagation();
+        }, false);
+
+        for (var i = 0; i < imgs.length; ++i) {
+            var img = imgs[i];
+            img.addEventListener('click', (function (src, rate) {
+                return function (e) {
+                    e && e.stopPropagation && e.stopPropagation();
+                    if (window.innerWidth < 980) {
+                        return
+                    }
+                    targetImg.style.height = targetImg.style.width = 'auto';
+                    if (window.innerWidth / window.innerHeight > rate) {
+                        targetImg.style.height = (window.innerHeight - 20) + 'px';
+                    } else {
+                        targetImg.style.width = (window.innerWidth - 20) + 'px';
+                    }
+                    container.style.height = window.innerHeight + 'px'
+                    container.style.lineHeight = window.innerHeight + 'px'
+                    container.style.display = 'block';
+                    targetImg.src = src;
+                };
+            }(img.src, img.width / img.height)), false)
+        }
+    })();
+</script>
+    <!-- Footer -->
+    <!-- Footer -->
+<style>
+    footer {
+        width: 100%;
+        line-height: 1.5;
+        padding: 20px;
+    }
+
+    footer a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .footer-hexo img {
+        height: 20px;
+        margin-bottom: -5px;
+    }
+
+    .footer-hexo a {
+        color: #337ab7;
+    }
+</style>
+<footer class="text-center col-xs-12">
+    <p>
+        <small>© 2023 - sky - </small>
+        <small>
+            <a target="_blank" rel="nofollow noopener" href="http://beian.miit.gov.cn/"></a>
+        </small>
+    </p>
+    <p class="footer-hexo">
+        <!-- 但若直接使用或修改主题，请务必保留这段声明 -->
+        <small>Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme
+            <a target="_blank" href="https://geektutu.com">Geektutu</a>
+            <a target="_blank" rel="noopener" href="https://github.com/geektutu/hexo-theme-geektutu">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAYGBgYHBgcICAcKCwoLCg8ODAwODxYQERAREBYiFRkVFRkVIh4kHhweJB42KiYmKjY+NDI0PkxERExfWl98fKcBBgYGBgcGBwgIBwoLCgsKDw4MDA4PFhAREBEQFiIVGRUVGRUiHiQeHB4kHjYqJiYqNj40MjQ+TERETF9aX3x8p//CABEIACIAUAMBIgACEQEDEQH/xAAcAAABBAMBAAAAAAAAAAAAAAAAAQQFBwIDBgj/2gAIAQEAAAAA9KrHSgAYL5/z6zZGuJd12uugbhq3uKtmuRtix20IS7lTLAfAAAn/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oACAECEAAAAAAB/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/aAAgBAxAAAAAAAf/EADEQAAICAQIEBQEGBwAAAAAAAAECAwQFAAYREhORBxQhUlQxQVFic5KxJDJCYYGC0f/aAAgBAQABPwCFHnjWUzuvN6hV4cANSRLGjO9yRVUcSzMoA7jVXJYe5N0a2dhmk9kc0bN2GvLN8mbuNeWb5M3ca8s3yZu415Y/Jm7jXlm+TN3H/NeVPyZu40vOk3TZywK8wJ+v3EHVM/wsI/Dq2lrxN3Nnca16eti8chSAIoMbzByhMwP14kHVfwIiSaF5c96J6kwwCOTnHsYk8uvCrdmQy1TI4rJuz3cZLyGR/wCd4+YoOf8AEpUjXitubLYPG4paFsUxcuiGe7yc5gTW3LW44szXmobsi3Dhmic2+Z4+vCVH9CpraPiQ+QvbgTJrPFBWd5YpWrmNIIEXiRO32Pqt4p7cnfHk18lFBdmEVW1LVdIZGOrniTt6plrWKaO69yCykDRxwF+LMAewB0Txtr+Sf31VI8tEPw62fZt7N3Humtbpzz13ucX6CGSWMSuzpLyD1eNgeUka3PuvHbaxq3biTMHfkiSNCS78CwU+3Xg7Vu3MhuTcU6cq3Zemn3Eh2dv8Lzcut+29x1atKbHYqLJUhLwyNMwiZ3j9yDWOxUOV3tgb+3No5LDx1pi9+aeIwRlNY6bc+Jv+IFGrhLxtXJZ7VKcw81diiAAEn0JOrkWZyNfbEr0tz27UGQgkuGzXdIIvyowq99bRxk9ffO/L81SZBPZgEEroQroIxxMZOgeNsfkn99QypHGqO4Vl9CDrN4LDZkwyzyyQ2IgRHZrzGCZVP1XnQglT9oOtw4LC7iqV6uRkZoYpxKFSQpzFRw4EjVRMfSrQ1qqwxQxKFjjTgFUD7BoWYR6iVe+mtxt9Zwf9teaj4AdccPu5tedX5A/VrzUR+sy/q1CwksF19VEfDj/cnQRW+qg66cfsXtrpx+xe2unH7F7a6cfsXtrpx+xe2unH7F7a6cfsXtoxx+xe2gAAOA1//8QAFBEBAAAAAAAAAAAAAAAAAAAAMP/aAAgBAgEBPwB//8QAFBEBAAAAAAAAAAAAAAAAAAAAMP/aAAgBAwEBPwB//9k="
+                    alt="Github Star">
+            </a>
+        </small>
+    </p>
+    
+    <p>
+        <small>
+            <span id="busuanzi_container_site_pv">👁<span id="busuanzi_value_site_pv"></span></span> &nbsp;
+            <span id="busuanzi_container_page_pv">📚<span id="busuanzi_value_page_pv"></span></span>
+        </small>
+    </p>
+    
+    
+
+</footer>
+
+
+<script>
+    window.addEventListener('load', function () {
+        globalAddScript('//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js');
+    })
+</script>
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+    <script>
+        // 非本站网址，新开tab页签
+        (function () {
+            var stopBubble = function (e) {
+                e && e.stopPropagation && e.stopPropagation();
+            }
+            var links = document.querySelectorAll('a');
+            [].slice.call(links).forEach(function (item) {
+                if (item.href && item.href.indexOf(window.location.host) === -1) {
+                    item.target = '_blank'
+                }
+                // 阻止冒泡，不触发彩蛋。
+                item.addEventListener('click', stopBubble, false);
+            });
+            var article = document.querySelector('article');
+            article && article.addEventListener('click', stopBubble, false)
+        })();
+    </script>
+    
+<script>
+    (function (window, document, undefined) {
+        var hearts = [];
+        var keywords = ["点个赞", "留个言", "赞赏一下", "多做多说", "suensky.github.io"];
+        function randomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+        window.addEventListener('click', createWord)
+
+        function createWord(e) {
+            var d = document.createElement("span");
+            d.style.position = 'fixed';
+            d.style.zIndex = 9999;
+            d.style.color = 'rgb(' + [randomInt(255), randomInt(255), randomInt(255)].join(',') + ')';
+            d.innerHTML = keywords[randomInt(keywords.length)];
+            d.onselectstart = function () { return false; }
+
+            hearts.push({ el: d, x: e.clientX - 5, y: e.clientY - 5, alpha: 1, scale: 1 });
+            document.body.appendChild(d);
+        }
+        (function gameloop() {
+            for (var i = 0; i < hearts.length; i++) {
+                heart = hearts[i];
+                if (heart.alpha <= 0) {
+                    document.body.removeChild(heart.el);
+                    hearts.splice(i, 1);
+                    continue;
+                }
+                heart.y -= heart.alpha < 0.5 ? 2 : 1;
+                heart.scale += 0.002;
+                heart.alpha -= 0.013;
+                heart.el.style.transform = 'scale(' + heart.scale + ')';
+                heart.el.style.left = heart.x + 'px';
+                heart.el.style.top = heart.y + 'px';
+            }
+            setTimeout(gameloop, 10)
+        })();
+    })(window, document);
+</script>
+
+</body>
+
+</html>
