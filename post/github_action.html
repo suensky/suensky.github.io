@@ -196,6 +196,15 @@
         
         <div class="gkt-article-start"></div>
         <p>了解github action后，第一步想到的是改造下这个博客。利用github action的工作流，做到直接在github上编辑markdown，保存后，触发一个设定的workflow，做到编译，部署编译好的静态网站到GitHub pages。</p>
+<p>这里面关键是，如何部署编译好的静态网站到Github Pages。我用的是hexo这个静态网站生成器，代码是在一个独立repo，与要部署的目标repo不同。在GitHub的runner也就是服务器上，如何设置github credentials，从而能从那里部署是关键。<br>几番搜索发现了有个现成的github action: <a target="_blank" rel="noopener" href="https://github.com/marketplace/actions/hexo-action">hexo-action</a>。简单总结下:</p>
+<ol>
+<li>Generate a deploy key pair.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;username@example.com&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>Public key is saved in github page repo’s Settings/Deploy Keys.</li>
+<li>Private key is saved as a secret in source repo’s Settings/Secrets, e.g., named <code>DEPLOY_KEY</code>.</li>
+<li>Add the github workflow:<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Blog</span> <span class="string">CICD</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;main&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">submodules:</span> <span class="literal">true</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Use</span> <span class="string">Node.js</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&#x27;20.x&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">dependencies</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">hexo</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">id:</span> <span class="string">deploy</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">sma11black/hexo-action@v1.0.3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">deploy_key:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DEPLOY_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">user_name:</span> <span class="string">github_action</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
 <p>这是第一篇自动部署的文章。Let’s see if it works.</p>
 
         
@@ -248,20 +257,24 @@
                 
                 <span>/</span>
                 
-                <a class="text-gray" href="/tags/#programming"
-                    title="programming">programming</a>
+                <a class="text-gray" href="/tags/#devops"
+                    title="devops">devops</a>
+                <span>/</span>
+                
+                <a class="text-gray" href="/tags/#tech"
+                    title="tech">tech</a>
                 <span>/</span>
                 
                 
             </div>
-            <a href="/post/clubhouse-problem3.html" class="title">
-                Clubhouse需要你解决的问题之三
+            <a href="/post/github_action.html" class="title">
+                折腾github action的一天
             </a>
             <p class="text-gray">
                 <small>
-                    <span>发表于2021-02-06，</span>
-                    <span class="hidden-xs">全文730字，</span>
-                    <span>阅读约3分钟</span>
+                    <span>发表于2023-12-12，</span>
+                    <span class="hidden-xs">全文1330字，</span>
+                    <span>阅读约5分钟</span>
                 </small>
             </p>
         </div>
@@ -283,14 +296,14 @@
                 
                 
             </div>
-            <a href="/post/clubhouse-problem1.html" class="title">
-                Clubhouse需要你解决的算法题之一
+            <a href="/post/algorithm-reservoir-sampling.html" class="title">
+                详解水塘抽样(Reservoir sampling)
             </a>
             <p class="text-gray">
                 <small>
-                    <span>发表于2021-02-05，</span>
-                    <span class="hidden-xs">全文680字，</span>
-                    <span>阅读约3分钟</span>
+                    <span>发表于2021-03-24，</span>
+                    <span class="hidden-xs">全文3817字，</span>
+                    <span>阅读约13分钟</span>
                 </small>
             </p>
         </div>
@@ -306,20 +319,20 @@
                 
                 <span>/</span>
                 
-                <a class="text-gray" href="/tags/#随笔"
-                    title="随笔">随笔</a>
+                <a class="text-gray" href="/tags/#programming"
+                    title="programming">programming</a>
                 <span>/</span>
                 
                 
             </div>
-            <a href="/post/poems.html" class="title">
-                无聊的词句有人叫诗
+            <a href="/post/algorithm-segment-tree.html" class="title">
+                详解线段树之入门(Segment Tree)
             </a>
             <p class="text-gray">
                 <small>
-                    <span>发表于2021-02-03，</span>
-                    <span class="hidden-xs">全文580字，</span>
-                    <span>阅读约2分钟</span>
+                    <span>发表于2021-03-04，</span>
+                    <span class="hidden-xs">全文6778字，</span>
+                    <span>阅读约23分钟</span>
                 </small>
             </p>
         </div>
