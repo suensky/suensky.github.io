@@ -15,14 +15,14 @@
     <atom:link href="https://suensky.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 12 Dec 2023 23:52:03 GMT</pubDate>
+    <pubDate>Thu, 14 Dec 2023 05:31:09 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>折腾github action的一天</title>
       <link>https://suensky.github.io/post/github_action.html</link>
       <guid>https://suensky.github.io/post/github_action.html</guid>
-      <pubDate>Tue, 12 Dec 2023 23:52:03 GMT</pubDate>
+      <pubDate>Thu, 14 Dec 2023 05:31:09 GMT</pubDate>
       
         
         
@@ -31,14 +31,14 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/DevOps/">DevOps</category>
       
       
       <category domain="https://suensky.github.io/tags/devops/">devops</category>
-      
-      <category domain="https://suensky.github.io/tags/tech/">tech</category>
       
       
       <comments>https://suensky.github.io/post/github_action.html#disqus_thread</comments>
@@ -60,6 +60,8 @@
 &lt;p&gt;这几年随着小红书转码热门话题，十</description>
         
       
+      
+      <enclosure url="https://suensky.github.io/img/essay.png" type="image"/>
       
       
       
@@ -89,6 +91,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/poem.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E8%AF%97/">诗</category>
@@ -117,6 +121,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/poem.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E8%AF%97/">诗</category>
@@ -141,6 +147,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/Scala/">Scala</category>
@@ -164,6 +172,8 @@
       <description>&lt;h2 id=&quot;一个场景&quot;&gt;&lt;a href=&quot;#一个场景&quot; class=&quot;headerlink&quot; title=&quot;一个场景&quot;&gt;&lt;/a&gt;一个场景&lt;/h2&gt;&lt;p&gt;当内存无法加载全部数据时，如何从包含未知大小的数据流中随机选取&lt;code&gt;k&lt;/code&gt;个数据，并且要保证每个数据被抽取到</description>
         
       
+      
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
       
       
       
@@ -194,6 +204,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/Java/">Java</category>
@@ -218,6 +230,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/">算法详解</category>
@@ -241,6 +255,8 @@
       <description>&lt;h1 id=&quot;何为线段树&quot;&gt;&lt;a href=&quot;#何为线段树&quot; class=&quot;headerlink&quot; title=&quot;何为线段树&quot;&gt;&lt;/a&gt;何为线段树&lt;/h1&gt;&lt;p&gt;线段树是基于要研究的数组而构建的数据结构，呈二叉树状。线段树的叶子结点就是所要研究的数组，非叶子节点表示数组的一段区</description>
         
       
+      
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
       
       
       
@@ -267,6 +283,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/">算法详解</category>
@@ -291,6 +309,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/">算法详解</category>
@@ -314,6 +334,8 @@
       <description>&lt;h1 id=&quot;What’s-Union-Find&quot;&gt;&lt;a href=&quot;#What’s-Union-Find&quot; class=&quot;headerlink&quot; title=&quot;What’s Union Find?&quot;&gt;&lt;/a&gt;What’s Union Find?&lt;/h1&gt;&lt;p&gt;Union Fi</description>
         
       
+      
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
       
       
       
@@ -342,6 +364,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/poem.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E8%AF%97/">诗</category>
@@ -368,6 +392,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E8%B6%A3%E8%B0%88%E7%AE%97%E6%B3%95/">趣谈算法</category>
@@ -392,6 +418,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E8%B6%A3%E8%B0%88%E7%AE%97%E6%B3%95/">趣谈算法</category>
@@ -415,6 +443,8 @@
       <description>&lt;p&gt;Clubhouse大火，平台迅速聚集了大量用户，每个用户都有自己的profile，profile里除了自己的id，还会标注推荐人。现在产品经理提出一个要求，希望能研究任意两个用户的最近的共同好友在哪。程序员也不知道pm为什么要提这么个要求，但这个功能不算费事，所以程序员决定</description>
         
       
+      
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
       
       
       
@@ -441,6 +471,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
+      
       
       
       
@@ -462,6 +494,8 @@
       <description>&lt;h1 id=&quot;01背包问题（01-backpack-problem）&quot;&gt;&lt;a href=&quot;#01背包问题（01-backpack-problem）&quot; class=&quot;headerlink&quot; title=&quot;01背包问题（01 backpack problem）&quot;&gt;&lt;/a&gt;01背包问</description>
         
       
+      
+      <enclosure url="https://suensky.github.io/img/tech.png" type="image"/>
       
       
       
@@ -490,6 +524,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/poem.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E8%AF%97/">诗</category>
@@ -517,6 +553,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/poem.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E8%AF%97/">诗</category>
@@ -540,6 +578,8 @@
       <description>&lt;h2 id=&quot;信雅达&quot;&gt;&lt;a href=&quot;#信雅达&quot; class=&quot;headerlink&quot; title=&quot;信雅达&quot;&gt;&lt;/a&gt;信雅达&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;不爱红装爱武装”一般翻译成&lt;/strong&gt;：to be battle-dressed and not rosy-g</description>
         
       
+      
+      <enclosure url="https://suensky.github.io/img/essay.png" type="image"/>
       
       
       
@@ -565,6 +605,8 @@
         
       
       
+      <enclosure url="https://suensky.github.io/img/essay.png" type="image"/>
+      
       
       
       <category domain="https://suensky.github.io/categories/%E9%9A%8F%E7%AC%94/">随笔</category>
@@ -589,6 +631,8 @@
 &lt;h3 id=&quot;时维九月-序属三秋。乘高铁自金陵入京，转三万尺鹏鸟，穿万里长云，赴未眠西雅图。及雨拍弦窗，知身已入他乡。&quot;&gt;&lt;a href=&quot;#时维九月-序属三秋。乘高铁自金陵入京，转三万尺鹏鸟，穿万里长云，赴未眠西雅图。及雨拍弦窗，知身已入他乡。&quot;</description>
         
       
+      
+      <enclosure url="https://suensky.github.io/img/essay.png" type="image"/>
       
       
       
@@ -653,6 +697,8 @@
       <description>&lt;p&gt;开这个博客是因为沈向洋博士的一篇号召大家通过写作来淬炼思考广度与深度的文章。很多人可能有这样的经历，读了一本深受启发的书，看了一篇引起共鸣的文章，可身边却没有人分享。自己脑海中有很多的想法，很多的见解，却没有合适的场合去展现。在这个自媒体盛行的时代，写作或许就是一个让那些喜</description>
         
       
+      
+      <enclosure url="https://suensky.github.io/img/essay.png" type="image"/>
       
       
       
