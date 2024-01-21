@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DP on 多做多说</title>
+    <link>dzds.me/tags/dp/</link>
+    <description>Recent content in DP on 多做多说</description>
+    <image>
+      <title>多做多说</title>
+      <url>dzds.me/content/img/icon.png</url>
+      <link>dzds.me/content/img/icon.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 04 Feb 2021 12:13:57 +0000</lastBuildDate>
+    <atom:link href="dzds.me/tags/dp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>动态规划系列(1)</title>
+      <link>dzds.me/posts/dp-1/</link>
+      <pubDate>Thu, 04 Feb 2021 12:13:57 +0000</pubDate>
+      <guid>dzds.me/posts/dp-1/</guid>
+      <description>01背包问题（01 backpack problem） Problem Given N items and a bag of weight capacity W. Each item has weight w[i] and value v[i]. What&amp;rsquo;s the most value this bag can hold?
+E.g., N = 5, W = 10. w = [1 2 3 4 5], v = [5 4 3 2 1] Output: 14. Explanation: Choose item 1 2 3 4 whose total weight is 10 and total value is 14. Solution dp[i][j] := the most value to get if taken from item [1:i] and weight &amp;lt;= j.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>算法详解 | 多做多说</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="Me">
+<link rel="canonical" href="dzds.me/categories/%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/">
+<link crossorigin="anonymous" href="/dzds.me/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="dzds.me/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="dzds.me/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="dzds.me/favicon-32x32.png">
+<link rel="apple-touch-icon" href="dzds.me/apple-touch-icon.png">
+<link rel="mask-icon" href="dzds.me/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="dzds.me/categories/%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/index.xml">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="算法详解" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="dzds.me/categories/%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" /><meta property="og:image" content="dzds.me/content/img/icon.png"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="dzds.me/content/img/icon.png"/>
+
+<meta name="twitter:title" content="算法详解"/>
+<meta name="twitter:description" content=""/>
+
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="dzds.me" accesskey="h" title="多做多说 (Alt + H)">多做多说</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="dzds.me/dzds.me/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="dzds.me/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="dzds.me">Home</a>&nbsp;»&nbsp;<a href="dzds.me/categories/">Categories</a></div>
+  <h1>
+    算法详解
+    <a href="dzds.me/categories/%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">详解水塘抽样(Reservoir sampling)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>一个场景 当内存无法加载全部数据时，如何从包含未知大小的数据流中随机选取k个数据，并且要保证每个数据被抽取到的概率相等。
+水塘抽样 把上述问题具体化为给定一个未知大小数组data[]，从中选取k个数，要求每个数被选中的概率相等。假设数组长度为n，则每个数被选中概率应为k/n。
+策略是：
+对最前面k个数，直接放到数组chosen[]即chosen[i] = data[i] 0 &lt;= i &lt; k。 对data[i], i &gt;= k，先生成个[0...i)间的随机数(左闭右开)，假设rand(0, i) = j，则如果j &lt; k,则做替换chosen[j] = data[i]。否则，nothing happens. 如此反复直到结束。 Java实现如下：
+public class ReservoirSampling { private Random rand = new Random(); public int[] sampling(int[] data, int k) { int[] chosen = new int[k]; int i = 0; for (int d : data) { if (i &lt; k) { chosen[i] = d; } else { int j = rand....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-03-24 20:04:23 +0000 UTC'>March 24, 2021</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;440 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to 详解水塘抽样(Reservoir sampling)" href="dzds.me/posts/algorithm-reservoir-sampling/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">详解线段树之进阶(Segment Tree)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>懒更新(lazy update) 上文留下一个问题没有解决，就是对一个区间更新。对一个元素的更新复杂度为O(N),N为数组长度,按上文方法对区间更新，则复杂度为L*O(N), L为区间长度。
+另外，更新原数组元素，是从线段树中对应的叶子节点，一路向上更新到根节点。如果所要更新的区间有很多公共祖先节点，那么这些节点每次都需要被更新一次。如图中如果我们要更新数组中的2, 8, 6分别&#43;5, &#43;1, &#43;9，可以看到图中公共节点如19会更新2次，37则有3次。
+另外，在实际应用中，可能只是某些热点数据会频繁被读取，而大部分数据是在冷宫常年不见天日。有些更新没有必要立即落实到每一个节点，而可以在其被读取时再落实更新。
+这就是懒更新的登场时刻。
+基于数组的实现 既然需要将更新延后落实，那么就需要保存这些更新，所以需要一个与tree长度一致的lazy数组来保存对应节点没有落实的更新。代码如下。几个注意点：
+进入queryCore时，首先需要检查有无当前节点index的更新，如果有，先执行更新，清空该更新，然后继续，其余与正常线段树query区别。 进入updateCore时，也是首先要检查有无当前节点index的更新，如果有，重复上面。 另外，当更新范围[left, right]完全覆盖当前节点代表区间[segLeft, segRight]时，要再次执行更新，但这次update参数是newVal。这是关键点所在，执行完更新，就不用继续递归调用了，因为孩子节点的更新被保存在了lazy[leftChild]和lazy[rightChild]。下次再调用query或者update时，如果执行到节点leftChild或rightChild，则会执行之前保存的更新。 class SegmentTree { private int[] tree; private int[] lazy; private int n; public SegmentTree(int n) { this.n = n; int len = (1 &lt;&lt; (1 &#43; (int)(Math.ceil(Math.log(n) / Math.log(2))))) - 1; tree = new int[len]; lazy = new int[len]; } public int query(int left, int right) { return queryCore(left, right, 0, n - 1, 0); } public void update(int left, int right, int newVal) { updateCore(left, right, 0, n - 1, 0, newVal); } private int queryCore(int left, int right, int segLeft, int segRight, int index) { if (lazy[index] !...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-03-05 10:43:21 +0000 UTC'>March 5, 2021</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;986 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to 详解线段树之进阶(Segment Tree)" href="dzds.me/posts/algorithm-segment-tree-2/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">详解线段树之入门(Segment Tree)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>何为线段树 线段树是基于要研究的数组而构建的数据结构，呈二叉树状。线段树的叶子结点就是所要研究的数组，非叶子节点表示数组的一段区间的某个性质的值。比如此区间的和，或者最大值最小值等等。
+为什么需要线段树呢？试想你需要设计一个功能，给定一个数组，需要你提供两个操作，一是更改某个元素，而是索引某个区间的和，或者最大值，或者最小值，这里以和举例。最直接也是最简单做法当然是直接在数组上操作，O(1)更新，O(N)索引和，N为区间长度。
+class NumArray { public NumArray(int[] nums) { //TODO } // Updates nums[index] = val. public void update(int index, int val) { //TODO} // Gets sum of nums[left ... right]. public int query(int left, int right) { //TODO } } 再进一步，如果需要更新一个区间的元素呢，比如，nums[i] &#43;= val, for left &lt;= i &lt;= right。
+class NumArray { // ... // Add val, for nums[i] with left &lt;= i &lt;= right public int add(int left, int right, int val) { //TODO } } 继续以上方法，就是遍历区间，一一更新，与索引相同复杂度:O(N)。...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-03-04 11:40:40 +0000 UTC'>March 4, 2021</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;739 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to 详解线段树之入门(Segment Tree)" href="dzds.me/posts/algorithm-segment-tree/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">详解二叉索引树(Binary Index Tree又名Fenwick Tree)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>何为BIT BIT是一种数据结构，名为树其实用数组即可表达。其主要作用是给定了一个数组(或多维数组)，BIT可用来：
+O(logN)的复杂度计算给定范围的和,也就是求sum(low, high) O(logN)的复杂度更新数组的一个元素 其构造方法巧妙但简单，可谓大道至简。
+给定一个数组a[0 ... N-1],长度N。 BIT表示为indexes[0 ... N],长度N&#43;1。indexes[i]=sum(g(i) ... i], g(i)=i-i&amp;(-i)，注意是左开右闭区间。i&amp;(-i)得到的是一个数字的二进制表示中只留下最右的1后的数字，比如12=[1100],则12&amp;(-12)只留下最右的1就成了4=[0100]。 注意到indexes[]从1开始计数，所以始终有indexes[0]=0。为了说明方便，在数组a[]前面添加了个元素0。
+看图说话，如此构造后，原数组的和sum[0 ... i]就可以通过把能覆盖range[0 ... i]的indexes[]加起来得到。比如求sum[0 ... 14]，步骤如下，辅以图示。
+先加上indexes[14]，覆盖了a[14], a[13]。 14=[1110],最右1留下后是2=[10],减去后得到12,加上indexes[12]。 12=[1100],最右1留下后是4=[100],减去后得到8,加上indexes[8]。 8=[1000],最右1留下后是8=[1000],减去后得到0，结束。 所以何为BIT,其本质是通过原数组构造一个新数组indexes[]，其中每个元素表示原数组中一段连续子数组的和。范围求和就从线性遍历原数组(O(N))，变成了在indexes[]中快速查找(O(logN))能覆盖所求范围的那几个元素。
+而更新则是与求和相反的一个过程,原数组一个元素a[i]更新后，首先需要更新indexes[i]，然后要不停向上，更新每个覆盖了a[i]的indexes元素。比如,a[9]=2 -&gt; a[9]=10,则有：
+计算一个更新delta, delta=10-2，更新indexes[9]&#43;=delta, 9=[1001],最右1留下后是1=[0001],加上后得到10,更新indexes[10] &#43;= delta。 10=[1010],最右1留下后是2=[0010],加上后得到12,更新indexes[12] &#43;= delta。 12=[1100],最右1留下后是4=[0100],加上后得到16,更新indexes[16] &#43;= delta。 代码如下:
+class BIT { private int[] indexes; private int[] nums; public BIT(int[] nums) { this.nums = nums; indexes = new int[nums.length &#43; 1]; for (int i = 0; i &lt; nums....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-03-03 11:38:19 +0000 UTC'>March 3, 2021</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;960 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to 详解二叉索引树(Binary Index Tree又名Fenwick Tree)" href="dzds.me/posts/algorithm-fenwick-tree/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">详解归并排序之应用(Merge sort)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>归并排序基于分治思想，基本步骤是把数组一分为二，分别排序，然后将两个排序好的数组合并，合并两个排序好的数组可以在O(N)的复杂度完成。根据T(N) = 2T(2/N) &#43; N,可以推导出时间复杂度为O(NlogN)。代码如下：
+public void sort(int[] nums) { mergeSort(nums, 0, nums.length - 1); } private void mergeSort(int[] nums, int start, int end) { if (start &gt;= end) { return; } int mid = start &#43; (end - start) / 2; // Step 1: sort nums[start ... mid]. mergeSort(nums, start, mid); // Step 2: sort nums[mid&#43;1 ... end]. mergeSort(nums, mid &#43; 1, end); // Step 3: merge two sorted sub-arrays....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-03-02 16:17:18 +0000 UTC'>March 2, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1259 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to 详解归并排序之应用(Merge sort)" href="dzds.me/posts/algorithm-merge-sort/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="dzds.me/dzds.me/categories/%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/page/2/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="dzds.me">多做多说</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>详解线段树之进阶(Segment Tree) | 多做多说</title>
+<meta name="keywords" content="programming">
+<meta name="description" content="懒更新(lazy update) 上文留下一个问题没有解决，就是对一个区间更新。对一个元素的更新复杂度为O(N),N为数组长度,按上文方法对区间更新，则复杂度为L*O(N), L为区间长度。
+另外，更新原数组元素，是从线段树中对应的叶子节点，一路向上更新到根节点。如果所要更新的区间有很多公共祖先节点，那么这些节点每次都需要被更新一次。如图中如果我们要更新数组中的2, 8, 6分别&#43;5, &#43;1, &#43;9，可以看到图中公共节点如19会更新2次，37则有3次。
+另外，在实际应用中，可能只是某些热点数据会频繁被读取，而大部分数据是在冷宫常年不见天日。有些更新没有必要立即落实到每一个节点，而可以在其被读取时再落实更新。
+这就是懒更新的登场时刻。
+基于数组的实现 既然需要将更新延后落实，那么就需要保存这些更新，所以需要一个与tree长度一致的lazy数组来保存对应节点没有落实的更新。代码如下。几个注意点：
+进入queryCore时，首先需要检查有无当前节点index的更新，如果有，先执行更新，清空该更新，然后继续，其余与正常线段树query区别。 进入updateCore时，也是首先要检查有无当前节点index的更新，如果有，重复上面。 另外，当更新范围[left, right]完全覆盖当前节点代表区间[segLeft, segRight]时，要再次执行更新，但这次update参数是newVal。这是关键点所在，执行完更新，就不用继续递归调用了，因为孩子节点的更新被保存在了lazy[leftChild]和lazy[rightChild]。下次再调用query或者update时，如果执行到节点leftChild或rightChild，则会执行之前保存的更新。 class SegmentTree { private int[] tree; private int[] lazy; private int n; public SegmentTree(int n) { this.n = n; int len = (1 &lt;&lt; (1 &#43; (int)(Math.ceil(Math.log(n) / Math.log(2))))) - 1; tree = new int[len]; lazy = new int[len]; } public int query(int left, int right) { return queryCore(left, right, 0, n - 1, 0); } public void update(int left, int right, int newVal) { updateCore(left, right, 0, n - 1, 0, newVal); } private int queryCore(int left, int right, int segLeft, int segRight, int index) { if (lazy[index] !">
+<meta name="author" content="Me">
+<link rel="canonical" href="dzds.me/posts/algorithm-segment-tree-2/">
+<link crossorigin="anonymous" href="/dzds.me/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="dzds.me/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="dzds.me/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="dzds.me/favicon-32x32.png">
+<link rel="apple-touch-icon" href="dzds.me/apple-touch-icon.png">
+<link rel="mask-icon" href="dzds.me/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="详解线段树之进阶(Segment Tree)" />
+<meta property="og:description" content="懒更新(lazy update) 上文留下一个问题没有解决，就是对一个区间更新。对一个元素的更新复杂度为O(N),N为数组长度,按上文方法对区间更新，则复杂度为L*O(N), L为区间长度。
+另外，更新原数组元素，是从线段树中对应的叶子节点，一路向上更新到根节点。如果所要更新的区间有很多公共祖先节点，那么这些节点每次都需要被更新一次。如图中如果我们要更新数组中的2, 8, 6分别&#43;5, &#43;1, &#43;9，可以看到图中公共节点如19会更新2次，37则有3次。
+另外，在实际应用中，可能只是某些热点数据会频繁被读取，而大部分数据是在冷宫常年不见天日。有些更新没有必要立即落实到每一个节点，而可以在其被读取时再落实更新。
+这就是懒更新的登场时刻。
+基于数组的实现 既然需要将更新延后落实，那么就需要保存这些更新，所以需要一个与tree长度一致的lazy数组来保存对应节点没有落实的更新。代码如下。几个注意点：
+进入queryCore时，首先需要检查有无当前节点index的更新，如果有，先执行更新，清空该更新，然后继续，其余与正常线段树query区别。 进入updateCore时，也是首先要检查有无当前节点index的更新，如果有，重复上面。 另外，当更新范围[left, right]完全覆盖当前节点代表区间[segLeft, segRight]时，要再次执行更新，但这次update参数是newVal。这是关键点所在，执行完更新，就不用继续递归调用了，因为孩子节点的更新被保存在了lazy[leftChild]和lazy[rightChild]。下次再调用query或者update时，如果执行到节点leftChild或rightChild，则会执行之前保存的更新。 class SegmentTree { private int[] tree; private int[] lazy; private int n; public SegmentTree(int n) { this.n = n; int len = (1 &lt;&lt; (1 &#43; (int)(Math.ceil(Math.log(n) / Math.log(2))))) - 1; tree = new int[len]; lazy = new int[len]; } public int query(int left, int right) { return queryCore(left, right, 0, n - 1, 0); } public void update(int left, int right, int newVal) { updateCore(left, right, 0, n - 1, 0, newVal); } private int queryCore(int left, int right, int segLeft, int segRight, int index) { if (lazy[index] !" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="dzds.me/posts/algorithm-segment-tree-2/" /><meta property="og:image" content="dzds.me/content/img/icon.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-05T10:43:21+00:00" />
+<meta property="article:modified_time" content="2021-03-05T10:43:21+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="dzds.me/content/img/icon.png"/>
+
+<meta name="twitter:title" content="详解线段树之进阶(Segment Tree)"/>
+<meta name="twitter:description" content="懒更新(lazy update) 上文留下一个问题没有解决，就是对一个区间更新。对一个元素的更新复杂度为O(N),N为数组长度,按上文方法对区间更新，则复杂度为L*O(N), L为区间长度。
+另外，更新原数组元素，是从线段树中对应的叶子节点，一路向上更新到根节点。如果所要更新的区间有很多公共祖先节点，那么这些节点每次都需要被更新一次。如图中如果我们要更新数组中的2, 8, 6分别&#43;5, &#43;1, &#43;9，可以看到图中公共节点如19会更新2次，37则有3次。
+另外，在实际应用中，可能只是某些热点数据会频繁被读取，而大部分数据是在冷宫常年不见天日。有些更新没有必要立即落实到每一个节点，而可以在其被读取时再落实更新。
+这就是懒更新的登场时刻。
+基于数组的实现 既然需要将更新延后落实，那么就需要保存这些更新，所以需要一个与tree长度一致的lazy数组来保存对应节点没有落实的更新。代码如下。几个注意点：
+进入queryCore时，首先需要检查有无当前节点index的更新，如果有，先执行更新，清空该更新，然后继续，其余与正常线段树query区别。 进入updateCore时，也是首先要检查有无当前节点index的更新，如果有，重复上面。 另外，当更新范围[left, right]完全覆盖当前节点代表区间[segLeft, segRight]时，要再次执行更新，但这次update参数是newVal。这是关键点所在，执行完更新，就不用继续递归调用了，因为孩子节点的更新被保存在了lazy[leftChild]和lazy[rightChild]。下次再调用query或者update时，如果执行到节点leftChild或rightChild，则会执行之前保存的更新。 class SegmentTree { private int[] tree; private int[] lazy; private int n; public SegmentTree(int n) { this.n = n; int len = (1 &lt;&lt; (1 &#43; (int)(Math.ceil(Math.log(n) / Math.log(2))))) - 1; tree = new int[len]; lazy = new int[len]; } public int query(int left, int right) { return queryCore(left, right, 0, n - 1, 0); } public void update(int left, int right, int newVal) { updateCore(left, right, 0, n - 1, 0, newVal); } private int queryCore(int left, int right, int segLeft, int segRight, int index) { if (lazy[index] !"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "dzds.me/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "详解线段树之进阶(Segment Tree)",
+      "item": "dzds.me/posts/algorithm-segment-tree-2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "详解线段树之进阶(Segment Tree)",
+  "name": "详解线段树之进阶(Segment Tree)",
+  "description": "懒更新(lazy update) 上文留下一个问题没有解决，就是对一个区间更新。对一个元素的更新复杂度为O(N),N为数组长度,按上文方法对区间更新，则复杂度为L*O(N), L为区间长度。\n另外，更新原数组元素，是从线段树中对应的叶子节点，一路向上更新到根节点。如果所要更新的区间有很多公共祖先节点，那么这些节点每次都需要被更新一次。如图中如果我们要更新数组中的2, 8, 6分别+5, +1, +9，可以看到图中公共节点如19会更新2次，37则有3次。\n另外，在实际应用中，可能只是某些热点数据会频繁被读取，而大部分数据是在冷宫常年不见天日。有些更新没有必要立即落实到每一个节点，而可以在其被读取时再落实更新。\n这就是懒更新的登场时刻。\n基于数组的实现 既然需要将更新延后落实，那么就需要保存这些更新，所以需要一个与tree长度一致的lazy数组来保存对应节点没有落实的更新。代码如下。几个注意点：\n进入queryCore时，首先需要检查有无当前节点index的更新，如果有，先执行更新，清空该更新，然后继续，其余与正常线段树query区别。 进入updateCore时，也是首先要检查有无当前节点index的更新，如果有，重复上面。 另外，当更新范围[left, right]完全覆盖当前节点代表区间[segLeft, segRight]时，要再次执行更新，但这次update参数是newVal。这是关键点所在，执行完更新，就不用继续递归调用了，因为孩子节点的更新被保存在了lazy[leftChild]和lazy[rightChild]。下次再调用query或者update时，如果执行到节点leftChild或rightChild，则会执行之前保存的更新。 class SegmentTree { private int[] tree; private int[] lazy; private int n; public SegmentTree(int n) { this.n = n; int len = (1 \u0026lt;\u0026lt; (1 + (int)(Math.ceil(Math.log(n) / Math.log(2))))) - 1; tree = new int[len]; lazy = new int[len]; } public int query(int left, int right) { return queryCore(left, right, 0, n - 1, 0); } public void update(int left, int right, int newVal) { updateCore(left, right, 0, n - 1, 0, newVal); } private int queryCore(int left, int right, int segLeft, int segRight, int index) { if (lazy[index] !",
+  "keywords": [
+    "programming"
+  ],
+  "articleBody": "懒更新(lazy update) 上文留下一个问题没有解决，就是对一个区间更新。对一个元素的更新复杂度为O(N),N为数组长度,按上文方法对区间更新，则复杂度为L*O(N), L为区间长度。\n另外，更新原数组元素，是从线段树中对应的叶子节点，一路向上更新到根节点。如果所要更新的区间有很多公共祖先节点，那么这些节点每次都需要被更新一次。如图中如果我们要更新数组中的2, 8, 6分别+5, +1, +9，可以看到图中公共节点如19会更新2次，37则有3次。\n另外，在实际应用中，可能只是某些热点数据会频繁被读取，而大部分数据是在冷宫常年不见天日。有些更新没有必要立即落实到每一个节点，而可以在其被读取时再落实更新。\n这就是懒更新的登场时刻。\n基于数组的实现 既然需要将更新延后落实，那么就需要保存这些更新，所以需要一个与tree长度一致的lazy数组来保存对应节点没有落实的更新。代码如下。几个注意点：\n进入queryCore时，首先需要检查有无当前节点index的更新，如果有，先执行更新，清空该更新，然后继续，其余与正常线段树query区别。 进入updateCore时，也是首先要检查有无当前节点index的更新，如果有，重复上面。 另外，当更新范围[left, right]完全覆盖当前节点代表区间[segLeft, segRight]时，要再次执行更新，但这次update参数是newVal。这是关键点所在，执行完更新，就不用继续递归调用了，因为孩子节点的更新被保存在了lazy[leftChild]和lazy[rightChild]。下次再调用query或者update时，如果执行到节点leftChild或rightChild，则会执行之前保存的更新。 class SegmentTree { private int[] tree; private int[] lazy; private int n; public SegmentTree(int n) { this.n = n; int len = (1 \u003c\u003c (1 + (int)(Math.ceil(Math.log(n) / Math.log(2))))) - 1; tree = new int[len]; lazy = new int[len]; } public int query(int left, int right) { return queryCore(left, right, 0, n - 1, 0); } public void update(int left, int right, int newVal) { updateCore(left, right, 0, n - 1, 0, newVal); } private int queryCore(int left, int right, int segLeft, int segRight, int index) { if (lazy[index] != 0) { // Execute un-merged update. execute(index, lazy[index], segLeft, segRight); // Clear merged update. lazy[index] = 0; } if (left \u003e segRight || right \u003c segLeft) { return 0; } if (left \u003c= segLeft \u0026\u0026 segRight \u003c= right) { return tree[index]; } int mid = getMid(segLeft, segRight); return merge(queryCore(left, right, segLeft, mid, index * 2 + 1), queryCore(left, right, mid + 1, segRight, index * 2 + 2)); } private void updateCore(int left, int right, int segLeft, int segRight, int index, int newVal) { if (lazy[index] != 0) { execute(index, lazy[index], segLeft, segRight); lazy[index] = 0; } if (left \u003e segRight || right \u003c segLeft) { return; } if (left \u003c= segLeft \u0026\u0026 segRight \u003c= right) { // Execute update for newVal. execute(index, newVal, segLeft, segRight); return; } int mid = getMid(segLeft, segRight); updateCore(left, right, segLeft, mid, index * 2 + 1, newVal); updateCore(left, right, mid + 1, segRight, index * 2 + 2, newVal); tree[index] = merge(tree[index * 2 + 1], tree[index * 2 + 2]); } // Execute an update against tree[index] with interval [segLeft, segRight]. private void execute(int index, int update, int segLeft, int segRight) { // Apply the udpate. tree[index] = merge(tree[index], update); if (segLeft != segRight) { // Propagate the update to children. lazy[2 * index + 1] = merge(lazy[2 * index + 1], update); lazy[2 * index + 2] = merge(lazy[2 * index + 2], update); } } private int merge(int x, int y) { return Math.max(x, y); } private int getMid(int left, int right) { return left + (right - left) / 2; } } 基于树的实现 其实就是把上面的代码做一次翻译，不多赘述。\nclass SegmentTree { private Node root; public SegmentTree(int n) { this.root = new Node(0, 0, n - 1); } public int query(int left, int right) { return queryCore(left, right, root); } public void update(int left, int right, int newVal) { updateCore(left, right, root, newVal); } private int queryCore(int left, int right, Node cur) { if (cur == null) { return 0; } if (cur.lazyVal != 0) { // Execute un-merged update. execute(cur, cur.lazyVal); // Clear merged update. cur.lazyVal = 0; } if (left \u003e cur.high || right \u003c cur.low) { return 0; } if (left \u003c= cur.low \u0026\u0026 cur.high \u003c= right) { return cur.val; } return merge(queryCore(left, right, cur.left), queryCore(left, right, cur.right)); } private void updateCore(int left, int right, Node cur, int newVal) { if (cur.lazyVal != 0) { // Execute un-merged update. execute(cur, cur.lazyVal); // Clear merged update. cur.lazyVal = 0; } if (left \u003e cur.high || right \u003c cur.low) { return; } if (left \u003c= cur.low \u0026\u0026 cur.high \u003c= right) { // Execute update for newVal. execute(cur, newVal); return; } int mid = getMid(cur.low, cur.high); if (cur.left == null) { cur.left = new Node(0, cur.low, mid); cur.right = new Node(0, mid + 1, cur.high); } updateCore(left, right, cur.left, newVal); updateCore(left, right, cur.right, newVal); cur.val = merge(cur.left.val, cur.right.val); } private void execute(Node cur, int update) { // Apply the udpate. cur.val = merge(cur.val, update); if (cur.low != cur.high) { // Propagate the updates to children. if (cur.left == null) { int mid = getMid(cur.low, cur.high); cur.left = new Node(0, cur.low, mid); cur.right = new Node(0, mid + 1, cur.high); } cur.left.lazyVal = merge(cur.left.lazyVal, update); cur.right.lazyVal = merge(cur.right.lazyVal, update); } } private int merge(int x, int y) { return Math.max(x, y); } private int getMid(int left, int right) { return left + (right - left) / 2; } static class Node { // The value for range [low ... high]. public int val; public int low; public int high; // The lazy update yet to apply. public int lazyVal; public Node left = null; public Node right = null; public Node(int val, int low, int high) { this.val = val; this.low = low; this.high = high; this.lazyVal = 0; } } } 应用 上述线段树都基于一个假设，即数组元素允许最小值为0，所以我们把入门篇里所说的null节点的值默认为0。再次重申，对于不同的区间性质(和，最大，最小等)，null节点的默认值需要作相应调整。\n基于上面的线段树可以轻松的解决Leetcode 699 Falling Squares,以更低的复杂度！\n原题表述较为啰嗦，总结如下。给定一组方块以positions[][]表示，position[i]表示方块i,position[i][0]表示方块在x轴上坐标，position[i][1]表示方块边长。依次把方块从很高处沿y轴扔下，后面的方块有可能掉在前面方块上。\n比如： positions = [[1, 2], [2, 3], [6, 1]]则扔完后会像下图所示。 现在要求heights[]，heights[i]表示在扔到方块i时，所有已扔方块形成的形状的最高高度。比如上述输入，则结果是[2, 5, 5]。\n此题完全可以暴力解决，维持一个heights[]数组来维持到方块i掉下时的高度。\nheights[]长度与方块数相同，初始化为0. 当方块i掉下时，heights[i] += positions[i][1]。 同时需要更新方块i覆盖范围内的heights[]。 取当前最大值作为方块i掉落时的最高高度。 代码如下：\npublic List\u003cInteger\u003e fallingSquares(int[][] positions) { int[] heights = new int[positions.length]; List\u003cInteger\u003e ans = new ArrayList\u003c\u003e(); int cur = 0; for (int i = 0; i \u003c heights.length; ++i) { int left = positions[i][0]; int size = positions[i][1]; int right = left + size - 1; heights[i] += size; for (int j = i + 1; j \u003c heights.length; ++j) { int left2 = positions[j][0]; int size2 = positions[j][1]; int right2 = left2 + size2 - 1; if (left2 \u003c= right \u0026\u0026 right2 \u003e= left) { heights[j] = Math.max(heights[i], heights[j]); } } cur = Math.max(cur, heights[i]); ans.add(cur); } return ans; } 可以看到，上述O(n^2)的算法中，内循环部分是为了找到方块i掉落所覆盖的区域[left ... right]的最大值，线性扫描更新为O(n)。而线段树则能以O(logN)的复杂度query区域[left ... right]的最大值。\n在这里，还需要对已有数据进行个小处理，名为坐标压缩，以便于后续线段树构造。所谓坐标压缩，方块的横坐标较为分散，上面的例子里有1, 2, 6三个离散值，可以一一映射到从0开始，间隔1的坐标中，如下图所示。 代码实现：\nprivate Map\u003cInteger, Integer\u003e compressCoord(int[][] positions) { Set\u003cInteger\u003e points = new HashSet\u003c\u003e(); for (int[] pos : positions) { points.add(pos[0]); points.add(pos[0] + pos[1] - 1); } List\u003cInteger\u003e pointList = new ArrayList\u003c\u003e(points); Collections.sort(pointList); Map\u003cInteger, Integer\u003e coords = new HashMap\u003c\u003e(); for (int i = pointList.size() - 1; i \u003e= 0; --i) { coords.put(pointList.get(i), i); } return coords; } 有了以上铺垫，基于线段树的解法如下：\npublic List\u003cInteger\u003e fallingSquares(int[][] positions) { Map\u003cInteger, Integer\u003e coords = compressCoord(positions); SegmentTree st = new SegmentTree(coords.size()); List\u003cInteger\u003e ans = new ArrayList\u003c\u003e(); int max = 0; for (int[] pos : positions) { int left = coords.get(pos[0]); int right = coords.get(pos[0] + pos[1] - 1); int height = st.query(left, right) + pos[1]; st.update(left, right, height); max = Math.max(max, height); ans.add(max); } return ans; } ",
+  "wordCount" : "986",
+  "inLanguage": "en",
+  "datePublished": "2021-03-05T10:43:21Z",
+  "dateModified": "2021-03-05T10:43:21Z",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "dzds.me/posts/algorithm-segment-tree-2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "多做多说",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "dzds.me/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="dzds.me" accesskey="h" title="多做多说 (Alt + H)">多做多说</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="dzds.me/dzds.me/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="dzds.me/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="dzds.me">Home</a>&nbsp;»&nbsp;<a href="dzds.me/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      详解线段树之进阶(Segment Tree)
+    </h1>
+    <div class="post-meta"><span title='2021-03-05 10:43:21 +0000 UTC'>March 5, 2021</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;986 words&nbsp;·&nbsp;Me
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><nav id="TableOfContents"></nav>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="懒更新lazy-update">懒更新(lazy update)<a hidden class="anchor" aria-hidden="true" href="#懒更新lazy-update">#</a></h1>
+<p><a href="https://suensky.github.io/post/algorithm-segment-tree.html">上文</a>留下一个问题没有解决，就是对一个区间更新。对一个元素的更新复杂度为<code>O(N),N为数组长度</code>,按上文方法对区间更新，则复杂度为<code>L*O(N), L为区间长度</code>。</p>
+<p>另外，更新原数组元素，是从线段树中对应的叶子节点，一路向上更新到根节点。如果所要更新的区间有很多公共祖先节点，那么这些节点每次都需要被更新一次。如图中如果我们要更新数组中的<code>2, 8, 6</code>分别<code>+5, +1, +9</code>，可以看到图中公共节点如<code>19</code>会更新<code>2</code>次，<code>37</code>则有<code>3</code>次。</p>
+<p><img loading="lazy" src="algorithm-segment-tree-2/segtree.png" alt="algorithm-segment-tree-2"  />
+</p>
+<p>另外，在实际应用中，可能只是某些热点数据会频繁被读取，而大部分数据是在冷宫常年不见天日。有些更新没有必要立即落实到每一个节点，而可以在其被读取时再落实更新。</p>
+<p>这就是懒更新的登场时刻。</p>
+<h1 id="基于数组的实现">基于数组的实现<a hidden class="anchor" aria-hidden="true" href="#基于数组的实现">#</a></h1>
+<p>既然需要将更新延后落实，那么就需要保存这些更新，所以需要一个与<code>tree</code>长度一致的<code>lazy</code>数组来保存对应节点没有落实的更新。代码如下。几个注意点：</p>
+<ul>
+<li>进入<code>queryCore</code>时，首先需要检查有无当前节点<code>index</code>的更新，如果有，先执行更新，清空该更新，然后继续，其余与正常线段树<code>query</code>区别。</li>
+<li>进入<code>updateCore</code>时，也是首先要检查有无当前节点<code>index</code>的更新，如果有，重复上面。</li>
+<li>另外，当更新范围<code>[left, right]</code>完全覆盖当前节点代表区间<code>[segLeft, segRight]</code>时，要再次执行更新，但这次<code>update</code>参数是<code>newVal</code>。这是关键点所在，执行完更新，就不用继续递归调用了，因为孩子节点的更新被保存在了<code>lazy[leftChild]</code>和<code>lazy[rightChild]</code>。下次再调用<code>query</code>或者<code>update</code>时，如果执行到节点<code>leftChild</code>或<code>rightChild</code>，则会执行之前保存的更新。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SegmentTree</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> tree;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> lazy;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">SegmentTree</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">n</span> <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> (1 <span style="color:#f92672">&lt;&lt;</span> (1 <span style="color:#f92672">+</span> (<span style="color:#66d9ef">int</span>)(Math.<span style="color:#a6e22e">ceil</span>(Math.<span style="color:#a6e22e">log</span>(n) <span style="color:#f92672">/</span> Math.<span style="color:#a6e22e">log</span>(2))))) <span style="color:#f92672">-</span> 1;
+</span></span><span style="display:flex;"><span>        tree <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>len<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        lazy <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>len<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">query</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> queryCore(left, right, 0, n <span style="color:#f92672">-</span> 1, 0);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right, <span style="color:#66d9ef">int</span> newVal) {
+</span></span><span style="display:flex;"><span>        updateCore(left, right, 0, n <span style="color:#f92672">-</span> 1, 0, newVal);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">queryCore</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right, <span style="color:#66d9ef">int</span> segLeft, <span style="color:#66d9ef">int</span> segRight, <span style="color:#66d9ef">int</span> index) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (lazy<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span> <span style="color:#f92672">!=</span> 0) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Execute un-merged update.</span>
+</span></span><span style="display:flex;"><span>            execute(index, lazy<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span>, segLeft, segRight);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Clear merged update.</span>
+</span></span><span style="display:flex;"><span>            lazy<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&gt;</span> segRight <span style="color:#f92672">||</span> right <span style="color:#f92672">&lt;</span> segLeft) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&lt;=</span> segLeft <span style="color:#f92672">&amp;&amp;</span> segRight <span style="color:#f92672">&lt;=</span> right) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> tree<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> getMid(segLeft, segRight);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> merge(queryCore(left, right, segLeft, mid, index <span style="color:#f92672">*</span> 2 <span style="color:#f92672">+</span> 1),
+</span></span><span style="display:flex;"><span>            queryCore(left, right, mid <span style="color:#f92672">+</span> 1, segRight, index <span style="color:#f92672">*</span> 2 <span style="color:#f92672">+</span> 2));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">updateCore</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right,
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">int</span> segLeft, <span style="color:#66d9ef">int</span> segRight, <span style="color:#66d9ef">int</span> index, <span style="color:#66d9ef">int</span> newVal) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (lazy<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span> <span style="color:#f92672">!=</span> 0) {
+</span></span><span style="display:flex;"><span>            execute(index, lazy<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span>, segLeft, segRight);
+</span></span><span style="display:flex;"><span>            lazy<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&gt;</span> segRight <span style="color:#f92672">||</span> right <span style="color:#f92672">&lt;</span> segLeft) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&lt;=</span> segLeft <span style="color:#f92672">&amp;&amp;</span> segRight <span style="color:#f92672">&lt;=</span> right) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Execute update for newVal.</span>
+</span></span><span style="display:flex;"><span>            execute(index, newVal, segLeft, segRight);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> getMid(segLeft, segRight);
+</span></span><span style="display:flex;"><span>        updateCore(left, right, segLeft, mid, index <span style="color:#f92672">*</span> 2 <span style="color:#f92672">+</span> 1, newVal);
+</span></span><span style="display:flex;"><span>        updateCore(left, right, mid <span style="color:#f92672">+</span> 1, segRight, index <span style="color:#f92672">*</span> 2 <span style="color:#f92672">+</span> 2, newVal);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        tree<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> merge(tree<span style="color:#f92672">[</span>index <span style="color:#f92672">*</span> 2 <span style="color:#f92672">+</span> 1<span style="color:#f92672">]</span>, tree<span style="color:#f92672">[</span>index <span style="color:#f92672">*</span> 2 <span style="color:#f92672">+</span> 2<span style="color:#f92672">]</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Execute an update against tree[index] with interval [segLeft, segRight].</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span>(<span style="color:#66d9ef">int</span> index, <span style="color:#66d9ef">int</span> update, <span style="color:#66d9ef">int</span> segLeft, <span style="color:#66d9ef">int</span> segRight) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Apply the udpate.</span>
+</span></span><span style="display:flex;"><span>        tree<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> merge(tree<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span>, update);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (segLeft <span style="color:#f92672">!=</span> segRight) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Propagate the update to children.</span>
+</span></span><span style="display:flex;"><span>            lazy<span style="color:#f92672">[</span>2 <span style="color:#f92672">*</span> index <span style="color:#f92672">+</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> merge(lazy<span style="color:#f92672">[</span>2 <span style="color:#f92672">*</span> index <span style="color:#f92672">+</span> 1<span style="color:#f92672">]</span>, update);
+</span></span><span style="display:flex;"><span>            lazy<span style="color:#f92672">[</span>2 <span style="color:#f92672">*</span> index <span style="color:#f92672">+</span> 2<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> merge(lazy<span style="color:#f92672">[</span>2 <span style="color:#f92672">*</span> index <span style="color:#f92672">+</span> 2<span style="color:#f92672">]</span>, update);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">merge</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Math.<span style="color:#a6e22e">max</span>(x, y);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getMid</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> left <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">/</span> 2;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="基于树的实现">基于树的实现<a hidden class="anchor" aria-hidden="true" href="#基于树的实现">#</a></h1>
+<p>其实就是把上面的代码做一次翻译，不多赘述。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SegmentTree</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Node root;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">SegmentTree</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(0, 0, n <span style="color:#f92672">-</span> 1);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">query</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> queryCore(left, right, root);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right, <span style="color:#66d9ef">int</span> newVal) {
+</span></span><span style="display:flex;"><span>        updateCore(left, right, root, newVal);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">queryCore</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right, Node cur) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (cur <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (cur.<span style="color:#a6e22e">lazyVal</span> <span style="color:#f92672">!=</span> 0) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Execute un-merged update.</span>
+</span></span><span style="display:flex;"><span>            execute(cur, cur.<span style="color:#a6e22e">lazyVal</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Clear merged update.</span>
+</span></span><span style="display:flex;"><span>            cur.<span style="color:#a6e22e">lazyVal</span> <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&gt;</span> cur.<span style="color:#a6e22e">high</span> <span style="color:#f92672">||</span> right <span style="color:#f92672">&lt;</span> cur.<span style="color:#a6e22e">low</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&lt;=</span> cur.<span style="color:#a6e22e">low</span> <span style="color:#f92672">&amp;&amp;</span> cur.<span style="color:#a6e22e">high</span> <span style="color:#f92672">&lt;=</span> right) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> cur.<span style="color:#a6e22e">val</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> merge(queryCore(left, right, cur.<span style="color:#a6e22e">left</span>),
+</span></span><span style="display:flex;"><span>            queryCore(left, right, cur.<span style="color:#a6e22e">right</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">updateCore</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right, Node cur, <span style="color:#66d9ef">int</span> newVal) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (cur.<span style="color:#a6e22e">lazyVal</span> <span style="color:#f92672">!=</span> 0) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Execute un-merged update.</span>
+</span></span><span style="display:flex;"><span>            execute(cur, cur.<span style="color:#a6e22e">lazyVal</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Clear merged update.</span>
+</span></span><span style="display:flex;"><span>            cur.<span style="color:#a6e22e">lazyVal</span> <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&gt;</span> cur.<span style="color:#a6e22e">high</span> <span style="color:#f92672">||</span> right <span style="color:#f92672">&lt;</span> cur.<span style="color:#a6e22e">low</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&lt;=</span> cur.<span style="color:#a6e22e">low</span> <span style="color:#f92672">&amp;&amp;</span> cur.<span style="color:#a6e22e">high</span> <span style="color:#f92672">&lt;=</span> right) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Execute update for newVal.</span>
+</span></span><span style="display:flex;"><span>            execute(cur, newVal);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> getMid(cur.<span style="color:#a6e22e">low</span>, cur.<span style="color:#a6e22e">high</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (cur.<span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            cur.<span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(0, cur.<span style="color:#a6e22e">low</span>, mid);
+</span></span><span style="display:flex;"><span>            cur.<span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(0, mid <span style="color:#f92672">+</span> 1, cur.<span style="color:#a6e22e">high</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        updateCore(left, right, cur.<span style="color:#a6e22e">left</span>, newVal);
+</span></span><span style="display:flex;"><span>        updateCore(left, right, cur.<span style="color:#a6e22e">right</span>, newVal);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        cur.<span style="color:#a6e22e">val</span> <span style="color:#f92672">=</span> merge(cur.<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">val</span>, cur.<span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">val</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span>(Node cur, <span style="color:#66d9ef">int</span> update) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Apply the udpate.</span>
+</span></span><span style="display:flex;"><span>        cur.<span style="color:#a6e22e">val</span> <span style="color:#f92672">=</span> merge(cur.<span style="color:#a6e22e">val</span>, update);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (cur.<span style="color:#a6e22e">low</span> <span style="color:#f92672">!=</span> cur.<span style="color:#a6e22e">high</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Propagate the updates to children.</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (cur.<span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> getMid(cur.<span style="color:#a6e22e">low</span>, cur.<span style="color:#a6e22e">high</span>);
+</span></span><span style="display:flex;"><span>                cur.<span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(0, cur.<span style="color:#a6e22e">low</span>, mid);
+</span></span><span style="display:flex;"><span>                cur.<span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(0, mid <span style="color:#f92672">+</span> 1, cur.<span style="color:#a6e22e">high</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            cur.<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">lazyVal</span> <span style="color:#f92672">=</span> merge(cur.<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">lazyVal</span>, update);
+</span></span><span style="display:flex;"><span>            cur.<span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">lazyVal</span> <span style="color:#f92672">=</span> merge(cur.<span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">lazyVal</span>, update);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">merge</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Math.<span style="color:#a6e22e">max</span>(x, y);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getMid</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> left <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">/</span> 2;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// The value for range [low ... high].</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> low;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> high;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// The lazy update yet to apply.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> lazyVal;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Node left <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Node right <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Node</span>(<span style="color:#66d9ef">int</span> val, <span style="color:#66d9ef">int</span> low, <span style="color:#66d9ef">int</span> high) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">val</span> <span style="color:#f92672">=</span> val;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">low</span> <span style="color:#f92672">=</span> low;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">high</span> <span style="color:#f92672">=</span> high;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lazyVal</span> <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="应用">应用<a hidden class="anchor" aria-hidden="true" href="#应用">#</a></h1>
+<p>上述线段树都基于一个假设，即数组元素允许最小值为<code>0</code>，所以我们把入门篇里所说的<code>null</code>节点的值默认为<code>0</code>。再次重申，对于不同的区间性质(和，最大，最小等)，<code>null</code>节点的默认值需要作相应调整。</p>
+<p>基于上面的线段树可以轻松的解决<a href="https://leetcode.com/problems/falling-squares/">Leetcode 699 Falling Squares</a>,以更低的复杂度！</p>
+<p>原题表述较为啰嗦，总结如下。给定一组方块以<code>positions[][]</code>表示，<code>position[i]</code>表示方块<code>i</code>,<code>position[i][0]</code>表示方块在<code>x</code>轴上坐标，<code>position[i][1]</code>表示方块边长。依次把方块从很高处沿<code>y轴</code>扔下，后面的方块有可能掉在前面方块上。</p>
+<p>比如：
+<code>positions = [[1, 2], [2, 3], [6, 1]]</code>则扔完后会像下图所示。
+<img loading="lazy" src="algorithm-segment-tree-2/falling_squares.png" alt="algorithm-segment-tree-2"  />
+</p>
+<p>现在要求<code>heights[]</code>，<code>heights[i]</code>表示在扔到方块<code>i</code>时，所有已扔方块形成的形状的最高高度。比如上述输入，则结果是<code>[2, 5, 5]</code>。</p>
+<p>此题完全可以暴力解决，维持一个<code>heights[]</code>数组来维持到方块<code>i</code>掉下时的高度。</p>
+<ol>
+<li><code>heights[]</code>长度与方块数相同，初始化为0.</li>
+<li>当方块<code>i</code>掉下时，<code>heights[i] += positions[i][1]</code>。</li>
+<li>同时需要更新方块<code>i</code>覆盖范围内的<code>heights[]</code>。</li>
+<li>取当前最大值作为方块<code>i</code>掉落时的最高高度。</li>
+</ol>
+<p>代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">fallingSquares</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span> positions) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> heights <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>positions.<span style="color:#a6e22e">length</span><span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> ans <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> cur <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> heights.<span style="color:#a6e22e">length</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> positions<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>0<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">int</span> size <span style="color:#f92672">=</span> positions<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>1<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> size <span style="color:#f92672">-</span> 1;
+</span></span><span style="display:flex;"><span>          heights<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">+=</span> size;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> 1; j <span style="color:#f92672">&lt;</span> heights.<span style="color:#a6e22e">length</span>; <span style="color:#f92672">++</span>j) {
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">int</span> left2 <span style="color:#f92672">=</span> positions<span style="color:#f92672">[</span>j<span style="color:#f92672">][</span>0<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">int</span> size2 <span style="color:#f92672">=</span> positions<span style="color:#f92672">[</span>j<span style="color:#f92672">][</span>1<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">int</span> right2 <span style="color:#f92672">=</span> left2 <span style="color:#f92672">+</span> size2 <span style="color:#f92672">-</span> 1;
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">if</span> (left2 <span style="color:#f92672">&lt;=</span> right <span style="color:#f92672">&amp;&amp;</span> right2 <span style="color:#f92672">&gt;=</span> left) {
+</span></span><span style="display:flex;"><span>                  heights<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(heights<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>, heights<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span>);
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          cur <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(cur, heights<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>);
+</span></span><span style="display:flex;"><span>          ans.<span style="color:#a6e22e">add</span>(cur);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>可以看到，上述<code>O(n^2)</code>的算法中，内循环部分是为了找到方块<code>i</code>掉落所覆盖的区域<code>[left ... right]</code>的最大值，线性扫描更新为<code>O(n)</code>。而线段树则能以<code>O(logN)</code>的复杂度<code>query</code>区域<code>[left ... right]</code>的最大值。</p>
+<p>在这里，还需要对已有数据进行个小处理，名为坐标压缩，以便于后续线段树构造。所谓坐标压缩，方块的横坐标较为分散，上面的例子里有<code>1, 2, 6</code>三个离散值，可以一一映射到从<code>0</code>开始，间隔<code>1</code>的坐标中，如下图所示。
+<img loading="lazy" src="algorithm-segment-tree-2/coordinates_compression.png" alt="algorithm-segment-tree-2"  />
+</p>
+<p>代码实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> Map<span style="color:#f92672">&lt;</span>Integer, Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">compressCoord</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span> positions) {
+</span></span><span style="display:flex;"><span>    Set<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> points <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> pos : positions) {
+</span></span><span style="display:flex;"><span>        points.<span style="color:#a6e22e">add</span>(pos<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>);
+</span></span><span style="display:flex;"><span>        points.<span style="color:#a6e22e">add</span>(pos<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> pos<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> 1);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> pointList <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>(points);
+</span></span><span style="display:flex;"><span>    Collections.<span style="color:#a6e22e">sort</span>(pointList);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Map<span style="color:#f92672">&lt;</span>Integer, Integer<span style="color:#f92672">&gt;</span> coords <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> pointList.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">-</span> 1; i <span style="color:#f92672">&gt;=</span> 0; <span style="color:#f92672">--</span>i) {
+</span></span><span style="display:flex;"><span>        coords.<span style="color:#a6e22e">put</span>(pointList.<span style="color:#a6e22e">get</span>(i), i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> coords;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>有了以上铺垫，基于线段树的解法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">fallingSquares</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span> positions) {
+</span></span><span style="display:flex;"><span>    Map<span style="color:#f92672">&lt;</span>Integer, Integer<span style="color:#f92672">&gt;</span> coords <span style="color:#f92672">=</span> compressCoord(positions);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    SegmentTree st <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SegmentTree(coords.<span style="color:#a6e22e">size</span>());
+</span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> ans <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> max <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> pos : positions) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> coords.<span style="color:#a6e22e">get</span>(pos<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> coords.<span style="color:#a6e22e">get</span>(pos<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> pos<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> 1);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> st.<span style="color:#a6e22e">query</span>(left, right) <span style="color:#f92672">+</span> pos<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        st.<span style="color:#a6e22e">update</span>(left, right, height);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        max <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(max, height);
+</span></span><span style="display:flex;"><span>        ans.<span style="color:#a6e22e">add</span>(max);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="dzds.me/tags/programming/">programming</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="dzds.me/posts/java-collections/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Java集合速览</span>
+  </a>
+  <a class="next" href="dzds.me/posts/algorithm-segment-tree/">
+    <span class="title">Next »</span>
+    <br>
+    <span>详解线段树之入门(Segment Tree)</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 详解线段树之进阶(Segment Tree) on x"
+            href="https://x.com/intent/tweet/?text=%e8%af%a6%e8%a7%a3%e7%ba%bf%e6%ae%b5%e6%a0%91%e4%b9%8b%e8%bf%9b%e9%98%b6%28Segment%20Tree%29&amp;url=dzds.me%2fposts%2falgorithm-segment-tree-2%2f&amp;hashtags=programming">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 详解线段树之进阶(Segment Tree) on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=dzds.me%2fposts%2falgorithm-segment-tree-2%2f&amp;title=%e8%af%a6%e8%a7%a3%e7%ba%bf%e6%ae%b5%e6%a0%91%e4%b9%8b%e8%bf%9b%e9%98%b6%28Segment%20Tree%29&amp;summary=%e8%af%a6%e8%a7%a3%e7%ba%bf%e6%ae%b5%e6%a0%91%e4%b9%8b%e8%bf%9b%e9%98%b6%28Segment%20Tree%29&amp;source=dzds.me%2fposts%2falgorithm-segment-tree-2%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 详解线段树之进阶(Segment Tree) on reddit"
+            href="https://reddit.com/submit?url=dzds.me%2fposts%2falgorithm-segment-tree-2%2f&title=%e8%af%a6%e8%a7%a3%e7%ba%bf%e6%ae%b5%e6%a0%91%e4%b9%8b%e8%bf%9b%e9%98%b6%28Segment%20Tree%29">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 详解线段树之进阶(Segment Tree) on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=dzds.me%2fposts%2falgorithm-segment-tree-2%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 详解线段树之进阶(Segment Tree) on whatsapp"
+            href="https://api.whatsapp.com/send?text=%e8%af%a6%e8%a7%a3%e7%ba%bf%e6%ae%b5%e6%a0%91%e4%b9%8b%e8%bf%9b%e9%98%b6%28Segment%20Tree%29%20-%20dzds.me%2fposts%2falgorithm-segment-tree-2%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 详解线段树之进阶(Segment Tree) on telegram"
+            href="https://telegram.me/share/url?text=%e8%af%a6%e8%a7%a3%e7%ba%bf%e6%ae%b5%e6%a0%91%e4%b9%8b%e8%bf%9b%e9%98%b6%28Segment%20Tree%29&amp;url=dzds.me%2fposts%2falgorithm-segment-tree-2%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 详解线段树之进阶(Segment Tree) on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=%e8%af%a6%e8%a7%a3%e7%ba%bf%e6%ae%b5%e6%a0%91%e4%b9%8b%e8%bf%9b%e9%98%b6%28Segment%20Tree%29&u=dzds.me%2fposts%2falgorithm-segment-tree-2%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="dzds.me">多做多说</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

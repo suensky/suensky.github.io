@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>关于我 on 多做多说</title>
+    <link>dzds.me/tags/%E5%85%B3%E4%BA%8E%E6%88%91/</link>
+    <description>Recent content in 关于我 on 多做多说</description>
+    <image>
+      <title>多做多说</title>
+      <url>dzds.me/content/img/icon.png</url>
+      <link>dzds.me/content/img/icon.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 02 Feb 2021 12:13:57 +0000</lastBuildDate>
+    <atom:link href="dzds.me/tags/%E5%85%B3%E4%BA%8E%E6%88%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于我</title>
+      <link>dzds.me/posts/about/</link>
+      <pubDate>Tue, 02 Feb 2021 12:13:57 +0000</pubDate>
+      <guid>dzds.me/posts/about/</guid>
+      <description>sky之小站，做做技术探谈人生</description>
+    </item>
+  </channel>
+</rss>

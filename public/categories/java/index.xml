@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on 多做多说</title>
+    <link>dzds.me/categories/java/</link>
+    <description>Recent content in Java on 多做多说</description>
+    <image>
+      <title>多做多说</title>
+      <url>dzds.me/content/img/icon.png</url>
+      <link>dzds.me/content/img/icon.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 07 Mar 2021 09:52:12 +0000</lastBuildDate>
+    <atom:link href="dzds.me/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java集合速览</title>
+      <link>dzds.me/posts/java-collections/</link>
+      <pubDate>Sun, 07 Mar 2021 09:52:12 +0000</pubDate>
+      <guid>dzds.me/posts/java-collections/</guid>
+      <description>A quick review of Java Collection and Map key methods. Array based collections usually have:
+Method Time complexity add O(1) insert(int index) O(N) remove O(1) remove(int index) O(N) find(Object value) O(N) PriorityQueue, TreeSet and TreeMap are implemented based on balanced tree, thus:
+Method Time complexity offer O(logN) poll O(logN) peek O(1) Overview via a diagram Collections extends Iterable which has below key methods:
+Method Description boolean hasNext() This method returns true if the iterator has more elements.</description>
+    </item>
+  </channel>
+</rss>

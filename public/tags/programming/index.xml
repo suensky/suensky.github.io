@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>programming on 多做多说</title>
+    <link>dzds.me/tags/programming/</link>
+    <description>Recent content in programming on 多做多说</description>
+    <image>
+      <title>多做多说</title>
+      <url>dzds.me/content/img/icon.png</url>
+      <link>dzds.me/content/img/icon.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 12 Jul 2021 11:29:23 +0000</lastBuildDate>
+    <atom:link href="dzds.me/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Recap of Scala tutorial</title>
+      <link>dzds.me/posts/scala-intro/</link>
+      <pubDate>Mon, 12 Jul 2021 11:29:23 +0000</pubDate>
+      <guid>dzds.me/posts/scala-intro/</guid>
+      <description>A cheatsheet that gets you started. The original tutorial can be found here
+Main function The normal version:
+object Hello { def main(args: Array[String]) = { println(&amp;#34;Hello, world&amp;#34;) } } The version that extends App trait
+object Hello extends App { println(&amp;#34;Hello, world&amp;#34;) } // To access args. object Hello extends App { if (args.size == 0) println(&amp;#34;Hello, you&amp;#34;) else println(&amp;#34;Hello, &amp;#34; + args(0)) } As you may notice: no ; needed as ending in Scala.</description>
+    </item>
+    <item>
+      <title>详解水塘抽样(Reservoir sampling)</title>
+      <link>dzds.me/posts/algorithm-reservoir-sampling/</link>
+      <pubDate>Wed, 24 Mar 2021 20:04:23 +0000</pubDate>
+      <guid>dzds.me/posts/algorithm-reservoir-sampling/</guid>
+      <description>一个场景 当内存无法加载全部数据时，如何从包含未知大小的数据流中随机选取k个数据，并且要保证每个数据被抽取到的概率相等。
+水塘抽样 把上述问题具体化为给定一个未知大小数组data[]，从中选取k个数，要求每个数被选中的概率相等。假设数组长度为n，则每个数被选中概率应为k/n。
+策略是：
+对最前面k个数，直接放到数组chosen[]即chosen[i] = data[i] 0 &amp;lt;= i &amp;lt; k。 对data[i], i &amp;gt;= k，先生成个[0...i)间的随机数(左闭右开)，假设rand(0, i) = j，则如果j &amp;lt; k,则做替换chosen[j] = data[i]。否则，nothing happens. 如此反复直到结束。 Java实现如下：
+public class ReservoirSampling { private Random rand = new Random(); public int[] sampling(int[] data, int k) { int[] chosen = new int[k]; int i = 0; for (int d : data) { if (i &amp;lt; k) { chosen[i] = d; } else { int j = rand.</description>
+    </item>
+    <item>
+      <title>Java集合速览</title>
+      <link>dzds.me/posts/java-collections/</link>
+      <pubDate>Sun, 07 Mar 2021 09:52:12 +0000</pubDate>
+      <guid>dzds.me/posts/java-collections/</guid>
+      <description>A quick review of Java Collection and Map key methods. Array based collections usually have:
+Method Time complexity add O(1) insert(int index) O(N) remove O(1) remove(int index) O(N) find(Object value) O(N) PriorityQueue, TreeSet and TreeMap are implemented based on balanced tree, thus:
+Method Time complexity offer O(logN) poll O(logN) peek O(1) Overview via a diagram Collections extends Iterable which has below key methods:
+Method Description boolean hasNext() This method returns true if the iterator has more elements.</description>
+    </item>
+    <item>
+      <title>详解线段树之进阶(Segment Tree)</title>
+      <link>dzds.me/posts/algorithm-segment-tree-2/</link>
+      <pubDate>Fri, 05 Mar 2021 10:43:21 +0000</pubDate>
+      <guid>dzds.me/posts/algorithm-segment-tree-2/</guid>
+      <description>懒更新(lazy update) 上文留下一个问题没有解决，就是对一个区间更新。对一个元素的更新复杂度为O(N),N为数组长度,按上文方法对区间更新，则复杂度为L*O(N), L为区间长度。
+另外，更新原数组元素，是从线段树中对应的叶子节点，一路向上更新到根节点。如果所要更新的区间有很多公共祖先节点，那么这些节点每次都需要被更新一次。如图中如果我们要更新数组中的2, 8, 6分别+5, +1, +9，可以看到图中公共节点如19会更新2次，37则有3次。
+另外，在实际应用中，可能只是某些热点数据会频繁被读取，而大部分数据是在冷宫常年不见天日。有些更新没有必要立即落实到每一个节点，而可以在其被读取时再落实更新。
+这就是懒更新的登场时刻。
+基于数组的实现 既然需要将更新延后落实，那么就需要保存这些更新，所以需要一个与tree长度一致的lazy数组来保存对应节点没有落实的更新。代码如下。几个注意点：
+进入queryCore时，首先需要检查有无当前节点index的更新，如果有，先执行更新，清空该更新，然后继续，其余与正常线段树query区别。 进入updateCore时，也是首先要检查有无当前节点index的更新，如果有，重复上面。 另外，当更新范围[left, right]完全覆盖当前节点代表区间[segLeft, segRight]时，要再次执行更新，但这次update参数是newVal。这是关键点所在，执行完更新，就不用继续递归调用了，因为孩子节点的更新被保存在了lazy[leftChild]和lazy[rightChild]。下次再调用query或者update时，如果执行到节点leftChild或rightChild，则会执行之前保存的更新。 class SegmentTree { private int[] tree; private int[] lazy; private int n; public SegmentTree(int n) { this.n = n; int len = (1 &amp;lt;&amp;lt; (1 + (int)(Math.ceil(Math.log(n) / Math.log(2))))) - 1; tree = new int[len]; lazy = new int[len]; } public int query(int left, int right) { return queryCore(left, right, 0, n - 1, 0); } public void update(int left, int right, int newVal) { updateCore(left, right, 0, n - 1, 0, newVal); } private int queryCore(int left, int right, int segLeft, int segRight, int index) { if (lazy[index] !</description>
+    </item>
+    <item>
+      <title>详解线段树之入门(Segment Tree)</title>
+      <link>dzds.me/posts/algorithm-segment-tree/</link>
+      <pubDate>Thu, 04 Mar 2021 11:40:40 +0000</pubDate>
+      <guid>dzds.me/posts/algorithm-segment-tree/</guid>
+      <description>何为线段树 线段树是基于要研究的数组而构建的数据结构，呈二叉树状。线段树的叶子结点就是所要研究的数组，非叶子节点表示数组的一段区间的某个性质的值。比如此区间的和，或者最大值最小值等等。
+为什么需要线段树呢？试想你需要设计一个功能，给定一个数组，需要你提供两个操作，一是更改某个元素，而是索引某个区间的和，或者最大值，或者最小值，这里以和举例。最直接也是最简单做法当然是直接在数组上操作，O(1)更新，O(N)索引和，N为区间长度。
+class NumArray { public NumArray(int[] nums) { //TODO } // Updates nums[index] = val. public void update(int index, int val) { //TODO} // Gets sum of nums[left ... right]. public int query(int left, int right) { //TODO } } 再进一步，如果需要更新一个区间的元素呢，比如，nums[i] += val, for left &amp;lt;= i &amp;lt;= right。
+class NumArray { // ... // Add val, for nums[i] with left &amp;lt;= i &amp;lt;= right public int add(int left, int right, int val) { //TODO } } 继续以上方法，就是遍历区间，一一更新，与索引相同复杂度:O(N)。</description>
+    </item>
+    <item>
+      <title>详解二叉索引树(Binary Index Tree又名Fenwick Tree)</title>
+      <link>dzds.me/posts/algorithm-fenwick-tree/</link>
+      <pubDate>Wed, 03 Mar 2021 11:38:19 +0000</pubDate>
+      <guid>dzds.me/posts/algorithm-fenwick-tree/</guid>
+      <description>何为BIT BIT是一种数据结构，名为树其实用数组即可表达。其主要作用是给定了一个数组(或多维数组)，BIT可用来：
+O(logN)的复杂度计算给定范围的和,也就是求sum(low, high) O(logN)的复杂度更新数组的一个元素 其构造方法巧妙但简单，可谓大道至简。
+给定一个数组a[0 ... N-1],长度N。 BIT表示为indexes[0 ... N],长度N+1。indexes[i]=sum(g(i) ... i], g(i)=i-i&amp;amp;(-i)，注意是左开右闭区间。i&amp;amp;(-i)得到的是一个数字的二进制表示中只留下最右的1后的数字，比如12=[1100],则12&amp;amp;(-12)只留下最右的1就成了4=[0100]。 注意到indexes[]从1开始计数，所以始终有indexes[0]=0。为了说明方便，在数组a[]前面添加了个元素0。
+看图说话，如此构造后，原数组的和sum[0 ... i]就可以通过把能覆盖range[0 ... i]的indexes[]加起来得到。比如求sum[0 ... 14]，步骤如下，辅以图示。
+先加上indexes[14]，覆盖了a[14], a[13]。 14=[1110],最右1留下后是2=[10],减去后得到12,加上indexes[12]。 12=[1100],最右1留下后是4=[100],减去后得到8,加上indexes[8]。 8=[1000],最右1留下后是8=[1000],减去后得到0，结束。 所以何为BIT,其本质是通过原数组构造一个新数组indexes[]，其中每个元素表示原数组中一段连续子数组的和。范围求和就从线性遍历原数组(O(N))，变成了在indexes[]中快速查找(O(logN))能覆盖所求范围的那几个元素。
+而更新则是与求和相反的一个过程,原数组一个元素a[i]更新后，首先需要更新indexes[i]，然后要不停向上，更新每个覆盖了a[i]的indexes元素。比如,a[9]=2 -&amp;gt; a[9]=10,则有：
+计算一个更新delta, delta=10-2，更新indexes[9]+=delta, 9=[1001],最右1留下后是1=[0001],加上后得到10,更新indexes[10] += delta。 10=[1010],最右1留下后是2=[0010],加上后得到12,更新indexes[12] += delta。 12=[1100],最右1留下后是4=[0100],加上后得到16,更新indexes[16] += delta。 代码如下:
+class BIT { private int[] indexes; private int[] nums; public BIT(int[] nums) { this.nums = nums; indexes = new int[nums.length + 1]; for (int i = 0; i &amp;lt; nums.</description>
+    </item>
+    <item>
+      <title>详解归并排序之应用(Merge sort)</title>
+      <link>dzds.me/posts/algorithm-merge-sort/</link>
+      <pubDate>Tue, 02 Mar 2021 16:17:18 +0000</pubDate>
+      <guid>dzds.me/posts/algorithm-merge-sort/</guid>
+      <description>归并排序基于分治思想，基本步骤是把数组一分为二，分别排序，然后将两个排序好的数组合并，合并两个排序好的数组可以在O(N)的复杂度完成。根据T(N) = 2T(2/N) + N,可以推导出时间复杂度为O(NlogN)。代码如下：
+public void sort(int[] nums) { mergeSort(nums, 0, nums.length - 1); } private void mergeSort(int[] nums, int start, int end) { if (start &amp;gt;= end) { return; } int mid = start + (end - start) / 2; // Step 1: sort nums[start ... mid]. mergeSort(nums, start, mid); // Step 2: sort nums[mid+1 ... end]. mergeSort(nums, mid + 1, end); // Step 3: merge two sorted sub-arrays.</description>
+    </item>
+    <item>
+      <title>详解并查集(Union Find)</title>
+      <link>dzds.me/posts/algorithm_union-find/</link>
+      <pubDate>Mon, 01 Mar 2021 13:12:12 +0000</pubDate>
+      <guid>dzds.me/posts/algorithm_union-find/</guid>
+      <description>What&amp;rsquo;s Union Find? Union Find is useful in finding connected components. The idea behind UF is quite simple.
+You have N items initially. Each item forms its own group by setting parent to pointing to itself, i.e., parents[i] = i. Then you can union two items if they are connected or share some common properties in your problem definition. E.g., union(1,3) will connect item 1 and 3 and make their parents both pointing to the same item.</description>
+    </item>
+    <item>
+      <title>Clubhouse需要你解决的问题之三</title>
+      <link>dzds.me/posts/clubhouse-problem3/</link>
+      <pubDate>Sat, 06 Feb 2021 10:04:40 +0000</pubDate>
+      <guid>dzds.me/posts/clubhouse-problem3/</guid>
+      <description>书接前文，pm升到partner level后，打算再接再厉，把clubhouse推向全宇宙。
+之前一个房间参考微信设置只能容纳500人，pm说500人太少了，应该能容纳5亿人。
+dev一时间不知如何回应，只能拉出了张小龙：做产品不是要节制么。
+pm：做产品没有一成不变的方法论，每个产品我们都要追问自己几个问题：你这个产品的底层逻辑是什么？顶层设计在哪？最终交付价值是什么？过程的抓手在哪？如何保证闭环？你比别人的亮点在哪优势在哪？你的思考和沉淀又是什么？你的独特价值在哪？(*)
+dev：独特价值在哪？
+pm：我们能容纳5亿人在一个房间，地球村我都嫌路远，我称之为地球房。
+dev：可是我的技术能力可能实现不了这么高难度的服务，认真再想了下，以我的技术能力还是去掉可能二字。
+pm：好，那就5000人吧，我已经让步了5个数量级了，可不能再讨价划价了哦。另外，考虑到你的技术能力，给你10%的冗余范围，就是你分布式环境下计数不用做到丝毫无误，高并发下从4500一下跳到5500再阻止人加入也可以，4500时就阻止人加入也可以。
+dev：你是不是一开始就只想要5000人的房间。
+pm：你知道你为什么还是Senior SDE么？
+dev：请指教
+pm：这个功能deliver时，我跟你1：1
+请问，如何完成这个功能，限制房间人数为5000人，超过5000人时自动阻止其余人加入。
+*注: 此段子转自fenng</description>
+    </item>
+    <item>
+      <title>Clubhouse需要你解决的算法题之二</title>
+      <link>dzds.me/posts/clubhouse-problem2/</link>
+      <pubDate>Fri, 05 Feb 2021 17:13:57 +0000</pubDate>
+      <guid>dzds.me/posts/clubhouse-problem2/</guid>
+      <description>书接前文，the coding guy delivered the feature of finding the closest friend in a timely manner. PM got new task from the leads team. They want to improve clubhouse users&amp;rsquo; engagement.
+PM proposed the immediate idea that it would benefit the engagement if we can improve the joining rate of the rooms recommended to users.
+Dev said, I would prefer to join rooms with my closest friends in. That&amp;rsquo;s said, we can recommend rooms based on the closeness between the room and the user.</description>
+    </item>
+    <item>
+      <title>Clubhouse需要你解决的算法题之一</title>
+      <link>dzds.me/posts/clubhouse-problem1/</link>
+      <pubDate>Fri, 05 Feb 2021 16:50:10 +0000</pubDate>
+      <guid>dzds.me/posts/clubhouse-problem1/</guid>
+      <description>Clubhouse大火，平台迅速聚集了大量用户，每个用户都有自己的profile，profile里除了自己的id，还会标注推荐人。现在产品经理提出一个要求，希望能研究任意两个用户的最近的共同好友在哪。程序员也不知道pm为什么要提这么个要求，但这个功能不算费事，所以程序员决定不与pm多做讨论，因为一般情况下，所谓讨论都沦为给pm扩充知识理清思路的过程。简化起见，profile定义如下，完成TODO，注意，这个API可能会被多次调用。
+class Profile { // Id of this profile. public String id; // Id of the person who nominated this person. public String nominatedBy; } public class Clubhouse { public Clubhouse(List&amp;lt;Profile&amp;gt; clubPool) { // TODO ? } public Profile getClosestCommonFriend(Profile a, Profile b) { // TODO } } </description>
+    </item>
+    <item>
+      <title>动态规划系列(1)</title>
+      <link>dzds.me/posts/dp-1/</link>
+      <pubDate>Thu, 04 Feb 2021 12:13:57 +0000</pubDate>
+      <guid>dzds.me/posts/dp-1/</guid>
+      <description>01背包问题（01 backpack problem） Problem Given N items and a bag of weight capacity W. Each item has weight w[i] and value v[i]. What&amp;rsquo;s the most value this bag can hold?
+E.g., N = 5, W = 10. w = [1 2 3 4 5], v = [5 4 3 2 1] Output: 14. Explanation: Choose item 1 2 3 4 whose total weight is 10 and total value is 14. Solution dp[i][j] := the most value to get if taken from item [1:i] and weight &amp;lt;= j.</description>
+    </item>
+  </channel>
+</rss>
