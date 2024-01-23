@@ -1,8 +1,8 @@
 ---
-title: 折腾github action的一天
+title: Automate deploying this blog using Github action
 tags:
   - devops
-nav: 工程实践
+date: 2024-01-07 07:17:16
 categories:
 - DevOps
 image: img/tech.png
