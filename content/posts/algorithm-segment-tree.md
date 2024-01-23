@@ -120,7 +120,7 @@ for (int i = 0; i < a.lenght; ++i) {
 }
 ```
 结合以上代码与下图可以走一遍构造过程。
-![segment tree](algorithm-segment-tree/tree.png)
+![segment tree](/algorithm-segment-tree/tree.png)
 
 大家可能疑问了，这个`tree[]`长度为什么这么计算？很简单，可以看到所构造的线段树是一棵完全二叉树，注意不一定满。其叶子节点共有`N`个，假设最终的深度为`h`,则有`2^h = N`,所以`h = logN`。接下来就是等比求和`1+2+4+...+2^h = 2^(1+h) - 1`。因为不一定是满二叉树，所以要`logN`往上取整。这也说明，会有一些节点永远不会被用到而浪费空间。
 

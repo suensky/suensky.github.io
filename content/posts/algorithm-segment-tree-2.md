@@ -13,7 +13,7 @@ image: img/tech.png
 
 另外，更新原数组元素，是从线段树中对应的叶子节点，一路向上更新到根节点。如果所要更新的区间有很多公共祖先节点，那么这些节点每次都需要被更新一次。如图中如果我们要更新数组中的`2, 8, 6`分别`+5, +1, +9`，可以看到图中公共节点如`19`会更新`2`次，`37`则有`3`次。
 
-![algorithm-segment-tree-2](algorithm-segment-tree-2/segtree.png)
+![algorithm-segment-tree-2](/algorithm-segment-tree-2/segtree.png)
 
 另外，在实际应用中，可能只是某些热点数据会频繁被读取，而大部分数据是在冷宫常年不见天日。有些更新没有必要立即落实到每一个节点，而可以在其被读取时再落实更新。
 
@@ -238,7 +238,7 @@ class SegmentTree {
 
 比如：
 `positions = [[1, 2], [2, 3], [6, 1]]`则扔完后会像下图所示。
-![algorithm-segment-tree-2](algorithm-segment-tree-2/falling_squares.png)
+![algorithm-segment-tree-2](/algorithm-segment-tree-2/falling_squares.png)
 
 现在要求`heights[]`，`heights[i]`表示在扔到方块`i`时，所有已扔方块形成的形状的最高高度。比如上述输入，则结果是`[2, 5, 5]`。
 
@@ -280,7 +280,7 @@ public List<Integer> fallingSquares(int[][] positions) {
 可以看到，上述`O(n^2)`的算法中，内循环部分是为了找到方块`i`掉落所覆盖的区域`[left ... right]`的最大值，线性扫描更新为`O(n)`。而线段树则能以`O(logN)`的复杂度`query`区域`[left ... right]`的最大值。
 
 在这里，还需要对已有数据进行个小处理，名为坐标压缩，以便于后续线段树构造。所谓坐标压缩，方块的横坐标较为分散，上面的例子里有`1, 2, 6`三个离散值，可以一一映射到从`0`开始，间隔`1`的坐标中，如下图所示。
-![algorithm-segment-tree-2](algorithm-segment-tree-2/coordinates_compression.png)
+![algorithm-segment-tree-2](/algorithm-segment-tree-2/coordinates_compression.png)
 
 代码实现：
 ```java

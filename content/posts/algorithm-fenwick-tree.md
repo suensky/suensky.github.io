@@ -21,7 +21,7 @@ BIT是一种数据结构，名为树其实用数组即可表达。其主要作�
 
 注意到`indexes[]`从`1`开始计数，所以始终有`indexes[0]=0`。为了说明方便，在数组`a[]`前面添加了个元素`0`。
 
-![fenwicktree](algorithm-fenwick-tree/fenwick_tree.png)
+![fenwicktree](/algorithm-fenwick-tree/fenwick_tree.png)
 
 看图说话，如此构造后，原数组的和`sum[0 ... i]`就可以通过把能覆盖`range[0 ... i]`的`indexes[]`加起来得到。比如求`sum[0 ... 14]`，步骤如下，辅以图示。
 1. 先加上`indexes[14]`，覆盖了`a[14], a[13]`。
@@ -29,7 +29,7 @@ BIT是一种数据结构，名为树其实用数组即可表达。其主要作�
 3. `12=[1100]`,最右`1`留下后是`4=[100]`,减去后得到`8`,加上`indexes[8]`。
 4. `8=[1000]`,最右`1`留下后是`8=[1000]`,减去后得到`0`，结束。
 
-![fenwicktree2](algorithm-fenwick-tree/fenwick_tree2.png)
+![fenwicktree2](/algorithm-fenwick-tree/fenwick_tree2.png)
 
 所以何为BIT,其本质是通过原数组构造一个新数组`indexes[]`，其中**每个元素表示原数组中一段连续子数组的和**。范围求和就从线性遍历原数组(`O(N)`)，变成了在`indexes[]`中快速查找(`O(logN)`)能覆盖所求范围的那几个元素。
 

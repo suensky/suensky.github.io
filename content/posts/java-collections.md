@@ -27,7 +27,7 @@ poll | O(logN)
 peek | O(1)
 
 # Overview via a diagram
-![Overview](java-collections/java-collections.png)
+![Overview](/java-collections/java-collections.png)
 
 `Collections` extends `Iterable` which has below key methods:
 

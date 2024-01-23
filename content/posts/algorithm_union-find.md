@@ -13,7 +13,7 @@ Union Find is useful in finding connected components. The idea behind UF is quit
 1. You have **N** items initially. Each item forms its own group by setting parent to pointing to itself, i.e., `parents[i] = i`.
 2. Then you can union two items if they are connected or share some common properties in your problem definition. E.g., `union(1,3)` will connect item 1 and 3 and make their parents both pointing to the same item.
 3. You can continue `union(x, y)` and put more items into one group.
-![Disjoint Set process](algorithm_union-find/dsu.png)
+![Disjoint Set process](/algorithm_union-find/dsu.png)
 
 A very common implementation of Disjoint Set Union. Here I applied two optimization: path compression and union by rank. The idea is to flatten the tree when `find(x)` is called so as to reduce the time complexity, which is `O(logN)` now. In reality, the amortized time complexity is a very small constant. Refer to [wiki](https://en.wikipedia.org/wiki/Disjoint-set_data_structure) for more detailed discussion.
 ```java
@@ -146,7 +146,7 @@ Input:  \
 ]
 Output: 2 \
 Explanation: The 2x2 grid is as follows: \
-![eg1](algorithm_union-find/1.png)
+![eg1](/algorithm_union-find/1.png)
 
 **Example 2:** \
 Input:  \
@@ -156,7 +156,7 @@ Input:  \
 ]
 Output: 1 \
 Explanation: The 2x2 grid is as follows: \
-![eg2](algorithm_union-find/2.png)
+![eg2](/algorithm_union-find/2.png)
 
 Example 1:
 Input:  \
@@ -166,7 +166,7 @@ Input:  \
 ]
 Output: 4 \
 Explanation: The 2x2 grid is as follows: \
-![eg3](algorithm_union-find/3.png)
+![eg3](/algorithm_union-find/3.png)
 
 ### Solution
 It's not straightforward to link this problem to UF though the regions cut by the slashes may remind of groups then UF. First, if we each grid cell into 4 small cells like below figure, we know that the four small cells are connected to each other without slashes or back slashes. Also, we know that each small cell connects to its neighbor small cell regardless of slashes or back slashes. Let `cell(row, col, index)` represents the small cell of `index` at `grid[row][col]`. Then we get:
@@ -175,7 +175,7 @@ It's not straightforward to link this problem to UF though the regions cut by th
  3. If there is no / in `grid[row][col]`, then `cell(row, col, 0)` connects to `cell(row, col, 3)` and `cell(row, col, 1)` connects to `cell(row, col, 2)`.
  4. If there is no \\ in `grid[row][col]`, then `cell(row, col, 0)` connects to `cell(row, col, 1)` and `cell(row, col, 2)` connects to `cell(row, col, 3)`.
 
-![eg3](algorithm_union-find/dsu_4.png)
+![eg3](/algorithm_union-find/dsu_4.png)
 
 With above in mind, we can apply UF here by initially setting each small cell to its own group. Iterate all small cells and union connected cells based on the above rules. The resulting groups is the answer to this problem.
 
