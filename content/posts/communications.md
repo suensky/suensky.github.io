@@ -13,4 +13,4 @@ image: img/communications.jpeg
 复观众生：所历殊途，境界悬隔，智识云泥。虽同观一物，所见深浅迥异；共闻一语，所会旨趣悬殊。理喻之难，甚于登天。
 是以倦于置喙，但守方寸。于洪流大势，静观而已矣——言既难契于众听，身亦莫挽乎滔滔之势。
 
-![沟通](img/communications.jpeg)
+![沟通](/img/communications.jpeg)
