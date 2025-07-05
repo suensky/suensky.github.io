@@ -4,6 +4,10 @@ title: 多做多说
 
 theme: "PaperMod"
 
+taxonomies:
+  tag: tags
+  category: categories
+
 # 在页面上方加入菜单
 menu:
   main:
