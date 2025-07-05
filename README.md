@@ -1,27 +1,43 @@
-## Install
-- Install nodejs
-- `npm install hexo`
+## Hugo Setup
 
-Checkout `package.json` for npm commands
+### Install Hugo
+Make sure Hugo is installed. If not, you can install it using Homebrew:
 
-## build
-`npm run build`
+```bash
+brew install hugo
+```
 
-## start local
-`npm run start`
+### Initialize Submodules
+Ensure the PaperMod theme is initialized:
 
-## deploy
-`hexo deploy` or `npm run deploy`
+```bash
+git submodule update --init --recursive
+```
 
-### build && deploy
-`npm run build && hexo deploy`
+### Running the Site Locally
+To start a local development server:
 
-### git update
-`git add --all && git commit -am "Update" && git push` or `npm run push`
+```bash
+hugo server -D
+```
 
-### shortcuts
-`npm run deploy` \
-`npm run push`
+### Building the Site
+To generate the static files:
 
-### new post
-`hexo new post <this_is_post_title>`
+```bash
+hugo
+```
+
+### Creating New Content
+To create a new post:
+
+```bash
+hugo new content/posts/your-post-title.md
+```
+
+### Updating the Theme
+To update the PaperMod theme:
+
+```bash
+git submodule update --remote --merge
+```
