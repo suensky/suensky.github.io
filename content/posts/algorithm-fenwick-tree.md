@@ -1,7 +1,7 @@
 ---
 title: 详解二叉索引树(Binary Index Tree又名Fenwick Tree)
 tags:
-- programming
+- 代码如诗
 nav: 算法专题
 categories:
 - 算法详解

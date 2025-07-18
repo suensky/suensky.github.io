@@ -1,7 +1,7 @@
 ---
 title: Java集合速览
 tags:
-- programming
+- 代码如诗
 nav: 编程语言
 categories:
 - Java

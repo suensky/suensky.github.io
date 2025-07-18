@@ -1,8 +1,7 @@
 ---
 title: 动态规划系列(1)
 tags:
-- DP
-- programming
+- 代码如诗
 nav: 算法专题
 categories:
 - 算法题解

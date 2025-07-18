@@ -1,7 +1,7 @@
 ---
 title: 详解归并排序之应用(Merge sort)
 tags:
-- programming
+- 代码如诗
 nav: 算法专题
 categories:
 - 算法详解

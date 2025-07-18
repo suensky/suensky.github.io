@@ -1,7 +1,7 @@
 ---
 title: Recap of Scala tutorial
 tags:
-  - programming
+  - 代码如诗
 nav: 编程语言
 categories:
 - Scala

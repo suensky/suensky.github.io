@@ -1,7 +1,7 @@
 ---
 title: 详解并查集(Union Find)
 tags:
-- programming
+- 代码如诗
 nav: 算法专题
 categories:
 - 算法详解

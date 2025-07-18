@@ -1,7 +1,7 @@
 ---
 title: 无聊的词句有人叫诗
 tags:
-- 随笔
+- 诗
 nav: 诗和远方
 categories:
 - 诗

@@ -1,10 +1,10 @@
 ---
 title: Automate deploying this blog using Github action
 tags:
-  - devops
+  - 代码如诗
 date: 2024-01-07 07:17:16
 categories:
-- DevOps
+- 代码如诗
 image: img/tech.png
 ---
 

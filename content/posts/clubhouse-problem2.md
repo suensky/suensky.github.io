@@ -1,7 +1,7 @@
 ---
 title: Clubhouse需要你解决的算法题之二
 tags:
-- programming
+- 代码如诗
 nav: 算法专题
 categories:
 - 趣谈算法

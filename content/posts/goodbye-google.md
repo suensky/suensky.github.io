@@ -1,7 +1,7 @@
 ---
 title: 夏日绝句
 tags:
-  - 随笔
+  - 诗
 nav: 诗和远方
 categories:
 - 诗

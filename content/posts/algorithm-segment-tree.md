@@ -1,7 +1,7 @@
 ---
 title: 详解线段树之入门(Segment Tree)
 tags:
-- programming
+- 代码如诗
 nav: 算法专题
 categories:
 - 算法详解
