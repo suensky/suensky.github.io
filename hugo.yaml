@@ -3,6 +3,7 @@ languageCode: en-us
 title: 多做多说
 
 theme: "PaperMod"
+hasCJKLanguage: true
 
 taxonomies:
   tag: tags
@@ -66,4 +67,3 @@ params:
     favicon32x32: "/img/icon.png"
     apple_touch_icon: "/img/icon.png"
     safari_pinned_tab: "/img/icon.png"
-
