@@ -20,4 +20,4 @@ Sharp 的人，思维永远是抢跑的。 他们能预判说话人的意图，�
 
 这就是所谓的“沟通成本”。 不同频的人在一起开会，低效的表达不仅是浪费时间，更是一种集体智力的降级。 想不清楚，自然就说不明白。
 
-![expression_is_thinking](/img/expression_is_thinking.png)
+![expression_is_thinking](/img/expression_is_thinking.jpg)
