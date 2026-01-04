@@ -1,0 +1,149 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(var(--color-bg-rgb, 250, 250, 250), 0.8);
+    backdrop-filter: blur(10px);
+
+}
+
+:global(.dark) .header {
+    background-color: rgba(15, 15, 20, 0.8);
+}
+
+.headerInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    max-width: var(--container-wide);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.logo:hover {
+    color: var(--color-accent);
+}
+
+.logoText {
+    font-size: 1.125rem;
+    letter-spacing: -0.02em;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.navLink {
+    padding: var(--space-sm) var(--space-md);
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.navLink:hover {
+    color: var(--color-text);
+    background-color: var(--color-bg-tertiary);
+}
+
+.navLink.active {
+    color: var(--color-accent);
+    background-color: var(--color-accent-light);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.themeToggle,
+.langToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    height: 36px;
+    padding: 0 var(--space-sm);
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-tertiary);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.themeToggle {
+    width: 36px;
+    padding: 0;
+}
+
+.themeToggle:hover,
+.langToggle:hover {
+    color: var(--color-accent);
+    background-color: var(--color-accent-light);
+}
+
+.langLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.menuToggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: var(--color-text-secondary);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        padding: var(--space-md);
+        background-color: var(--color-bg-secondary);
+
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all var(--transition-base);
+    }
+
+    .navOpen {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .navLink {
+        width: 100%;
+        text-align: center;
+        padding: var(--space-md);
+    }
+
+    .menuToggle {
+        display: flex;
+    }
+
+    .langLabel {
+        display: none;
+    }
+}

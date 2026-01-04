@@ -1,0 +1,200 @@
+.archiveLayout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: var(--space-2xl);
+    padding: var(--space-xl) 0 var(--space-3xl);
+    max-width: var(--container-wide);
+}
+
+.mainContent {
+    min-width: 0;
+}
+
+.filterBanner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-xl);
+    background-color: var(--color-accent-light);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-size: 0.9375rem;
+}
+
+.clearFilter {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8125rem;
+    color: var(--color-accent);
+    background-color: white;
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.clearFilter:hover {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+.timeline {
+    /* No changes needed */
+}
+
+.yearSection {
+    margin-bottom: var(--space-2xl);
+}
+
+.yearSection:last-child {
+    margin-bottom: 0;
+}
+
+.yearTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid var(--color-accent-light);
+}
+
+.postList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.postItem {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color var(--transition-fast);
+}
+
+.postItem:last-child {
+    border-bottom: none;
+}
+
+.postItem:hover {
+    background-color: var(--color-bg-tertiary);
+    margin: 0 calc(-1 * var(--space-sm));
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+}
+
+.postDate {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    font-family: var(--font-mono);
+    min-width: 50px;
+}
+
+.postTitle {
+    color: var(--color-text);
+    font-size: 1rem;
+    transition: color var(--transition-fast);
+}
+
+.postTitle:hover {
+    color: var(--color-accent);
+}
+
+/* Sidebar */
+.sidebar {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+}
+
+.tagsSection {
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+}
+
+.sidebarTitle {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-md);
+}
+
+.tagCloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.tagItem {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-tertiary);
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.tagItem:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-light);
+}
+
+.tagItem.tagActive {
+    color: white;
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.tagCount {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background-color: var(--color-bg-secondary);
+    padding: 0 var(--space-xs);
+    border-radius: var(--radius-full);
+    min-width: 18px;
+    text-align: center;
+}
+
+.tagItem:hover .tagCount {
+    color: var(--color-accent);
+    background-color: white;
+}
+
+.tagItem.tagActive .tagCount {
+    color: var(--color-accent);
+    background-color: white;
+}
+
+@media (max-width: 900px) {
+    .archiveLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+        order: -1;
+    }
+
+    .filterBanner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
