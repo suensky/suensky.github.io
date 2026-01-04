@@ -33,6 +33,7 @@ export default function RootLayout({
                     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
                     rel="stylesheet"
                 />
+                {/* Syntax highlighting theme */}
                 <link
                     rel="stylesheet"
                     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
