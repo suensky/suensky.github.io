@@ -186,6 +186,8 @@
 @media (max-width: 900px) {
     .archiveLayout {
         grid-template-columns: 1fr;
+        padding-left: var(--space-md);
+        padding-right: var(--space-md);
     }
 
     .sidebar {

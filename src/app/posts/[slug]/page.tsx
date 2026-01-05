@@ -9,6 +9,40 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import styles from './page.module.css';
 import ScrollTopButton from './ScrollTopButton';
+import TableOfContents from './TableOfContents';
+
+// Strip markdown syntax from text (links, bold, italic, code)
+function stripMarkdown(text: string): string {
+    return text
+        // Remove markdown links: [text](url) -> text
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        // Remove inline code: `code` -> code
+        .replace(/`([^`]+)`/g, '$1')
+        // Remove bold: **text** or __text__ -> text
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/__([^_]+)__/g, '$1')
+        // Remove italic: *text* or _text_ -> text
+        .replace(/\*([^*]+)\*/g, '$1')
+        .replace(/_([^_]+)_/g, '$1')
+        .trim();
+}
+
+// Generate a URL-friendly ID from heading text
+function generateId(text: string): string {
+    const cleanText = stripMarkdown(text);
+    return cleanText
+        .toLowerCase()
+        .replace(/[^\w\u4e00-\u9fff\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+}
+
+// Check if content has headings for TOC
+function hasHeadings(content: string): boolean {
+    const headingRegex = /^#{1,3}\s+.+$/m;
+    return headingRegex.test(content);
+}
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -46,118 +80,139 @@ export default async function PostPage({ params }: Props) {
         notFound();
     }
 
+    const showToc = hasHeadings(post.content);
+
     return (
-        <div className="container">
-            <article className={styles.article}>
-                <header className={styles.header}>
-                    <Link href="/" className={styles.backLink}>
-                        <ArrowLeft size={16} />
-                        返回首页
-                    </Link>
-
-                    <h1 className={styles.title}>{post.title}</h1>
-
-                    <div className={styles.meta}>
-                        <span className={styles.metaItem}>
-                            <Calendar size={16} />
-                            {new Date(post.date).toLocaleDateString('zh-CN', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric',
-                            })}
-                        </span>
-                        <span className={styles.metaItem}>
-                            <Clock size={16} />
-                            {post.readingTime} 分钟阅读
-                        </span>
-                    </div>
-
-                    {post.tags.length > 0 && (
-                        <div className={styles.tags}>
-                            {post.tags.map((tag) => (
-                                <Link
-                                    key={tag}
-                                    href={`/archive?tag=${encodeURIComponent(tag)}`}
-                                    className="tag"
-                                >
-                                    {tag}
-                                </Link>
-                            ))}
-                        </div>
-                    )}
-                </header>
-
-                <div className={`prose ${styles.content}`}>
-                    <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        rehypePlugins={[rehypeHighlight, rehypeRaw]}
-                        components={{
-                            img: ({ src, alt }) => {
-                                // Handle relative image paths
-                                const imgSrc = src?.startsWith('/') ? src : `/${src}`;
-                                return (
-                                    <img
-                                        src={imgSrc}
-                                        alt={alt || ''}
-                                        loading="lazy"
-                                        style={{ maxWidth: '100%', height: 'auto', borderRadius: '0.5rem' }}
-                                    />
-                                );
-                            },
-                            a: ({ href, children }) => {
-                                const isExternal = href?.startsWith('http');
-                                return (
-                                    <a
-                                        href={href}
-                                        target={isExternal ? '_blank' : undefined}
-                                        rel={isExternal ? 'noopener noreferrer' : undefined}
-                                    >
-                                        {children}
-                                    </a>
-                                );
-                            },
-                        }}
-                    >
-                        {post.content}
-                    </ReactMarkdown>
-                </div>
-
-                <footer className={styles.footer}>
-                    <nav className={styles.postNav}>
-                        {prev ? (
-                            <Link href={`/posts/${prev.slug}`} className={styles.navPrev}>
-                                <ChevronLeft size={20} />
-                                <div className={styles.navContent}>
-                                    <span className={styles.navLabel}>上一篇</span>
-                                    <span className={styles.navTitle}>{prev.title}</span>
-                                </div>
-                            </Link>
-                        ) : (
-                            <div className={styles.navPlaceholder} />
-                        )}
-
-                        {next ? (
-                            <Link href={`/posts/${next.slug}`} className={styles.navNext}>
-                                <div className={styles.navContent}>
-                                    <span className={styles.navLabel}>下一篇</span>
-                                    <span className={styles.navTitle}>{next.title}</span>
-                                </div>
-                                <ChevronRight size={20} />
-                            </Link>
-                        ) : (
-                            <div className={styles.navPlaceholder} />
-                        )}
-                    </nav>
-
-                    <div className={styles.footerActions}>
-                        <Link href="/" className={styles.footerLink}>
+        <div className={showToc ? "container container-wide" : "container"}>
+            <div className={showToc ? styles.articleContainer : undefined}>
+                <article className={styles.article}>
+                    <header className={styles.header}>
+                        <Link href="/" className={styles.backLink}>
                             <ArrowLeft size={16} />
                             返回首页
                         </Link>
-                        <ScrollTopButton />
+
+                        <h1 className={styles.title}>{post.title}</h1>
+
+                        <div className={styles.meta}>
+                            <span className={styles.metaItem}>
+                                <Calendar size={16} />
+                                {new Date(post.date).toLocaleDateString('zh-CN', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric',
+                                })}
+                            </span>
+                            <span className={styles.metaItem}>
+                                <Clock size={16} />
+                                {post.readingTime} 分钟阅读
+                            </span>
+                        </div>
+
+                        {post.tags.length > 0 && (
+                            <div className={styles.tags}>
+                                {post.tags.map((tag) => (
+                                    <Link
+                                        key={tag}
+                                        href={`/archive?tag=${encodeURIComponent(tag)}`}
+                                        className="tag"
+                                    >
+                                        {tag}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </header>
+
+                    <div className={`prose ${styles.content}`}>
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                            components={{
+                                h1: ({ children }) => {
+                                    const text = String(children);
+                                    const id = generateId(text);
+                                    return <h1 id={id}>{children}</h1>;
+                                },
+                                h2: ({ children }) => {
+                                    const text = String(children);
+                                    const id = generateId(text);
+                                    return <h2 id={id}>{children}</h2>;
+                                },
+                                h3: ({ children }) => {
+                                    const text = String(children);
+                                    const id = generateId(text);
+                                    return <h3 id={id}>{children}</h3>;
+                                },
+                                img: ({ src, alt }) => {
+                                    // Handle relative image paths
+                                    const imgSrc = src?.startsWith('/') ? src : `/${src}`;
+                                    return (
+                                        <img
+                                            src={imgSrc}
+                                            alt={alt || ''}
+                                            loading="lazy"
+                                            style={{ maxWidth: '100%', height: 'auto', borderRadius: '0.5rem' }}
+                                        />
+                                    );
+                                },
+                                a: ({ href, children }) => {
+                                    const isExternal = href?.startsWith('http');
+                                    return (
+                                        <a
+                                            href={href}
+                                            target={isExternal ? '_blank' : undefined}
+                                            rel={isExternal ? 'noopener noreferrer' : undefined}
+                                        >
+                                            {children}
+                                        </a>
+                                    );
+                                },
+                            }}
+                        >
+                            {post.content}
+                        </ReactMarkdown>
                     </div>
-                </footer>
-            </article>
+
+                    <footer className={styles.footer}>
+                        <nav className={styles.postNav}>
+                            {prev ? (
+                                <Link href={`/posts/${prev.slug}`} className={styles.navPrev}>
+                                    <ChevronLeft size={20} />
+                                    <div className={styles.navContent}>
+                                        <span className={styles.navLabel}>上一篇</span>
+                                        <span className={styles.navTitle}>{prev.title}</span>
+                                    </div>
+                                </Link>
+                            ) : (
+                                <div className={styles.navPlaceholder} />
+                            )}
+
+                            {next ? (
+                                <Link href={`/posts/${next.slug}`} className={styles.navNext}>
+                                    <div className={styles.navContent}>
+                                        <span className={styles.navLabel}>下一篇</span>
+                                        <span className={styles.navTitle}>{next.title}</span>
+                                    </div>
+                                    <ChevronRight size={20} />
+                                </Link>
+                            ) : (
+                                <div className={styles.navPlaceholder} />
+                            )}
+                        </nav>
+
+                        <div className={styles.footerActions}>
+                            <Link href="/" className={styles.footerLink}>
+                                <ArrowLeft size={16} />
+                                返回首页
+                            </Link>
+                            <ScrollTopButton />
+                        </div>
+                    </footer>
+                </article>
+
+                {showToc && <TableOfContents content={post.content} />}
+            </div>
         </div>
     );
 }

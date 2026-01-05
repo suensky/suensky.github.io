@@ -24,13 +24,6 @@ export default function HomeClient({ posts }: HomeClientProps) {
     return (
         <div className="container">
             <section className={styles.posts}>
-                <div className={styles.sectionHeader}>
-                    <h2>{t('latestPosts')}</h2>
-                    <Link href="/archive" className={styles.viewAll}>
-                        {t('viewAll')} <ArrowRight size={16} />
-                    </Link>
-                </div>
-
                 <div className={styles.postList}>
                     {posts.slice(0, 10).map((post, index) => (
                         <article

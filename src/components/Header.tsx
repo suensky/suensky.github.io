@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Sun, Moon, Menu, X, Globe } from 'lucide-react';
+import { Sun, Moon, Globe, Settings } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { useLanguage } from './LanguageProvider';
 import { useState } from 'react';
@@ -12,9 +11,7 @@ import styles from './Header.module.css';
 const isDev = process.env.NODE_ENV === 'development';
 
 export default function Header() {
-    const pathname = usePathname();
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { language, setLanguage, t } = useLanguage();
 
     // Use theme from context if available
@@ -34,31 +31,12 @@ export default function Header() {
         setLanguage(language === 'zh' ? 'en' : 'zh');
     };
 
-    const navLinks = [
-        { href: '/', label: t('home') },
-        { href: '/archive', label: t('archive') },
-        ...(isDev ? [{ href: '/admin', label: t('admin') }] : []),
-    ];
-
     return (
         <header className={styles.header}>
             <div className={`container ${styles.headerInner}`}>
                 <Link href="/" className={styles.logo}>
                     <span className={styles.logoText}>多做多说</span>
                 </Link>
-
-                <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className={`${styles.navLink} ${pathname === link.href ? styles.active : ''}`}
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
-                </nav>
 
                 <div className={styles.actions}>
                     <button
@@ -79,13 +57,16 @@ export default function Header() {
                         {currentTheme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
                     </button>
 
-                    <button
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className={styles.menuToggle}
-                        aria-label="Toggle menu"
-                    >
-                        {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-                    </button>
+                    {isDev && (
+                        <Link
+                            href="/admin"
+                            className={styles.themeToggle}
+                            aria-label="Admin"
+                            title={t('admin')}
+                        >
+                            <Settings size={18} />
+                        </Link>
+                    )}
                 </div>
             </div>
         </header>
