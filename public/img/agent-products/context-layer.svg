@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="760" viewBox="0 0 1300 760" role="img" aria-label="Stateful Context Layer">
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+<marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#dc2626"/></marker>
+<filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.12"/></filter>
+<style>
+text{font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill:#0f172a} .title{font-size:34px;font-weight:800}.subtitle{font-size:17px;fill:#475569}.label{font-size:18px;font-weight:700}.small{font-size:14px;fill:#334155}.tiny{font-size:12px;fill:#475569}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}.muted{fill:#64748b}
+</style>
+</defs>
+<rect x="0" y="0" width="1300" height="760" fill="#f8fafc"/>
+<text x="650" y="44" text-anchor="middle" class="title">Stateful Context Layer</text>
+<text x="650" y="72" text-anchor="middle" class="subtitle">Everything that must survive process failure</text>
+<rect x="70" y="130" width="340" height="220" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2" filter=""/>
+<text x="240" y="160" class="label" text-anchor="middle">Short-Term Context</text>
+<circle cx="96" cy="183" r="4" fill="#15803d"/>
+<text x="112" y="188" class="small" text-anchor="start">Conversation history</text>
+<circle cx="96" cy="208" r="4" fill="#15803d"/>
+<text x="112" y="213" class="small" text-anchor="start">Current task</text>
+<circle cx="96" cy="233" r="4" fill="#15803d"/>
+<text x="112" y="238" class="small" text-anchor="start">Working set</text>
+<circle cx="96" cy="258" r="4" fill="#15803d"/>
+<text x="112" y="263" class="small" text-anchor="start">Context-window assembly</text>
+<rect x="470" y="130" width="340" height="220" rx="16" fill="#f0fdfa" stroke="#0f766e" stroke-width="2" filter=""/>
+<text x="640" y="160" class="label" text-anchor="middle">Long-Term Memory</text>
+<circle cx="496" cy="183" r="4" fill="#0f766e"/>
+<text x="512" y="188" class="small" text-anchor="start">User preferences</text>
+<circle cx="496" cy="208" r="4" fill="#0f766e"/>
+<text x="512" y="213" class="small" text-anchor="start">Organization facts</text>
+<circle cx="496" cy="233" r="4" fill="#0f766e"/>
+<text x="512" y="238" class="small" text-anchor="start">Domain knowledge</text>
+<circle cx="496" cy="258" r="4" fill="#0f766e"/>
+<text x="512" y="263" class="small" text-anchor="start">Prior outcomes</text>
+<circle cx="496" cy="283" r="4" fill="#0f766e"/>
+<text x="512" y="288" class="small" text-anchor="start">Semantic retrieval</text>
+<rect x="870" y="130" width="340" height="220" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="2" filter=""/>
+<text x="1040" y="160" class="label" text-anchor="middle">Durable State</text>
+<circle cx="896" cy="183" r="4" fill="#2563eb"/>
+<text x="912" y="188" class="small" text-anchor="start">Run status</text>
+<circle cx="896" cy="208" r="4" fill="#2563eb"/>
+<text x="912" y="213" class="small" text-anchor="start">Current step</text>
+<circle cx="896" cy="233" r="4" fill="#2563eb"/>
+<text x="912" y="238" class="small" text-anchor="start">Pending tool calls</text>
+<circle cx="896" cy="258" r="4" fill="#2563eb"/>
+<text x="912" y="263" class="small" text-anchor="start">Tool results</text>
+<circle cx="896" cy="283" r="4" fill="#2563eb"/>
+<text x="912" y="288" class="small" text-anchor="start">Approvals</text>
+<circle cx="896" cy="308" r="4" fill="#2563eb"/>
+<text x="912" y="313" class="small" text-anchor="start">Error state</text>
+<rect x="70" y="400" width="340" height="220" rx="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" filter=""/>
+<text x="240" y="430" class="label" text-anchor="middle">Checkpoints</text>
+<circle cx="96" cy="453" r="4" fill="#7c3aed"/>
+<text x="112" y="458" class="small" text-anchor="start">Step snapshots</text>
+<circle cx="96" cy="478" r="4" fill="#7c3aed"/>
+<text x="112" y="483" class="small" text-anchor="start">State diffs</text>
+<circle cx="96" cy="503" r="4" fill="#7c3aed"/>
+<text x="112" y="508" class="small" text-anchor="start">Idempotency keys</text>
+<circle cx="96" cy="528" r="4" fill="#7c3aed"/>
+<text x="112" y="533" class="small" text-anchor="start">Recovery cursors</text>
+<rect x="470" y="400" width="340" height="220" rx="16" fill="#fff7ed" stroke="#ea580c" stroke-width="2" filter=""/>
+<text x="640" y="430" class="label" text-anchor="middle">Structured Context</text>
+<circle cx="496" cy="453" r="4" fill="#ea580c"/>
+<text x="512" y="458" class="small" text-anchor="start">Graph data</text>
+<circle cx="496" cy="478" r="4" fill="#ea580c"/>
+<text x="512" y="483" class="small" text-anchor="start">SQL / KV records</text>
+<circle cx="496" cy="503" r="4" fill="#ea580c"/>
+<text x="512" y="508" class="small" text-anchor="start">Task history</text>
+<circle cx="496" cy="528" r="4" fill="#ea580c"/>
+<text x="512" y="533" class="small" text-anchor="start">Entity profiles</text>
+<circle cx="496" cy="553" r="4" fill="#ea580c"/>
+<text x="512" y="558" class="small" text-anchor="start">Artifacts</text>
+<rect x="870" y="400" width="340" height="220" rx="16" fill="#fff1f2" stroke="#dc2626" stroke-width="2" filter=""/>
+<text x="1040" y="430" class="label" text-anchor="middle">Policy Context</text>
+<circle cx="896" cy="453" r="4" fill="#dc2626"/>
+<text x="912" y="458" class="small" text-anchor="start">Permissions</text>
+<circle cx="896" cy="478" r="4" fill="#dc2626"/>
+<text x="912" y="483" class="small" text-anchor="start">Tenant boundaries</text>
+<circle cx="896" cy="503" r="4" fill="#dc2626"/>
+<text x="912" y="508" class="small" text-anchor="start">Tool access</text>
+<circle cx="896" cy="528" r="4" fill="#dc2626"/>
+<text x="912" y="533" class="small" text-anchor="start">Retention rules</text>
+<circle cx="896" cy="553" r="4" fill="#dc2626"/>
+<text x="912" y="558" class="small" text-anchor="start">Compliance constraints</text>
+<rect x="210" y="650" width="880" height="70" rx="16" fill="#ffffff" stroke="#0f172a" stroke-width="2" filter=""/>
+<text x="650" y="680" class="label" text-anchor="middle">Context is the system of record: durable, permissioned, resumable, and auditable.</text>
+</svg>

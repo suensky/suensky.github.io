@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="850" viewBox="0 0 1500 850" role="img" aria-label="AI Infrastructure: Model Gateway and Serving">
+<defs>
+  <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,8 L11,4 z" fill="#334155"/></marker>
+  <marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,8 L11,4 z" fill="#2563eb"/></marker>
+  <marker id="arrowRed" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,8 L11,4 z" fill="#dc2626"/></marker>
+  <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0f172a" flood-opacity="0.13"/></filter>
+  <style>
+    text{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}
+    .title{font-size:38px;font-weight:850}.subtitle{font-size:18px;fill:#475569}.h{font-size:23px;font-weight:800}.body{font-size:17px;fill:#334155}.small{font-size:15px;fill:#475569}.tiny{font-size:13px;fill:#64748b}.num{font-size:18px;font-weight:850;fill:#fff}
+  </style>
+</defs>
+<rect width="1500" height="850" fill="#f8fafc"/>
+<text x="750" y="50" text-anchor="middle" class="title">AI Infrastructure: Model Gateway and Serving</text>
+<text x="750" y="82" text-anchor="middle" class="subtitle">Routing, inference, retrieval, and serving capacity behind the agent system</text>
+<rect x="70" y="335" width="230" height="125" rx="18" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.3" filter="url(#shadow)"/>
+<text x="185" y="373" class="h" text-anchor="middle">Agent System</text>
+<text x="185" y="401" class="small" text-anchor="middle">context + agent + tools</text>
+<rect x="415" y="255" width="310" height="280" rx="18" fill="#fff1f2" stroke="#dc2626" stroke-width="2.3" filter="url(#shadow)"/>
+<text x="570" y="293" class="h" text-anchor="middle">Model Gateway</text>
+<text x="570" y="321" class="small" text-anchor="middle">policy-aware router</text>
+<circle cx="455" cy="345" r="4.5" fill="#dc2626"/>
+<text x="471" y="350" class="body" text-anchor="start">task complexity</text>
+<circle cx="455" cy="377" r="4.5" fill="#dc2626"/>
+<text x="471" y="382" class="body" text-anchor="start">latency budget</text>
+<circle cx="455" cy="409" r="4.5" fill="#dc2626"/>
+<text x="471" y="414" class="body" text-anchor="start">cost budget</text>
+<circle cx="455" cy="441" r="4.5" fill="#dc2626"/>
+<text x="471" y="446" class="body" text-anchor="start">data policy</text>
+<circle cx="455" cy="473" r="4.5" fill="#dc2626"/>
+<text x="471" y="478" class="body" text-anchor="start">fallback rules</text>
+<line x1="300" y1="398" x2="415" y2="398" stroke="#7c3aed" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="850" y="150" width="255" height="120" rx="18" fill="#fff" stroke="#dc2626" stroke-width="2.3" filter="url(#shadow)"/>
+<text x="977.5" y="188" class="h" text-anchor="middle">Frontier APIs</text>
+<text x="977.5" y="216" class="small" text-anchor="middle">hard reasoning, tool use</text>
+<rect x="1150" y="150" width="255" height="120" rx="18" fill="#fff" stroke="#dc2626" stroke-width="2.3" filter="url(#shadow)"/>
+<text x="1277.5" y="188" class="h" text-anchor="middle">Self-hosted LLMs</text>
+<text x="1277.5" y="216" class="small" text-anchor="middle">data control, custom policy</text>
+<rect x="850" y="340" width="255" height="120" rx="18" fill="#fff" stroke="#dc2626" stroke-width="2.3" filter="url(#shadow)"/>
+<text x="977.5" y="378" class="h" text-anchor="middle">Small Models</text>
+<text x="977.5" y="406" class="small" text-anchor="middle">routing, extraction, checks</text>
+<rect x="1150" y="340" width="255" height="120" rx="18" fill="#fff" stroke="#dc2626" stroke-width="2.3" filter="url(#shadow)"/>
+<text x="1277.5" y="378" class="h" text-anchor="middle">Specialized Models</text>
+<text x="1277.5" y="406" class="small" text-anchor="middle">SQL, vision, speech, code</text>
+<path d="M725 350 C775 250 790 210 850 210" fill="none" stroke="#dc2626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowRed)"/>
+<path d="M725 380 C785 305 1050 215 1150 210" fill="none" stroke="#dc2626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowRed)"/>
+<path d="M725 415 C775 415 790 400 850 400" fill="none" stroke="#dc2626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowRed)"/>
+<path d="M725 445 C785 510 1050 410 1150 400" fill="none" stroke="#dc2626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowRed)"/>
+<rect x="150" y="650" width="1200" height="120" rx="18" fill="#ffffff" stroke="#0f172a" stroke-width="2.3" filter="url(#shadow)"/>
+<text x="750" y="688" class="h" text-anchor="middle">Serving Layer</text>
+<text x="750" y="716" class="small" text-anchor="middle">inference servers, batching, KV cache, scheduling, autoscaling, queueing, prompt cache, cost tracking</text>
+<path d="M570 535 C570 585 570 610 570 650" fill="none" stroke="#334155" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M980 460 C980 535 980 600 980 650" fill="none" stroke="#334155" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="750" y="810" class="subtitle" text-anchor="middle">The gateway hides provider differences while preserving policy, cost attribution, and fallback behavior.</text>
+</svg>

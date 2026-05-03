@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-label="Agent memory types">
+<defs><filter id="shadow" x="-8%" y="-8%" width="116%" height="116%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12"/></filter><style>text{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}.title{font-size:34px;font-weight:800}.subtitle{font-size:17px;fill:#475569}.cardTitle{font-size:21px;font-weight:800}.body{font-size:16px;fill:#334155}.small{font-size:14px;fill:#475569}.badge{font-size:13px;font-weight:700;fill:#ffffff}</style></defs>
+<rect width="1280" height="760" fill="#f8fafc"/>
+<text x="640" y="48" text-anchor="middle" class="title">Agent Memory Types</text>
+<text x="640" y="78" text-anchor="middle" class="subtitle">Memory is typed, scoped, attributed, correctable, and retrieved only when relevant</text>
+<rect x="65" y="125" width="370" height="175" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2.2" filter="url(#shadow)"/>
+<rect x="87" y="145" width="92" height="28" rx="14" fill="#2563eb"/>
+<text x="133" y="164" text-anchor="middle" class="badge">events</text>
+<text x="195" y="166" class="cardTitle">Episodic Memory</text>
+<circle cx="97" cy="198" r="4.2" fill="#2563eb"/>
+<text x="113" y="203" class="body">What happened in previous runs</text>
+<circle cx="97" cy="226" r="4.2" fill="#2563eb"/>
+<text x="113" y="231" class="body">Task attempts, results, and decisions</text>
+<circle cx="97" cy="254" r="4.2" fill="#2563eb"/>
+<text x="113" y="259" class="body">Useful for replay and continuity</text>
+<rect x="470" y="125" width="370" height="175" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2.2" filter="url(#shadow)"/>
+<rect x="492" y="145" width="92" height="28" rx="14" fill="#15803d"/>
+<text x="538" y="164" text-anchor="middle" class="badge">facts</text>
+<text x="600" y="166" class="cardTitle">Semantic Memory</text>
+<circle cx="502" cy="198" r="4.2" fill="#15803d"/>
+<text x="518" y="203" class="body">Stable facts about users and entities</text>
+<circle cx="502" cy="226" r="4.2" fill="#15803d"/>
+<text x="518" y="231" class="body">Products, policies, customers, codebases</text>
+<circle cx="502" cy="254" r="4.2" fill="#15803d"/>
+<text x="518" y="259" class="body">Useful for grounded personalization</text>
+<rect x="875" y="125" width="370" height="175" rx="14" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.2" filter="url(#shadow)"/>
+<rect x="897" y="145" width="92" height="28" rx="14" fill="#7c3aed"/>
+<text x="943" y="164" text-anchor="middle" class="badge">style</text>
+<text x="1005" y="166" class="cardTitle">Preference Memory</text>
+<circle cx="907" cy="198" r="4.2" fill="#7c3aed"/>
+<text x="923" y="203" class="body">User formatting and tone choices</text>
+<circle cx="907" cy="226" r="4.2" fill="#7c3aed"/>
+<text x="923" y="231" class="body">Communication preferences</text>
+<circle cx="907" cy="254" r="4.2" fill="#7c3aed"/>
+<text x="923" y="259" class="body">Useful for shaping responses</text>
+<rect x="65" y="334" width="370" height="175" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2.2" filter="url(#shadow)"/>
+<rect x="87" y="354" width="92" height="28" rx="14" fill="#ea580c"/>
+<text x="133" y="373" text-anchor="middle" class="badge">workflow</text>
+<text x="195" y="375" class="cardTitle">Procedural Memory</text>
+<circle cx="97" cy="407" r="4.2" fill="#ea580c"/>
+<text x="113" y="412" class="body">How work should be done</text>
+<circle cx="97" cy="435" r="4.2" fill="#ea580c"/>
+<text x="113" y="440" class="body">Team and organization playbooks</text>
+<circle cx="97" cy="463" r="4.2" fill="#ea580c"/>
+<text x="113" y="468" class="body">Useful for repeatable execution</text>
+<rect x="470" y="334" width="370" height="175" rx="14" fill="#f0fdfa" stroke="#0f766e" stroke-width="2.2" filter="url(#shadow)"/>
+<rect x="492" y="354" width="92" height="28" rx="14" fill="#0f766e"/>
+<text x="538" y="373" text-anchor="middle" class="badge">graph</text>
+<text x="600" y="375" class="cardTitle">Relationship Memory</text>
+<circle cx="502" cy="407" r="4.2" fill="#0f766e"/>
+<text x="518" y="412" class="body">Connections between people and objects</text>
+<circle cx="502" cy="435" r="4.2" fill="#0f766e"/>
+<text x="518" y="440" class="body">User, team, project, customer, contract</text>
+<circle cx="502" cy="463" r="4.2" fill="#0f766e"/>
+<text x="518" y="468" class="body">Useful for context-aware retrieval</text>
+<rect x="875" y="334" width="370" height="175" rx="14" fill="#fff1f2" stroke="#dc2626" stroke-width="2.2" filter="url(#shadow)"/>
+<rect x="897" y="354" width="92" height="28" rx="14" fill="#dc2626"/>
+<text x="943" y="373" text-anchor="middle" class="badge">risk</text>
+<text x="1005" y="375" class="cardTitle">Failure Memory</text>
+<circle cx="907" cy="407" r="4.2" fill="#dc2626"/>
+<text x="923" y="412" class="body">Known pitfalls and failed attempts</text>
+<circle cx="907" cy="435" r="4.2" fill="#dc2626"/>
+<text x="923" y="440" class="body">Blocked tools and common errors</text>
+<circle cx="907" cy="463" r="4.2" fill="#dc2626"/>
+<text x="923" y="468" class="body">Useful for avoiding repeated mistakes</text>
+<rect x="165" y="580" width="950" height="105" rx="18" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+<text x="640" y="618" text-anchor="middle" class="cardTitle">Production Memory Rules</text>
+<text x="640" y="648" text-anchor="middle" class="body">Scope it, attribute it, permission it, score confidence, make it visible, and make it deletable.</text>
+<text x="640" y="674" text-anchor="middle" class="small">A vector database can store memory, but memory intelligence decides what to remember, retrieve, trust, and forget.</text>
+</svg>
