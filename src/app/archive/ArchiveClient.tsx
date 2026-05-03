@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useLanguage } from '@/components/LanguageProvider';
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import styles from './page.module.css';
@@ -27,11 +26,9 @@ interface YearGroup {
 interface ArchiveClientProps {
     postsByYear: YearGroup[];
     tags: TagInfo[];
-    totalPosts: number;
 }
 
-export default function ArchiveClient({ postsByYear, tags, totalPosts }: ArchiveClientProps) {
-    const { language } = useLanguage();
+export default function ArchiveClient({ postsByYear, tags }: ArchiveClientProps) {
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -85,9 +82,9 @@ export default function ArchiveClient({ postsByYear, tags, totalPosts }: Archive
                 {selectedTag && (
                     <div className={styles.filterBanner}>
                         <span>
-                            {language === 'zh' ? '筛选标签:' : 'Filtered by:'}{' '}
+                            筛选标签:{' '}
                             <strong>{selectedTag}</strong>
-                            {' '}({filteredCount} {language === 'zh' ? '篇' : 'posts'})
+                            {' '}({filteredCount} 篇)
                         </span>
                         <button
                             onClick={clearFilter}
@@ -95,7 +92,7 @@ export default function ArchiveClient({ postsByYear, tags, totalPosts }: Archive
                             aria-label="Clear filter"
                         >
                             <X size={16} />
-                            {language === 'zh' ? '清除' : 'Clear'}
+                            清除
                         </button>
                     </div>
                 )}
@@ -109,7 +106,7 @@ export default function ArchiveClient({ postsByYear, tags, totalPosts }: Archive
                                     <article key={post.slug} className={styles.postItem}>
                                         <time className={styles.postDate}>
                                             {new Date(post.date).toLocaleDateString(
-                                                language === 'zh' ? 'zh-CN' : 'en-US',
+                                                'zh-CN',
                                                 { month: '2-digit', day: '2-digit' }
                                             )}
                                         </time>
@@ -126,9 +123,7 @@ export default function ArchiveClient({ postsByYear, tags, totalPosts }: Archive
 
             <aside className={styles.sidebar}>
                 <div className={styles.tagsSection}>
-                    <h3 className={styles.sidebarTitle}>
-                        {language === 'zh' ? '标签' : 'Tags'}
-                    </h3>
+                    <h3 className={styles.sidebarTitle}>标签</h3>
                     <div className={styles.tagCloud}>
                         {tags.map((tag) => (
                             <button

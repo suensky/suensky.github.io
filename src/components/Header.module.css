@@ -33,32 +33,7 @@
 
 .logoText {
     font-size: 1.125rem;
-    letter-spacing: -0.02em;
-}
-
-.nav {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-}
-
-.navLink {
-    padding: var(--space-sm) var(--space-md);
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-    font-weight: 500;
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
-}
-
-.navLink:hover {
-    color: var(--color-text);
-    background-color: var(--color-bg-tertiary);
-}
-
-.navLink.active {
-    color: var(--color-accent);
-    background-color: var(--color-accent-light);
+    letter-spacing: 0;
 }
 
 .actions {
@@ -67,14 +42,13 @@
     gap: var(--space-sm);
 }
 
-.themeToggle,
-.langToggle {
+.themeToggle {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-xs);
     height: 36px;
-    padding: 0 var(--space-sm);
+    width: 36px;
+    padding: 0;
     color: var(--color-text-secondary);
     background-color: var(--color-bg-tertiary);
     border: none;
@@ -83,67 +57,7 @@
     transition: all var(--transition-fast);
 }
 
-.themeToggle {
-    width: 36px;
-    padding: 0;
-}
-
-.themeToggle:hover,
-.langToggle:hover {
+.themeToggle:hover {
     color: var(--color-accent);
     background-color: var(--color-accent-light);
-}
-
-.langLabel {
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.menuToggle {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    color: var(--color-text-secondary);
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    .nav {
-        position: fixed;
-        top: 64px;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        padding: var(--space-md);
-        background-color: var(--color-bg-secondary);
-
-        transform: translateY(-100%);
-        opacity: 0;
-        pointer-events: none;
-        transition: all var(--transition-base);
-    }
-
-    .navOpen {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .navLink {
-        width: 100%;
-        text-align: center;
-        padding: var(--space-md);
-    }
-
-    .menuToggle {
-        display: flex;
-    }
-
-    .langLabel {
-        display: none;
-    }
 }

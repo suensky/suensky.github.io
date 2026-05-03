@@ -1,8 +1,5 @@
-'use client';
-
 import Link from 'next/link';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
-import { useLanguage } from '@/components/LanguageProvider';
 import styles from './page.module.css';
 
 interface PostMeta {
@@ -14,13 +11,11 @@ interface PostMeta {
     readingTime: number;
 }
 
-interface HomeClientProps {
+interface HomePostsProps {
     posts: PostMeta[];
 }
 
-export default function HomeClient({ posts }: HomeClientProps) {
-    const { language, t } = useLanguage();
-
+export default function HomePosts({ posts }: HomePostsProps) {
     return (
         <div className="container">
             <section className={styles.posts}>
@@ -38,7 +33,7 @@ export default function HomeClient({ posts }: HomeClientProps) {
                                     <span className={styles.metaItem}>
                                         <Calendar size={14} />
                                         {new Date(post.date).toLocaleDateString(
-                                            language === 'zh' ? 'zh-CN' : 'en-US',
+                                            'zh-CN',
                                             {
                                                 year: 'numeric',
                                                 month: 'long',
@@ -48,7 +43,7 @@ export default function HomeClient({ posts }: HomeClientProps) {
                                     </span>
                                     <span className={styles.metaItem}>
                                         <Clock size={14} />
-                                        {t('minRead', { time: post.readingTime })}
+                                        {post.readingTime} 分钟阅读
                                     </span>
                                 </div>
                                 {post.tags.length > 0 && (
@@ -68,7 +63,7 @@ export default function HomeClient({ posts }: HomeClientProps) {
                 {posts.length > 10 && (
                     <div className={styles.bottomAction}>
                         <Link href="/archive" className={styles.viewAllBottom}>
-                            {t('viewAllPosts', { count: posts.length })} <ArrowRight size={16} />
+                            查看全部 ({posts.length} 篇文章) <ArrowRight size={16} />
                         </Link>
                     </div>
                 )}

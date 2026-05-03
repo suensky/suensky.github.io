@@ -3,7 +3,6 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ThemeProvider } from '@/components/ThemeProvider';
-import { LanguageProvider } from '@/components/LanguageProvider';
 
 export const metadata: Metadata = {
     title: {
@@ -41,15 +40,13 @@ export default function RootLayout({
             </head>
             <body>
                 <ThemeProvider>
-                    <LanguageProvider>
-                        <div className="site-wrapper">
-                            <Header />
-                            <main className="main-content">
-                                {children}
-                            </main>
-                            <Footer />
-                        </div>
-                    </LanguageProvider>
+                    <div className="site-wrapper">
+                        <Header />
+                        <main className="main-content">
+                            {children}
+                        </main>
+                        <Footer />
+                    </div>
                 </ThemeProvider>
             </body>
         </html>

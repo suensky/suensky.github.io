@@ -1,12 +1,12 @@
-# Modern Blog with Admin Portal
+# 多做多说 Blog
 
-A minimalist, modern blog built with Next.js featuring:
+A minimalist personal blog built with Next.js and Markdown.
 
-- 🎨 **Minimalist Design** - Clean, modern UI with dark/light mode
-- ✍️ **Admin Portal** - Built-in content management with Markdown editor (development only)
-- 📱 **Responsive** - Works on all devices
-- ⚡ **Fast** - Static export for optimal performance
-- 🔍 **SEO Optimized** - Proper meta tags and semantic HTML
+- **Markdown-first writing** - Posts live in `content/posts/`
+- **Static export** - GitHub Pages serves the generated `out/` directory
+- **Responsive design** - Works on desktop and mobile
+- **Dark/light theme** - Includes a manual theme toggle
+- **SEO metadata** - Blog and post pages include basic metadata
 
 ## Development
 
@@ -18,24 +18,29 @@ npm install
 npm run dev
 ```
 
-Visit http://localhost:3000 for the blog, http://localhost:3000/admin for the admin portal.
-
-> **Note:** The admin portal is only available during local development. It is disabled in production builds for security.
+Visit http://localhost:3000 for the blog.
 
 ## Writing Posts
 
-1. Run `npm run dev` to start the development server
-2. Go to http://localhost:3000/admin
-3. Click "新建文章" to create a new post
-4. Write in Markdown with live preview
-5. Click "下载保存" to download the .md file
-6. Save it to `content/posts/` and commit to Git
+Create a Markdown file in `content/posts/` with frontmatter:
+
+```markdown
+---
+title: 文章标题
+tags:
+  - 随笔
+date: 2026-05-03 10:00:00
+---
+
+正文内容
+```
 
 Posts are stored in `content/posts/` as Markdown files with frontmatter.
+Post images should live under `public/img/` and be referenced from Markdown as `/img/example.png`.
 
 ## Deployment
 
-The blog auto-deploys to GitHub Pages on push to the `hugo` branch.
+The blog auto-deploys to GitHub Pages on push to the `blog` branch.
 
 ```bash
 # Build for production

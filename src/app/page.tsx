@@ -1,5 +1,5 @@
 import { getAllPosts } from '@/lib/posts';
-import HomeClient from './HomeClient';
+import HomePosts from './HomePosts';
 
 export default function HomePage() {
     const posts = getAllPosts().map((post) => ({
@@ -11,5 +11,5 @@ export default function HomePage() {
         readingTime: post.readingTime,
     }));
 
-    return <HomeClient posts={posts} />;
+    return <HomePosts posts={posts} />;
 }

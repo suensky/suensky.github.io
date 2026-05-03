@@ -20,11 +20,10 @@ export default function ArchivePage() {
     }));
 
     const tags = getAllTags();
-    const totalPosts = postsByYear.reduce((acc, { posts }) => acc + posts.length, 0);
 
     return (
         <Suspense fallback={<div className="container" style={{ padding: '2rem 0' }}>Loading...</div>}>
-            <ArchiveClient postsByYear={postsByYear} tags={tags} totalPosts={totalPosts} />
+            <ArchiveClient postsByYear={postsByYear} tags={tags} />
         </Suspense>
     );
 }

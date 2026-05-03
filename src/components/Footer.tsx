@@ -1,18 +1,13 @@
-'use client';
-
 import Link from 'next/link';
 import { Github } from 'lucide-react';
-import { useLanguage } from './LanguageProvider';
 import styles from './Footer.module.css';
 
 export default function Footer() {
-    const { t } = useLanguage();
-
     return (
         <footer className={styles.footer}>
             <div className={`container ${styles.footerInner}`}>
                 <p className={styles.copyright}>
-                    {t('copyright', { year: new Date().getFullYear() })}
+                    © {new Date().getFullYear()} 多做多说. All rights reserved.
                 </p>
                 <div className={styles.links}>
                     <Link
