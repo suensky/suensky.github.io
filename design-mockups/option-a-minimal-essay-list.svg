@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Option A refinement: Minimal Essay List</title>
+  <desc id="desc">A clean personal blog homepage mockup for 多做多说 with a concise header and essay-list-first layout.</desc>
+  <defs>
+    <style>
+      .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+      .serif { font-family: "Songti SC", "Noto Serif CJK SC", "STSong", Georgia, serif; }
+      .mono { font-family: "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace; }
+      .bg { fill: #fafaf6; }
+      .ink { fill: #171812; }
+      .muted { fill: #62675d; }
+      .faint { fill: #9ca394; }
+      .line { stroke: #dde2d4; stroke-width: 1; }
+      .heavy { stroke: #171812; stroke-width: 1.6; }
+      .accent { fill: #b94331; }
+      .green { fill: #236a58; }
+      .tag { fill: #eff3e4; stroke: #ccd7bd; stroke-width: 1; }
+      text { letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1080" class="bg"/>
+
+  <g transform="translate(248 54)">
+    <text x="0" y="0" class="sans ink" font-size="17" font-weight="600">多做多说</text>
+    <text x="694" y="0" class="sans muted" font-size="15">Archive</text>
+    <text x="772" y="0" class="sans muted" font-size="15">About</text>
+    <text x="836" y="0" class="sans muted" font-size="15">RSS</text>
+  </g>
+  <line x1="248" y1="82" x2="1132" y2="82" class="line"/>
+
+  <g transform="translate(248 144)">
+    <rect x="0" y="0" width="72" height="6" class="accent"/>
+    <text x="0" y="74" class="serif ink" font-size="62" font-weight="700">多做多说</text>
+    <text x="0" y="116" class="serif muted" font-size="26">文如其人，看文章就够了。</text>
+    <text x="0" y="154" class="sans muted" font-size="17">技术与随笔的个人博客。写 AI 系统、算法、诗、远行与日常。</text>
+  </g>
+
+  <g transform="translate(248 354)">
+    <text x="0" y="0" class="mono faint" font-size="13">ESSAYS</text>
+    <text x="810" y="0" class="mono faint" font-size="13" text-anchor="end">36 POSTS</text>
+    <line x1="0" y1="30" x2="884" y2="30" class="heavy"/>
+
+    <g transform="translate(0 80)">
+      <text x="0" y="0" class="mono faint" font-size="13">2026.05.02</text>
+      <text x="150" y="3" class="serif ink" font-size="31">From AI Agent Demo to Production System</text>
+      <text x="150" y="42" class="sans muted" font-size="16">A full-stack blueprint for durable agent products, context layers, tools, and recovery.</text>
+      <rect x="150" y="66" width="70" height="28" rx="3" class="tag"/>
+      <text x="168" y="85" class="sans green" font-size="13">代码如诗</text>
+      <text x="796" y="85" class="mono faint" font-size="13">12 min</text>
+    </g>
+    <line x1="0" y1="190" x2="884" y2="190" class="line"/>
+
+    <g transform="translate(0 244)">
+      <text x="0" y="0" class="mono faint" font-size="13">2026.02.14</text>
+      <text x="150" y="3" class="serif ink" font-size="31">Dropbox and Box Could Become Systems of Record</text>
+      <text x="150" y="42" class="sans muted" font-size="16">A product essay on memory, documents, and the interface layer around AI work.</text>
+      <rect x="150" y="66" width="58" height="28" rx="3" class="tag"/>
+      <text x="168" y="85" class="sans green" font-size="13">AI</text>
+      <text x="796" y="85" class="mono faint" font-size="13">8 min</text>
+    </g>
+    <line x1="0" y1="354" x2="884" y2="354" class="line"/>
+
+    <g transform="translate(0 408)">
+      <text x="0" y="0" class="mono faint" font-size="13">2026.01.17</text>
+      <text x="150" y="3" class="serif ink" font-size="31">Agent Skills: Apps of LLM OS</text>
+      <text x="150" y="42" class="sans muted" font-size="16">A product note about packaged capabilities for agentic systems.</text>
+      <rect x="150" y="66" width="46" height="28" rx="3" class="tag"/>
+      <text x="168" y="85" class="sans green" font-size="13">AI</text>
+      <text x="796" y="85" class="mono faint" font-size="13">7 min</text>
+    </g>
+    <line x1="0" y1="518" x2="884" y2="518" class="line"/>
+
+    <g transform="translate(0 572)">
+      <text x="0" y="0" class="mono faint" font-size="13">2025.12.31</text>
+      <text x="150" y="3" class="serif ink" font-size="31">别2025，致2026</text>
+      <text x="150" y="42" class="sans muted" font-size="16">A year-end note, personal but restrained, designed to sit beside technical work.</text>
+      <rect x="150" y="66" width="54" height="28" rx="3" class="tag"/>
+      <text x="168" y="85" class="sans green" font-size="13">随笔</text>
+      <text x="796" y="85" class="mono faint" font-size="13">6 min</text>
+    </g>
+    <line x1="0" y1="682" x2="884" y2="682" class="line"/>
+
+    <g transform="translate(0 736)">
+      <text x="0" y="0" class="mono faint" font-size="13">2025.12.17</text>
+      <text x="150" y="3" class="serif ink" font-size="31">表达即思维</text>
+      <text x="150" y="42" class="sans muted" font-size="16">Writing treated as the act of shaping thought.</text>
+      <rect x="150" y="66" width="54" height="28" rx="3" class="tag"/>
+      <text x="168" y="85" class="sans green" font-size="13">随笔</text>
+      <text x="796" y="85" class="mono faint" font-size="13">5 min</text>
+    </g>
+  </g>
+</svg>

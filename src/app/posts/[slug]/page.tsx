@@ -10,6 +10,8 @@ import remarkGfm from 'remark-gfm';
 import styles from './page.module.css';
 import ScrollTopButton from './ScrollTopButton';
 import TableOfContents from './TableOfContents';
+import { LocalizedDate, LocalizedReadingTime, LocalizedText } from '@/components/Localized';
+import { copy } from '@/lib/i18n';
 
 // Strip markdown syntax from text (links, bold, italic, code)
 function stripMarkdown(text: string): string {
@@ -56,7 +58,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const post = getPostBySlug(slug);
-    if (!post) return { title: 'Post Not Found' };
+    if (!post) return { title: `${copy.postNotFound.zh} / ${copy.postNotFound.en}` };
 
     return {
         title: post.title,
@@ -89,7 +91,7 @@ export default async function PostPage({ params }: Props) {
                     <header className={styles.header}>
                         <Link href="/" className={styles.backLink}>
                             <ArrowLeft size={16} />
-                            返回首页
+                            <LocalizedText id="backHome" />
                         </Link>
 
                         <h1 className={styles.title}>{post.title}</h1>
@@ -97,15 +99,15 @@ export default async function PostPage({ params }: Props) {
                         <div className={styles.meta}>
                             <span className={styles.metaItem}>
                                 <Calendar size={16} />
-                                {new Date(post.date).toLocaleDateString('zh-CN', {
+                                <LocalizedDate date={post.date} options={{
                                     year: 'numeric',
                                     month: 'long',
                                     day: 'numeric',
-                                })}
+                                }} />
                             </span>
                             <span className={styles.metaItem}>
                                 <Clock size={16} />
-                                {post.readingTime} 分钟阅读
+                                <LocalizedReadingTime minutes={post.readingTime} />
                             </span>
                         </div>
 
@@ -180,7 +182,9 @@ export default async function PostPage({ params }: Props) {
                                 <Link href={`/posts/${prev.slug}`} className={styles.navPrev}>
                                     <ChevronLeft size={20} />
                                     <div className={styles.navContent}>
-                                        <span className={styles.navLabel}>上一篇</span>
+                                        <span className={styles.navLabel}>
+                                            <LocalizedText id="previousPost" />
+                                        </span>
                                         <span className={styles.navTitle}>{prev.title}</span>
                                     </div>
                                 </Link>
@@ -191,7 +195,9 @@ export default async function PostPage({ params }: Props) {
                             {next ? (
                                 <Link href={`/posts/${next.slug}`} className={styles.navNext}>
                                     <div className={styles.navContent}>
-                                        <span className={styles.navLabel}>下一篇</span>
+                                        <span className={styles.navLabel}>
+                                            <LocalizedText id="nextPost" />
+                                        </span>
                                         <span className={styles.navTitle}>{next.title}</span>
                                     </div>
                                     <ChevronRight size={20} />
@@ -204,7 +210,7 @@ export default async function PostPage({ params }: Props) {
                         <div className={styles.footerActions}>
                             <Link href="/" className={styles.footerLink}>
                                 <ArrowLeft size={16} />
-                                返回首页
+                                <LocalizedText id="backHome" />
                             </Link>
                             <ScrollTopButton />
                         </div>

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Refined Option A mockup: Editorial Reading Room</title>
+  <desc id="desc">A refined warm editorial homepage mockup for 多做多说, with no decorative left panel and a functional reading-first layout.</desc>
+  <defs>
+    <style>
+      .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+      .serif { font-family: "Songti SC", "Noto Serif CJK SC", "STSong", Georgia, serif; }
+      .mono { font-family: "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace; }
+      .bg { fill: #f8f8f2; }
+      .paper { fill: #fffefa; }
+      .ink { fill: #151711; }
+      .muted { fill: #676b60; }
+      .faint { fill: #9ba191; }
+      .line { stroke: #d8ddce; stroke-width: 1; }
+      .heavy { stroke: #151711; stroke-width: 2; }
+      .accent { fill: #b9412f; }
+      .green { fill: #236a58; }
+      .gold { fill: #bd8624; }
+      .tag { fill: #eef2e2; stroke: #cfd8bd; stroke-width: 1; }
+      text { letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1080" class="bg"/>
+  <rect x="44" y="40" width="1352" height="1000" fill="none" stroke="#d4dacb"/>
+  <line x1="44" y1="124" x2="1396" y2="124" class="line"/>
+
+  <g transform="translate(86 88)">
+    <text x="0" y="0" class="mono faint" font-size="13">HU SUN / PERSONAL BLOG</text>
+    <text x="918" y="0" class="sans muted" font-size="16">Archive</text>
+    <text x="1004" y="0" class="sans muted" font-size="16">About</text>
+    <text x="1078" y="0" class="sans muted" font-size="16">RSS</text>
+    <circle cx="1218" cy="-5" r="18" fill="#eef2df" stroke="#cfd8bd"/>
+    <path d="M1210 -5h16M1218 -13v16" stroke="#236a58" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(114 176)">
+    <rect x="0" y="0" width="96" height="8" class="accent"/>
+    <text x="0" y="84" class="serif ink" font-size="86" font-weight="700">多做多说</text>
+    <text x="4" y="130" class="serif muted" font-size="30">文如其人，看文章就够了。</text>
+    <text x="4" y="178" class="sans muted" font-size="18">技术与随笔的个人博客。写 AI 系统、算法、诗、远行与日常。</text>
+  </g>
+
+  <g transform="translate(114 430)">
+    <text x="0" y="0" class="mono faint" font-size="13">RECENT ESSAYS</text>
+    <line x1="0" y1="30" x2="848" y2="30" class="heavy"/>
+
+    <g transform="translate(0 88)">
+      <text x="0" y="0" class="mono faint" font-size="13">2026.05.02</text>
+      <text x="148" y="4" class="serif ink" font-size="31">From AI Agent Demo to Production System</text>
+      <text x="148" y="44" class="sans muted" font-size="16">A full-stack blueprint for durable agent products, context layers, tools, and recovery.</text>
+      <rect x="148" y="69" width="70" height="28" rx="3" class="tag"/>
+      <text x="166" y="88" class="sans green" font-size="13">代码如诗</text>
+      <text x="738" y="88" class="mono faint" font-size="13">12 min</text>
+    </g>
+    <line x1="0" y1="206" x2="848" y2="206" class="line"/>
+
+    <g transform="translate(0 268)">
+      <text x="0" y="0" class="mono faint" font-size="13">2026.02.14</text>
+      <text x="148" y="4" class="serif ink" font-size="31">Dropbox and Box Could Become Systems of Record</text>
+      <text x="148" y="44" class="sans muted" font-size="16">A product essay on memory, documents, and the interface layer around AI work.</text>
+      <rect x="148" y="69" width="58" height="28" rx="3" class="tag"/>
+      <text x="166" y="88" class="sans green" font-size="13">AI</text>
+      <text x="738" y="88" class="mono faint" font-size="13">8 min</text>
+    </g>
+    <line x1="0" y1="386" x2="848" y2="386" class="line"/>
+
+    <g transform="translate(0 448)">
+      <text x="0" y="0" class="mono faint" font-size="13">2025.12.31</text>
+      <text x="148" y="4" class="serif ink" font-size="31">别2025，致2026</text>
+      <text x="148" y="44" class="sans muted" font-size="16">A year-end note, personal but restrained, designed to sit beside technical work.</text>
+      <rect x="148" y="69" width="54" height="28" rx="3" class="tag"/>
+      <text x="166" y="88" class="sans green" font-size="13">随笔</text>
+      <text x="738" y="88" class="mono faint" font-size="13">6 min</text>
+    </g>
+  </g>
+
+  <line x1="1010" y1="124" x2="1010" y2="1040" class="line"/>
+
+  <g transform="translate(1060 176)">
+    <text x="0" y="0" class="mono faint" font-size="13">ABOUT</text>
+    <text x="0" y="48" class="serif ink" font-size="34">做做技术，</text>
+    <text x="0" y="92" class="serif ink" font-size="34">谈谈人生。</text>
+    <text x="0" y="142" class="sans muted" font-size="16">A quiet index for technical work,</text>
+    <text x="0" y="166" class="sans muted" font-size="16">poems, algorithms, and notes from</text>
+    <text x="0" y="190" class="sans muted" font-size="16">ordinary life.</text>
+
+    <line x1="0" y1="244" x2="278" y2="244" class="line"/>
+    <text x="0" y="300" class="mono faint" font-size="13">SHELVES</text>
+    <g transform="translate(0 344)">
+      <circle cx="7" cy="-5" r="5" class="accent"/>
+      <text x="26" y="0" class="sans ink" font-size="18">代码如诗</text>
+      <text x="236" y="0" class="mono faint" font-size="13" text-anchor="end">18</text>
+    </g>
+    <g transform="translate(0 392)">
+      <circle cx="7" cy="-5" r="5" class="green"/>
+      <text x="26" y="0" class="sans ink" font-size="18">人间随笔</text>
+      <text x="236" y="0" class="mono faint" font-size="13" text-anchor="end">11</text>
+    </g>
+    <g transform="translate(0 440)">
+      <circle cx="7" cy="-5" r="5" class="gold"/>
+      <text x="26" y="0" class="sans ink" font-size="18">诗与翻译</text>
+      <text x="236" y="0" class="mono faint" font-size="13" text-anchor="end">7</text>
+    </g>
+
+    <line x1="0" y1="498" x2="278" y2="498" class="line"/>
+    <text x="0" y="554" class="mono faint" font-size="13">YEARS</text>
+    <text x="0" y="594" class="sans muted" font-size="18">2026</text>
+    <text x="76" y="594" class="sans muted" font-size="18">2025</text>
+    <text x="152" y="594" class="sans muted" font-size="18">2024</text>
+    <text x="228" y="594" class="sans muted" font-size="18">2021</text>
+  </g>
+
+  <text x="114" y="1012" class="mono faint" font-size="13">Refinement: no unexplained left panel; the homepage is now a readable index with a functional right rail.</text>
+</svg>

@@ -2,10 +2,11 @@ import { getPostsByYear, getAllTags } from '@/lib/posts';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import ArchiveClient from './ArchiveClient';
+import { copy } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: '归档',
-    description: '所有文章按时间归档',
+    title: `${copy.archiveTitle.zh} / ${copy.archiveTitle.en}`,
+    description: `${copy.archiveDescription.zh} / ${copy.archiveDescription.en}`,
 };
 
 export default function ArchivePage() {
@@ -22,7 +23,7 @@ export default function ArchivePage() {
     const tags = getAllTags();
 
     return (
-        <Suspense fallback={<div className="container" style={{ padding: '2rem 0' }}>Loading...</div>}>
+        <Suspense fallback={<div className="container" style={{ padding: '2rem 0' }}>{copy.loading.zh}</div>}>
             <ArchiveClient postsByYear={postsByYear} tags={tags} />
         </Suspense>
     );

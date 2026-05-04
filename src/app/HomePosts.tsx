@@ -1,5 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { formatDate, formatPostCount, formatReadingTime } from '@/lib/i18n';
+import { useLanguage } from '@/components/LanguageProvider';
 import styles from './page.module.css';
 
 interface PostMeta {
@@ -16,8 +20,15 @@ interface HomePostsProps {
 }
 
 export default function HomePosts({ posts }: HomePostsProps) {
+    const { language, t } = useLanguage();
+
     return (
         <div className="container">
+            <header className={styles.intro}>
+                <p className={styles.tagline}>{t('siteTagline')}</p>
+                <p className={styles.introText}>{t('siteIntro')}</p>
+            </header>
+
             <section className={styles.posts}>
                 <div className={styles.postList}>
                     {posts.slice(0, 10).map((post, index) => (
@@ -32,18 +43,15 @@ export default function HomePosts({ posts }: HomePostsProps) {
                                 <div className={styles.postMeta}>
                                     <span className={styles.metaItem}>
                                         <Calendar size={14} />
-                                        {new Date(post.date).toLocaleDateString(
-                                            'zh-CN',
-                                            {
-                                                year: 'numeric',
-                                                month: 'long',
-                                                day: 'numeric',
-                                            }
-                                        )}
+                                        {formatDate(post.date, language, {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric',
+                                        })}
                                     </span>
                                     <span className={styles.metaItem}>
                                         <Clock size={14} />
-                                        {post.readingTime} 分钟阅读
+                                        {formatReadingTime(post.readingTime, language)}
                                     </span>
                                 </div>
                                 {post.tags.length > 0 && (
@@ -63,7 +71,7 @@ export default function HomePosts({ posts }: HomePostsProps) {
                 {posts.length > 10 && (
                     <div className={styles.bottomAction}>
                         <Link href="/archive" className={styles.viewAllBottom}>
-                            查看全部 ({posts.length} 篇文章) <ArrowRight size={16} />
+                            {t('viewAll')} ({formatPostCount(posts.length, language)}) <ArrowRight size={16} />
                         </Link>
                     </div>
                 )}

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Minimal bilingual blog homepage mockup, English UI</title>
+  <desc id="desc">English interface state for Duozuo Duoshuo with compact header, language toggle icon, and clean essay list whose posts keep their own language.</desc>
+  <defs>
+    <style>
+      .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+      .serif { font-family: "Songti SC", "Noto Serif CJK SC", "STSong", Georgia, serif; }
+      .mono { font-family: "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace; }
+      .bg { fill: #fbfbf7; }
+      .ink { fill: #171812; }
+      .muted { fill: #62675d; }
+      .faint { fill: #9aa291; }
+      .line { stroke: #dde2d4; stroke-width: 1; }
+      .heavy { stroke: #171812; stroke-width: 1.6; }
+      .accent { fill: #b94331; }
+      text { letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1080" class="bg"/>
+
+  <g transform="translate(248 52)">
+    <text x="0" y="0" class="sans ink" font-size="17" font-weight="600">Duozuo Duoshuo</text>
+    <text x="686" y="0" class="sans muted" font-size="15">Archive</text>
+    <text x="758" y="0" class="sans muted" font-size="15">About</text>
+    <text x="816" y="0" class="sans muted" font-size="15">RSS</text>
+    <g transform="translate(878 -16)">
+      <circle cx="16" cy="16" r="16" fill="#eff3e4" stroke="#ccd7bd"/>
+      <circle cx="16" cy="16" r="9" fill="none" stroke="#236a58" stroke-width="1.4"/>
+      <path d="M7 16h18M16 7c4 4 4 14 0 18M16 7c-4 4-4 14 0 18" fill="none" stroke="#236a58" stroke-width="1.2"/>
+    </g>
+  </g>
+  <line x1="248" y1="80" x2="1132" y2="80" class="line"/>
+
+  <g transform="translate(248 140)">
+    <rect x="0" y="0" width="72" height="6" class="accent"/>
+    <text x="0" y="72" class="serif ink" font-size="62" font-weight="700">Duozuo Duoshuo</text>
+    <text x="0" y="114" class="serif muted" font-size="25">A personal archive of writing and work.</text>
+    <text x="0" y="152" class="sans muted" font-size="17">Essays on systems, algorithms, poetry, travel, and ordinary life.</text>
+  </g>
+
+  <g transform="translate(248 344)">
+    <text x="0" y="0" class="sans faint" font-size="14">Essays</text>
+    <text x="810" y="0" class="sans faint" font-size="14" text-anchor="end">36 posts</text>
+    <line x1="0" y1="30" x2="884" y2="30" class="heavy"/>
+
+    <g transform="translate(0 78)">
+      <text x="0" y="0" class="mono faint" font-size="13">2026.05.02</text>
+      <text x="150" y="3" class="serif ink" font-size="31">From AI Agent Demo to Production System</text>
+      <text x="150" y="42" class="sans muted" font-size="16">A full-stack blueprint for durable agent products, context layers, tools, and recovery.</text>
+      <text x="796" y="42" class="sans faint" font-size="14">12 min</text>
+    </g>
+    <line x1="0" y1="158" x2="884" y2="158" class="line"/>
+
+    <g transform="translate(0 214)">
+      <text x="0" y="0" class="mono faint" font-size="13">2026.02.14</text>
+      <text x="150" y="3" class="serif ink" font-size="31">Dropbox and Box Could Become Systems of Record</text>
+      <text x="150" y="42" class="sans muted" font-size="16">A product essay on memory, documents, and the interface layer around AI work.</text>
+      <text x="796" y="42" class="sans faint" font-size="14">8 min</text>
+    </g>
+    <line x1="0" y1="294" x2="884" y2="294" class="line"/>
+
+    <g transform="translate(0 350)">
+      <text x="0" y="0" class="mono faint" font-size="13">2026.01.17</text>
+      <text x="150" y="3" class="serif ink" font-size="31">Agent Skills: Apps of LLM OS</text>
+      <text x="150" y="42" class="sans muted" font-size="16">A product note about packaged capabilities for agentic systems.</text>
+      <text x="796" y="42" class="sans faint" font-size="14">7 min</text>
+    </g>
+    <line x1="0" y1="430" x2="884" y2="430" class="line"/>
+
+    <g transform="translate(0 486)">
+      <text x="0" y="0" class="mono faint" font-size="13">2025.12.31</text>
+      <text x="150" y="3" class="serif ink" font-size="31">别2025，致2026</text>
+      <text x="150" y="42" class="sans muted" font-size="16">年终小记，写给过去一年，也写给下一年。</text>
+      <text x="796" y="42" class="sans faint" font-size="14">6 min</text>
+    </g>
+    <line x1="0" y1="566" x2="884" y2="566" class="line"/>
+
+    <g transform="translate(0 622)">
+      <text x="0" y="0" class="mono faint" font-size="13">2025.12.17</text>
+      <text x="150" y="3" class="serif ink" font-size="31">表达即思维</text>
+      <text x="150" y="42" class="sans muted" font-size="16">写作不是思考之后的记录，而是思考本身。</text>
+      <text x="796" y="42" class="sans faint" font-size="14">5 min</text>
+    </g>
+    <line x1="0" y1="702" x2="884" y2="702" class="line"/>
+
+    <g transform="translate(0 758)">
+      <text x="0" y="0" class="mono faint" font-size="13">2025.11.20</text>
+      <text x="150" y="3" class="serif ink" font-size="31">诗魂：李白长歌</text>
+      <text x="150" y="42" class="sans muted" font-size="16">在诗和人之间，重读一种开阔与不羁。</text>
+      <text x="796" y="42" class="sans faint" font-size="14">9 min</text>
+    </g>
+  </g>
+</svg>

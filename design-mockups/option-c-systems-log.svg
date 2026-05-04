@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Option C mockup: Systems Log</title>
+  <desc id="desc">A dark, high-contrast personal blog homepage mockup for 多做多说, using a systems log and engineering notebook style.</desc>
+  <defs>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.15" fill="#343126"/>
+    </pattern>
+    <style>
+      .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+      .serif { font-family: "Songti SC", "Noto Serif CJK SC", "STSong", Georgia, serif; }
+      .mono { font-family: "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace; }
+      .bg { fill: #11100c; }
+      .panel { fill: #191711; stroke: #393427; stroke-width: 1; }
+      .panel2 { fill: #201d15; stroke: #4a4230; stroke-width: 1; }
+      .ink { fill: #f4f1e8; }
+      .muted { fill: #aaa18f; }
+      .faint { fill: #766e60; }
+      .line { stroke: #393427; stroke-width: 1; }
+      .heavy { stroke: #f4f1e8; stroke-width: 2; }
+      .green { fill: #8bcf75; }
+      .amber { fill: #e4ae48; }
+      .red { fill: #e05f45; }
+      .blue { fill: #76a8d8; }
+      text { letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1080" class="bg"/>
+  <rect width="1440" height="1080" fill="url(#dots)" opacity="0.78"/>
+  <rect x="46" y="38" width="1348" height="1004" fill="none" stroke="#393427"/>
+
+  <g transform="translate(78 82)">
+    <circle cx="0" cy="-3" r="6" class="red"/>
+    <circle cx="22" cy="-3" r="6" class="amber"/>
+    <circle cx="44" cy="-3" r="6" class="green"/>
+    <text x="86" y="2" class="mono faint" font-size="13">OPTION C / SYSTEMS LOG</text>
+    <text x="1018" y="2" class="mono muted" font-size="13">ARCHIVE</text>
+    <text x="1112" y="2" class="mono muted" font-size="13">SEARCH</text>
+    <text x="1210" y="2" class="mono muted" font-size="13">RSS</text>
+  </g>
+  <line x1="46" y1="122" x2="1394" y2="122" class="line"/>
+
+  <g transform="translate(92 170)">
+    <rect x="0" y="0" width="830" height="362" rx="6" class="panel"/>
+    <text x="34" y="54" class="mono green" font-size="16">$ open ~/writing</text>
+    <text x="34" y="126" class="sans ink" font-size="82" font-weight="800">多做多说</text>
+    <text x="34" y="178" class="serif muted" font-size="30">技术、系统、诗和人的运行日志。</text>
+    <text x="34" y="232" class="mono faint" font-size="15">status: active · posts: 36 · newest: 2026-05-02 · locale: zh-CN</text>
+    <line x1="34" y1="270" x2="796" y2="270" class="line"/>
+    <text x="34" y="316" class="mono amber" font-size="15">focus -- agent products / algorithms / expression / home</text>
+  </g>
+
+  <g transform="translate(958 170)">
+    <rect x="0" y="0" width="342" height="362" rx="6" class="panel2"/>
+    <text x="28" y="48" class="mono faint" font-size="13">SYSTEM HEALTH</text>
+    <g transform="translate(28 86)">
+      <text x="0" y="0" class="mono muted" font-size="14">writing cadence</text>
+      <rect x="0" y="20" width="270" height="10" fill="#322d21"/>
+      <rect x="0" y="20" width="198" height="10" class="green"/>
+    </g>
+    <g transform="translate(28 146)">
+      <text x="0" y="0" class="mono muted" font-size="14">technical depth</text>
+      <rect x="0" y="20" width="270" height="10" fill="#322d21"/>
+      <rect x="0" y="20" width="232" height="10" class="blue"/>
+    </g>
+    <g transform="translate(28 206)">
+      <text x="0" y="0" class="mono muted" font-size="14">poetic voltage</text>
+      <rect x="0" y="20" width="270" height="10" fill="#322d21"/>
+      <rect x="0" y="20" width="156" height="10" class="red"/>
+    </g>
+    <text x="28" y="284" class="sans ink" font-size="23" font-weight="700">Designed for readers who</text>
+    <text x="28" y="318" class="sans ink" font-size="23" font-weight="700">arrive through one technical</text>
+    <text x="28" y="352" class="sans ink" font-size="23" font-weight="700">post and stay for the voice.</text>
+  </g>
+
+  <g transform="translate(92 588)">
+    <text x="0" y="0" class="mono faint" font-size="13">LATEST ENTRIES</text>
+    <line x1="0" y1="27" x2="1208" y2="27" class="heavy"/>
+
+    <g transform="translate(0 66)">
+      <rect x="0" y="0" width="1208" height="92" rx="5" class="panel"/>
+      <text x="28" y="36" class="mono green" font-size="14">2026-05-02</text>
+      <text x="176" y="39" class="sans ink" font-size="26" font-weight="700">From AI Agent Demo to Production System: A Full-Stack Blueprint</text>
+      <text x="1018" y="38" class="mono amber" font-size="14">代码如诗</text>
+      <text x="176" y="68" class="sans muted" font-size="15">Runtime, context, tools, memory, observability, evaluation.</text>
+    </g>
+
+    <g transform="translate(0 180)">
+      <rect x="0" y="0" width="1208" height="92" rx="5" class="panel"/>
+      <text x="28" y="36" class="mono green" font-size="14">2026-01-17</text>
+      <text x="176" y="39" class="sans ink" font-size="26" font-weight="700">Agent Skills: Apps of LLM OS</text>
+      <text x="1018" y="38" class="mono amber" font-size="14">AI</text>
+      <text x="176" y="68" class="sans muted" font-size="15">A product note about packaged capabilities for agentic systems.</text>
+    </g>
+
+    <g transform="translate(0 294)">
+      <rect x="0" y="0" width="1208" height="92" rx="5" class="panel"/>
+      <text x="28" y="36" class="mono green" font-size="14">2025-12-17</text>
+      <text x="176" y="39" class="sans ink" font-size="26" font-weight="700">表达即思维</text>
+      <text x="1018" y="38" class="mono red" font-size="14">随笔</text>
+      <text x="176" y="68" class="sans muted" font-size="15">The essay stream is not hidden; it is another subsystem.</text>
+    </g>
+  </g>
+
+  <g transform="translate(92 986)">
+    <text x="0" y="0" class="mono faint" font-size="13">Mood: sharp, technical, distinctive. Implementation scope: dark-first theme + command-search home + compact log archive.</text>
+  </g>
+</svg>

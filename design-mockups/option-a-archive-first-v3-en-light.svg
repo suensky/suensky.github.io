@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Archive-first personal blog homepage, English UI, light mode</title>
+  <desc id="desc">A refined pale English UI mockup for Do More, Say More with compact header, no RSS, and essay list as the main content.</desc>
+  <defs>
+    <style>
+      .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+      .serif { font-family: "Songti SC", "Noto Serif CJK SC", "STSong", Georgia, serif; }
+      .mono { font-family: "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace; }
+      .bg { fill: #fdfefd; }
+      .ink { fill: #20221c; }
+      .body { fill: #56615b; }
+      .muted { fill: #748179; }
+      .faint { fill: #9aa69f; }
+      .line { stroke: #e6ece7; stroke-width: 1; }
+      .rule { stroke: #96a29a; stroke-width: 1.2; }
+      .iconBg { fill: #f7faf7; stroke: #d8e2da; stroke-width: 1; }
+      .icon { stroke: #4f7467; stroke-width: 1.35; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      text { letter-spacing: 0; }
+    </style>
+  </defs>
+  <rect width="1440" height="1080" class="bg"/>
+  <g transform="translate(248 50)">
+    <text x="0" y="0" class="sans ink" font-size="16" font-weight="650">Do More, Say More</text>
+    <text x="690" y="0" class="sans body" font-size="15">Archive</text>
+    <text x="764" y="0" class="sans body" font-size="15">About</text>
+    <g transform="translate(842 -16)">
+      <circle cx="16" cy="16" r="16" class="iconBg"/>
+      <circle cx="16" cy="16" r="8.5" class="icon"/>
+      <path d="M7.5 16h17M16 7.5c3.8 4.4 3.8 12.6 0 17M16 7.5c-3.8 4.4-3.8 12.6 0 17" class="icon"/>
+    </g>
+    <g transform="translate(884 -16)">
+      <circle cx="16" cy="16" r="16" class="iconBg"/>
+      <path d="M20.6 22.2A8.7 8.7 0 0 1 13.8 6.3A7.4 7.4 0 1 0 20.6 22.2Z" fill="#4f7467"/>
+    </g>
+  </g>
+  <line x1="248" y1="78" x2="1132" y2="78" class="line"/>
+
+  <g transform="translate(248 126)">
+    <text x="0" y="0" class="serif ink" font-size="37" font-weight="700">Do More, Say More</text>
+    <text x="0" y="42" class="sans body" font-size="16.5">Personal notes on systems, algorithms, poetry, and ordinary life.</text>
+  </g>
+
+  <g transform="translate(248 226)">
+    <text x="0" y="0" class="sans faint" font-size="14">Essays</text>
+    <text x="884" y="0" class="sans faint" font-size="14" text-anchor="end">36 posts</text>
+    <line x1="0" y1="28" x2="884" y2="28" class="rule"/>
+    <g transform="translate(0 74)">
+      <text x="0" y="0" class="mono muted" font-size="13">2026.05.02</text>
+      <text x="148" y="4" class="serif ink" font-size="28">From AI Agent Demo to Production System</text>
+      <text x="148" y="40" class="sans body" font-size="15.5">A full-stack blueprint for durable agent products, context layers, tools, and recovery.</text>
+      <text x="830" y="40" class="sans muted" font-size="14" text-anchor="end">12 min</text>
+    </g>
+    <line x1="0" y1="134" x2="884" y2="134" class="line"/>
+    <g transform="translate(0 188)">
+      <text x="0" y="0" class="mono muted" font-size="13">2026.02.14</text>
+      <text x="148" y="4" class="serif ink" font-size="28">Dropbox and Box Could Become Systems of Record</text>
+      <text x="148" y="40" class="sans body" font-size="15.5">A product essay on memory, documents, and the interface layer around AI work.</text>
+      <text x="830" y="40" class="sans muted" font-size="14" text-anchor="end">8 min</text>
+    </g>
+    <line x1="0" y1="248" x2="884" y2="248" class="line"/>
+    <g transform="translate(0 302)">
+      <text x="0" y="0" class="mono muted" font-size="13">2026.01.17</text>
+      <text x="148" y="4" class="serif ink" font-size="28">Agent Skills: Apps of LLM OS</text>
+      <text x="148" y="40" class="sans body" font-size="15.5">A product note about packaged capabilities for agentic systems.</text>
+      <text x="830" y="40" class="sans muted" font-size="14" text-anchor="end">7 min</text>
+    </g>
+    <line x1="0" y1="362" x2="884" y2="362" class="line"/>
+    <g transform="translate(0 416)">
+      <text x="0" y="0" class="mono muted" font-size="13">2025.12.31</text>
+      <text x="148" y="4" class="serif ink" font-size="28">别2025，致2026</text>
+      <text x="148" y="40" class="sans body" font-size="15.5">年终小记，写给过去一年，也写给下一年。</text>
+      <text x="830" y="40" class="sans muted" font-size="14" text-anchor="end">6 min</text>
+    </g>
+    <line x1="0" y1="476" x2="884" y2="476" class="line"/>
+    <g transform="translate(0 530)">
+      <text x="0" y="0" class="mono muted" font-size="13">2025.12.17</text>
+      <text x="148" y="4" class="serif ink" font-size="28">表达即思维</text>
+      <text x="148" y="40" class="sans body" font-size="15.5">写作不是思考之后的记录，而是思考本身。</text>
+      <text x="830" y="40" class="sans muted" font-size="14" text-anchor="end">5 min</text>
+    </g>
+    <line x1="0" y1="590" x2="884" y2="590" class="line"/>
+    <g transform="translate(0 644)">
+      <text x="0" y="0" class="mono muted" font-size="13">2025.11.20</text>
+      <text x="148" y="4" class="serif ink" font-size="28">诗魂：李白长歌</text>
+      <text x="148" y="40" class="sans body" font-size="15.5">在诗和人之间，重读一种开阔与不羁。</text>
+      <text x="830" y="40" class="sans muted" font-size="14" text-anchor="end">9 min</text>
+    </g>
+    <line x1="0" y1="704" x2="884" y2="704" class="line"/>
+    <g transform="translate(0 758)">
+      <text x="0" y="0" class="mono muted" font-size="13">2025.07.17</text>
+      <text x="148" y="4" class="serif ink" font-size="28">凝望</text>
+      <text x="148" y="40" class="sans body" font-size="15.5">关于看见，也关于被看见。</text>
+      <text x="830" y="40" class="sans muted" font-size="14" text-anchor="end">4 min</text>
+    </g>
+  </g>
+</svg>

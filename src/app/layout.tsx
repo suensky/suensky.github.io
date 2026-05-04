@@ -3,20 +3,23 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { LanguageProvider } from '@/components/LanguageProvider';
+import { copy } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: {
-        default: '多做多说',
-        template: '%s | 多做多说',
+        default: `${copy.siteName.zh} | ${copy.siteName.en}`,
+        template: `%s | ${copy.siteName.zh} / ${copy.siteName.en}`,
     },
-    description: '技术与随笔的个人博客',
+    description: `${copy.siteDescription.zh} / ${copy.siteDescription.en}`,
     keywords: ['Blog', 'Engineering', 'Algorithm', '技术', '随笔'],
     authors: [{ name: 'Hu Sun' }],
     openGraph: {
-        title: '多做多说',
-        description: '技术与随笔的个人博客',
+        title: `${copy.siteName.zh} | ${copy.siteName.en}`,
+        description: `${copy.siteDescription.zh} / ${copy.siteDescription.en}`,
         type: 'website',
         locale: 'zh_CN',
+        alternateLocale: ['en_US'],
     },
 };
 
@@ -40,13 +43,15 @@ export default function RootLayout({
             </head>
             <body>
                 <ThemeProvider>
-                    <div className="site-wrapper">
-                        <Header />
-                        <main className="main-content">
-                            {children}
-                        </main>
-                        <Footer />
-                    </div>
+                    <LanguageProvider>
+                        <div className="site-wrapper">
+                            <Header />
+                            <main className="main-content">
+                                {children}
+                            </main>
+                            <Footer />
+                        </div>
+                    </LanguageProvider>
                 </ThemeProvider>
             </body>
         </html>

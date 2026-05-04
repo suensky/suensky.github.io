@@ -42,7 +42,7 @@
     gap: var(--space-sm);
 }
 
-.themeToggle {
+.iconButton {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,7 +57,7 @@
     transition: all var(--transition-fast);
 }
 
-.themeToggle:hover {
+.iconButton:hover {
     color: var(--color-accent);
     background-color: var(--color-accent-light);
 }

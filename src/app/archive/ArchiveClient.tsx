@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import { formatDate, formatPostCount } from '@/lib/i18n';
+import { useLanguage } from '@/components/LanguageProvider';
 import styles from './page.module.css';
 
 interface PostMeta {
@@ -31,6 +33,7 @@ interface ArchiveClientProps {
 export default function ArchiveClient({ postsByYear, tags }: ArchiveClientProps) {
     const searchParams = useSearchParams();
     const router = useRouter();
+    const { language, t } = useLanguage();
 
     // Get initial tag from URL query parameter
     const initialTag = searchParams.get('tag');
@@ -82,17 +85,17 @@ export default function ArchiveClient({ postsByYear, tags }: ArchiveClientProps)
                 {selectedTag && (
                     <div className={styles.filterBanner}>
                         <span>
-                            筛选标签:{' '}
+                            {t('tagFilterLabel')}:{' '}
                             <strong>{selectedTag}</strong>
-                            {' '}({filteredCount} 篇)
+                            {' '}({formatPostCount(filteredCount, language)})
                         </span>
                         <button
                             onClick={clearFilter}
                             className={styles.clearFilter}
-                            aria-label="Clear filter"
+                            aria-label={t('clearFilter')}
                         >
                             <X size={16} />
-                            清除
+                            {t('clearFilter')}
                         </button>
                     </div>
                 )}
@@ -105,10 +108,10 @@ export default function ArchiveClient({ postsByYear, tags }: ArchiveClientProps)
                                 {posts.map((post) => (
                                     <article key={post.slug} className={styles.postItem}>
                                         <time className={styles.postDate}>
-                                            {new Date(post.date).toLocaleDateString(
-                                                'zh-CN',
-                                                { month: '2-digit', day: '2-digit' }
-                                            )}
+                                            {formatDate(post.date, language, {
+                                                month: '2-digit',
+                                                day: '2-digit',
+                                            })}
                                         </time>
                                         <Link href={`/posts/${post.slug}`} className={styles.postTitle}>
                                             {post.title}
@@ -123,7 +126,7 @@ export default function ArchiveClient({ postsByYear, tags }: ArchiveClientProps)
 
             <aside className={styles.sidebar}>
                 <div className={styles.tagsSection}>
-                    <h3 className={styles.sidebarTitle}>标签</h3>
+                    <h3 className={styles.sidebarTitle}>{t('tags')}</h3>
                     <div className={styles.tagCloud}>
                         {tags.map((tag) => (
                             <button

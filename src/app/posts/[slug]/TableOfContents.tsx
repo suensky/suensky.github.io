@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useLanguage } from '@/components/LanguageProvider';
 import styles from './page.module.css';
 
 interface TocItem {
@@ -61,6 +62,7 @@ function extractHeadings(content: string): TocItem[] {
 
 export default function TableOfContents({ content }: TableOfContentsProps) {
     const [activeId, setActiveId] = useState<string>('');
+    const { t } = useLanguage();
     const headings = extractHeadings(content);
 
     useEffect(() => {
@@ -120,7 +122,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
 
     return (
         <nav className={styles.toc}>
-            <h4 className={styles.tocTitle}>目录</h4>
+            <h4 className={styles.tocTitle}>{t('tableOfContents')}</h4>
             <ul className={styles.tocList}>
                 {headings.map(({ id, text, level }) => (
                     <li key={id} className={styles.tocItem} data-level={level}>

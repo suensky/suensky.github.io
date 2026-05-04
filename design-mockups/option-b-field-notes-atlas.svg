@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Option B mockup: Field Notes Atlas</title>
+  <desc id="desc">A map-like personal blog homepage mockup for 多做多说, organized around traces, topics, and mixed essay categories.</desc>
+  <defs>
+    <pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse">
+      <path d="M 38 0 L 0 0 0 38" fill="none" stroke="#d7ded6" stroke-width="1"/>
+    </pattern>
+    <style>
+      .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+      .serif { font-family: "Songti SC", "Noto Serif CJK SC", "STSong", Georgia, serif; }
+      .mono { font-family: "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace; }
+      .bg { fill: #f4f7f2; }
+      .ink { fill: #17201b; }
+      .muted { fill: #657168; }
+      .faint { fill: #8b968d; }
+      .line { stroke: #cdd7ce; stroke-width: 1; }
+      .heavy { stroke: #17201b; stroke-width: 2; }
+      .orange { fill: #e36c37; }
+      .blue { fill: #356f9f; }
+      .moss { fill: #61754a; }
+      .paper { fill: #fffdfa; stroke: #cbd5cc; stroke-width: 1; }
+      .chip { fill: #eaf1e8; stroke: #c9d5c5; stroke-width: 1; }
+      text { letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1080" class="bg"/>
+  <rect width="1440" height="1080" fill="url(#grid)" opacity="0.72"/>
+  <rect x="48" y="42" width="1344" height="996" fill="none" stroke="#bfcbbf"/>
+
+  <g transform="translate(78 82)">
+    <text x="0" y="0" class="mono faint" font-size="13">OPTION B</text>
+    <text x="100" y="0" class="mono ink" font-size="13">多做多说</text>
+    <text x="1092" y="0" class="sans muted" font-size="15">Posts</text>
+    <text x="1172" y="0" class="sans muted" font-size="15">Notes</text>
+    <text x="1252" y="0" class="sans muted" font-size="15">About</text>
+  </g>
+  <line x1="48" y1="122" x2="1392" y2="122" class="heavy"/>
+
+  <g transform="translate(94 176)">
+    <text x="0" y="86" class="sans ink" font-size="78" font-weight="700">Field notes from</text>
+    <text x="0" y="170" class="sans ink" font-size="78" font-weight="700">code, poems, and</text>
+    <text x="0" y="254" class="sans ink" font-size="78" font-weight="700">the long road home.</text>
+    <text x="6" y="316" class="serif muted" font-size="26">一个用来标记想法、工程系统、算法和生活现场的个人地图。</text>
+
+    <g transform="translate(6 366)">
+      <rect x="0" y="0" width="112" height="34" rx="4" class="chip"/>
+      <text x="18" y="23" class="sans moss" font-size="14">AI systems</text>
+      <rect x="130" y="0" width="106" height="34" rx="4" class="chip"/>
+      <text x="148" y="23" class="sans blue" font-size="14">Algorithms</text>
+      <rect x="254" y="0" width="88" height="34" rx="4" class="chip"/>
+      <text x="272" y="23" class="sans orange" font-size="14">Poetry</text>
+      <rect x="360" y="0" width="90" height="34" rx="4" class="chip"/>
+      <text x="378" y="23" class="sans moss" font-size="14">Travel</text>
+    </g>
+  </g>
+
+  <g transform="translate(935 172)">
+    <path d="M36 122 C128 28 228 46 260 146 C302 276 176 360 74 292 C-36 218 -28 186 36 122Z" fill="#fffdfa" stroke="#c6d0c4"/>
+    <path d="M62 164 C128 104 210 124 222 196 C236 274 154 304 92 262 C24 216 14 206 62 164Z" fill="none" stroke="#61754a" stroke-width="3"/>
+    <circle cx="94" cy="172" r="11" class="orange"/>
+    <circle cx="184" cy="140" r="11" class="blue"/>
+    <circle cx="204" cy="228" r="11" class="moss"/>
+    <circle cx="132" cy="266" r="11" class="orange"/>
+    <path d="M94 172 L184 140 L204 228 L132 266 L94 172" fill="none" stroke="#17201b" stroke-width="2"/>
+    <text x="42" y="410" class="mono faint" font-size="13">TOPIC ROUTES</text>
+    <text x="42" y="446" class="sans ink" font-size="24" font-weight="600">Browse by trace</text>
+    <text x="42" y="466" class="sans muted" font-size="16">Living map, not only time.</text>
+  </g>
+
+  <g transform="translate(94 620)">
+    <text x="0" y="0" class="mono faint" font-size="13">RECENT TRACES</text>
+    <line x1="0" y1="26" x2="1252" y2="26" class="heavy"/>
+
+    <g transform="translate(0 64)">
+      <rect x="0" y="0" width="374" height="232" rx="6" class="paper"/>
+      <text x="26" y="42" class="mono faint" font-size="13">2026 / AI SYSTEMS</text>
+      <text x="26" y="78" class="sans ink" font-size="27" font-weight="700">From AI Agent Demo</text>
+      <text x="26" y="112" class="sans ink" font-size="27" font-weight="700">to Production System</text>
+      <text x="26" y="148" class="sans muted" font-size="16">Context, tools, product surfaces.</text>
+      <line x1="26" y1="168" x2="330" y2="168" class="line"/>
+      <text x="26" y="202" class="mono moss" font-size="13">12 min read</text>
+    </g>
+
+    <g transform="translate(438 64)">
+      <rect x="0" y="0" width="374" height="232" rx="6" class="paper"/>
+      <text x="26" y="42" class="mono faint" font-size="13">2025 / ESSAY</text>
+      <text x="26" y="84" class="sans ink" font-size="28" font-weight="700">表达即思维</text>
+      <text x="26" y="126" class="sans muted" font-size="16">Writing treated as the act of shaping thought.</text>
+      <line x1="26" y1="158" x2="330" y2="158" class="line"/>
+      <text x="26" y="194" class="mono orange" font-size="13">5 min read</text>
+    </g>
+
+    <g transform="translate(876 64)">
+      <rect x="0" y="0" width="374" height="232" rx="6" class="paper"/>
+      <text x="26" y="42" class="mono faint" font-size="13">2021 / ALGORITHM</text>
+      <text x="26" y="84" class="sans ink" font-size="28" font-weight="700">详解线段树之入门</text>
+      <text x="26" y="126" class="sans muted" font-size="16">Classic data structure writing with visual anchors.</text>
+      <line x1="26" y1="158" x2="330" y2="158" class="line"/>
+      <text x="26" y="194" class="mono blue" font-size="13">9 min read</text>
+    </g>
+  </g>
+
+  <g transform="translate(94 950)">
+    <circle cx="12" cy="0" r="6" class="orange"/>
+    <line x1="32" y1="0" x2="1250" y2="0" class="line"/>
+    <text x="0" y="44" class="mono faint" font-size="13">Mood: curious, navigable, mixed-media. Implementation scope: homepage route map + topic chips + archive filters.</text>
+  </g>
+</svg>
