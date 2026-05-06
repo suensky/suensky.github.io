@@ -1,24 +1,24 @@
 :root {
   /* Colors - Light Mode */
-  --color-bg: #fafafa;
+  --color-bg: #fbfdff;
+  --color-bg-rgb: 251, 253, 255;
   --color-bg-secondary: #ffffff;
-  --color-bg-tertiary: #f5f5f5;
-  --color-text: #1a1a2e;
-  --color-text-secondary: #4a4a68;
-  --color-text-muted: #8888a0;
-  --color-border: #e0e0e8;
-  --color-accent: #6366f1;
-  --color-accent-hover: #4f46e5;
-  --color-accent-light: rgba(99, 102, 241, 0.1);
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
+  --color-bg-tertiary: #eef8fb;
+  --color-text: #172026;
+  --color-text-secondary: #4d5f68;
+  --color-text-muted: #7d8c96;
+  --color-border: #d7e8ee;
+  --color-border-strong: #9dc8d3;
+  --color-accent: #0f766e;
+  --color-accent-hover: #0e8f84;
+  --color-accent-light: rgba(20, 184, 166, 0.12);
+  --color-inverse: #ffffff;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
+  --shadow-sm: 0 1px 2px rgba(15, 118, 110, 0.08);
+  --shadow-md: 0 10px 28px rgba(15, 118, 110, 0.11);
+  --shadow-lg: 0 18px 44px rgba(15, 118, 110, 0.13);
+  --shadow-glow: 0 12px 30px rgba(20, 184, 166, 0.14);
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -32,12 +32,12 @@
   /* Border Radius */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.625rem;
   --radius-full: 9999px;
 
   /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
 
   /* Transitions */
@@ -52,20 +52,23 @@
 
 /* Dark Mode */
 .dark {
-  --color-bg: #0f0f14;
-  --color-bg-secondary: #1a1a24;
-  --color-bg-tertiary: #252532;
-  --color-text: #f5f5f7;
-  --color-text-secondary: #a8a8b8;
-  --color-text-muted: #68687a;
-  --color-border: #2a2a3a;
-  --color-accent: #818cf8;
-  --color-accent-hover: #a5b4fc;
-  --color-accent-light: rgba(129, 140, 248, 0.15);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(129, 140, 248, 0.2);
+  --color-bg: #171d20;
+  --color-bg-rgb: 23, 29, 32;
+  --color-bg-secondary: #222b2f;
+  --color-bg-tertiary: #2d3a3f;
+  --color-text: #f7fbfb;
+  --color-text-secondary: #d5e2e4;
+  --color-text-muted: #9cafb4;
+  --color-border: #405056;
+  --color-border-strong: #6f8c94;
+  --color-accent: #5eead4;
+  --color-accent-hover: #99f6e4;
+  --color-accent-light: rgba(94, 234, 212, 0.13);
+  --color-inverse: #111719;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.22);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.34);
+  --shadow-glow: 0 12px 30px rgba(94, 234, 212, 0.12);
 }
 
 /* Reset */
@@ -162,12 +165,12 @@ p {
 
 .btn-primary {
   background-color: var(--color-accent);
-  color: white;
+  color: var(--color-inverse);
 }
 
 .btn-primary:hover {
   background-color: var(--color-accent-hover);
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-secondary {
@@ -178,7 +181,7 @@ p {
 
 .btn-secondary:hover {
   background-color: var(--color-bg-secondary);
-  border-color: var(--color-accent);
+  border-color: var(--color-border-strong);
 }
 
 .btn-ghost {
@@ -198,15 +201,17 @@ p {
   padding: var(--space-xs) var(--space-sm);
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--color-accent);
-  background-color: var(--color-accent-light);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-tertiary);
+  border: 1px solid transparent;
   border-radius: var(--radius-full);
   transition: all var(--transition-fast);
 }
 
 .tag:hover {
-  background-color: var(--color-accent);
-  color: white;
+  color: var(--color-text);
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border);
 }
 
 /* Cards */
@@ -219,9 +224,9 @@ p {
 }
 
 .card:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-border-strong);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 /* Code - Inline */
@@ -256,19 +261,19 @@ pre code {
 :root:not(.dark) pre,
 :root:not(.dark) pre code,
 :root:not(.dark) .hljs {
-  background: #f6f8fa !important;
-  color: #24292e !important;
+  background: var(--color-bg-tertiary) !important;
+  color: var(--color-text-secondary) !important;
 }
 
 :root:not(.dark) .hljs-comment,
 :root:not(.dark) .hljs-quote {
-  color: #6a737d !important;
+  color: var(--color-text-muted) !important;
 }
 
 :root:not(.dark) .hljs-keyword,
 :root:not(.dark) .hljs-selector-tag,
 :root:not(.dark) .hljs-literal {
-  color: #d73a49 !important;
+  color: var(--color-text) !important;
 }
 
 :root:not(.dark) .hljs-string,
@@ -277,40 +282,72 @@ pre code {
 :root:not(.dark) .hljs-attr,
 :root:not(.dark) .hljs-template-variable,
 :root:not(.dark) .hljs-variable {
-  color: #032f62 !important;
+  color: var(--color-text-secondary) !important;
 }
 
 :root:not(.dark) .hljs-number,
 :root:not(.dark) .hljs-symbol,
 :root:not(.dark) .hljs-bullet,
 :root:not(.dark) .hljs-link {
-  color: #005cc5 !important;
+  color: var(--color-text-secondary) !important;
 }
 
 :root:not(.dark) .hljs-type,
 :root:not(.dark) .hljs-class .hljs-title,
 :root:not(.dark) .hljs-built_in {
-  color: #6f42c1 !important;
+  color: var(--color-text) !important;
 }
 
 :root:not(.dark) .hljs-function,
 :root:not(.dark) .hljs-name {
-  color: #6f42c1 !important;
+  color: var(--color-text) !important;
 }
 
 :root:not(.dark) .hljs-meta {
-  color: #005cc5 !important;
+  color: var(--color-text-muted) !important;
 }
 
 :root:not(.dark) .hljs-params {
-  color: #24292e !important;
+  color: var(--color-text-secondary) !important;
 }
 
 /* Syntax Highlighting - Dark Mode (uses github-dark from CDN) */
 .dark pre,
 .dark pre code,
 .dark .hljs {
-  background: #161b22 !important;
+  background: var(--color-bg-tertiary) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.dark .hljs-comment,
+.dark .hljs-quote,
+.dark .hljs-meta {
+  color: var(--color-text-muted) !important;
+}
+
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-literal,
+.dark .hljs-type,
+.dark .hljs-class .hljs-title,
+.dark .hljs-built_in,
+.dark .hljs-function,
+.dark .hljs-name {
+  color: var(--color-text) !important;
+}
+
+.dark .hljs-string,
+.dark .hljs-title,
+.dark .hljs-section,
+.dark .hljs-attr,
+.dark .hljs-template-variable,
+.dark .hljs-variable,
+.dark .hljs-number,
+.dark .hljs-symbol,
+.dark .hljs-bullet,
+.dark .hljs-link,
+.dark .hljs-params {
+  color: var(--color-text-secondary) !important;
 }
 
 /* Prose - Article Content */
@@ -347,7 +384,7 @@ pre code {
 }
 
 .prose blockquote {
-  border-left: 3px solid var(--color-accent);
+  border-left: 3px solid var(--color-border-strong);
   padding-left: var(--space-md);
   margin: var(--space-lg) 0;
   font-style: italic;
@@ -470,6 +507,6 @@ pre code {
 
 /* Selection */
 ::selection {
-  background-color: var(--color-accent);
-  color: white;
+  background-color: var(--color-text);
+  color: var(--color-inverse);
 }

@@ -17,8 +17,8 @@
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
     margin-bottom: var(--space-xl);
-    background-color: var(--color-accent-light);
-    border: 1px solid var(--color-accent);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     color: var(--color-text);
     font-size: 0.9375rem;
@@ -30,21 +30,18 @@
     gap: var(--space-xs);
     padding: var(--space-xs) var(--space-sm);
     font-size: 0.8125rem;
-    color: var(--color-accent);
-    background-color: white;
-    border: 1px solid var(--color-accent);
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all var(--transition-fast);
 }
 
 .clearFilter:hover {
-    background-color: var(--color-accent);
-    color: white;
-}
-
-.timeline {
-    /* No changes needed */
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
 }
 
 .yearSection {
@@ -58,10 +55,10 @@
 .yearTitle {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--color-accent);
+    color: var(--color-text);
     margin-bottom: var(--space-lg);
     padding-bottom: var(--space-sm);
-    border-bottom: 2px solid var(--color-accent-light);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .postList {
@@ -76,6 +73,7 @@
     gap: var(--space-md);
     padding: var(--space-sm) 0;
     border-bottom: 1px solid var(--color-border);
+    min-width: 0;
     transition: background-color var(--transition-fast);
 }
 
@@ -100,11 +98,13 @@
 .postTitle {
     color: var(--color-text);
     font-size: 1rem;
+    min-width: 0;
+    overflow-wrap: anywhere;
     transition: color var(--transition-fast);
 }
 
 .postTitle:hover {
-    color: var(--color-accent);
+    color: var(--color-text-secondary);
 }
 
 /* Sidebar */
@@ -151,13 +151,13 @@
 }
 
 .tagItem:hover {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
-    background-color: var(--color-accent-light);
+    color: var(--color-text);
+    border-color: var(--color-border);
+    background-color: var(--color-bg-secondary);
 }
 
 .tagItem.tagActive {
-    color: white;
+    color: var(--color-inverse);
     background-color: var(--color-accent);
     border-color: var(--color-accent);
 }
@@ -174,13 +174,13 @@
 }
 
 .tagItem:hover .tagCount {
-    color: var(--color-accent);
-    background-color: white;
+    color: var(--color-text);
+    background-color: var(--color-bg-tertiary);
 }
 
 .tagItem.tagActive .tagCount {
     color: var(--color-accent);
-    background-color: white;
+    background-color: var(--color-inverse);
 }
 
 @media (max-width: 900px) {
